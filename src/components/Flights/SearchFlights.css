@@ -1,0 +1,500 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.g5 {
+  gap: 5px;
+}
+.gap10 {
+  gap: 10px;
+}
+.gap20 {
+  gap: 20px;
+}
+.flex {
+  display: flex;
+}
+.flexj {
+  display: flex;
+  justify-content: center;
+}
+.flexa {
+  display: flex;
+  align-items: center;
+}
+.flexja {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flexc {
+  flex-direction: column;
+}
+.b1 {
+  border: 1px solid black;
+}
+.flexr {
+  display: flex;
+  flex-direction: row;
+}
+.cp {
+  cursor: pointer;
+}
+.searchhhhhhhhhhh{
+  width: 100%;
+}
+.navList{
+  width: 30%;
+  height: 50px;
+}
+.imgSearchbar .activecolor{
+  flex-wrap: nowrap;
+}
+.backgrounddd {
+  position: relative;
+  width: 100%;
+  background-color: #e5eef4;
+}
+.navheader {
+  top: 0;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  background-color: #fff;
+  z-index: 1;
+}
+.navheader img {
+  height: 35px;
+  margin-left: 50px;
+}
+.navheader ul {
+  width: 500px;
+  justify-content: space-around;
+  list-style-type: none;
+}
+.bg-gradiant {
+  position: relative;
+  background-image: linear-gradient(0deg, #15457b, #051423);
+  width: 100%;
+  height: 290px;
+  margin-top: 80px;
+}
+.wrapDetails{
+  top: 20px;
+  left: 30px;
+  position: absolute;
+  width: 75%;
+  color: white;
+}
+.wrapChildContainer{
+  position: relative;
+  background-color: #ffffff1a;
+  width: 25%;
+  height: 40px; 
+  margin: 10px;
+  font-size: 14px;
+  padding: 7px;
+  border-radius: 6px;
+  font-weight: 600;
+  scale: 0.9;
+}
+.btn-wrap-container{
+  padding: 10px;
+  height: 40px;
+  width: 100%;
+  margin: 20px;
+  border-radius: 35px;
+  background-image: linear-gradient(96deg, #53b2fe, #065af3);
+  color: #ffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+.filters {
+  position: sticky;
+  top: 80px;
+  width: 300px;
+  margin-left: 160px;
+  margin-top: -100px;
+  height: 900px !important;
+  background-color: #fff;
+}
+.filtersdata {
+  margin-top: 50px;
+  height: 300px;
+  width: 250px;
+  padding: 10px;
+}
+
+.btnlessmore {
+  font-size: 12px;
+  margin-top: 30px;
+  margin-right: 160px;
+  border: none;
+}
+.filtersdata label {
+  justify-content: space-between;
+  width: 100%;
+}
+.showless {
+  height: 150px;
+  overflow: hidden;
+}
+.showmore {
+  height: 280px;
+}
+.departureTime div {
+  margin: 5px;
+  height: 60px;
+  width: 50px;
+  text-align: center;
+  border: 1px solid rgba(55, 54, 54, 0.299);
+  border-radius: 6px;
+}
+.departureTime div p {
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.fromDetailsSearch{
+  position: absolute;
+  height: 316px;
+  width: 350px;
+  background-color: white;
+  left: 0px;
+  top: 29px;
+  z-index: 10000;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+.fromDetailsSearch input{
+  width: 329px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.292);
+}
+.searchDetailSWrappop{
+  width: 330px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-left: 11px;
+  padding: 5px;
+  color: black;
+  background-color: #dfe9f8;
+}
+.searchDetailSWrappop:hover {
+  background-color: rgba(173, 191, 230, 0.183);
+  cursor: pointer;
+}
+.toDetailsSearch{
+  position: absolute;
+  height: 316px;
+  width: 350px;
+  background-color: white;
+  left: 0px;
+  top: 29px;
+  z-index: 10000;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+.toDetailsSearch input{
+  width: 329px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.292);
+}
+.departSearchPop{
+  position: absolute;
+  height: 316px;
+  width: 350px;
+  background-color: white;
+  left: 0px;
+  top: 29px;
+  z-index: 10000;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+.wraPassanger{
+  position: absolute;
+  height: 316px;
+  width: 350px;
+  background-color: white;
+  left: 0px;
+  top: 29px;
+  z-index: 10000;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+.stops {
+  margin-top: 50px;
+  margin-right: 80px;
+}
+.stops label div {
+  margin-top: 16px;
+}
+.departureCity {
+  margin-top: 50px;
+}
+.departureCity h3 {
+  margin: 5px;
+}
+.airlines {
+  margin-top: 50px;
+  width: 100%;
+}
+.airlines h3 {
+  margin-left: 10px;
+}
+.filterstypeairline label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 280px;
+  height: 30px;
+  padding: 0px 15px;
+}
+.listingCard {
+  height: 170px;
+  width: 100%;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+.sizeincreaser {
+  height: 520px;
+}
+.sizeincreaserinnerdiv {
+  height: 350px;
+  border: 2px solid lightgray;
+  border-radius: 6px;
+}
+.flightNameandId h6 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.flightNameandId p {
+  font-size: 14px;
+  font-weight: 600;
+}
+.luggage {
+  text-align: center;
+  height: 120px;
+  width: 40%;
+  justify-content: space-between;
+}
+.luggageChild{
+  padding: 10px;
+}
+.bookNowbtn{
+  height: 30px;
+  width: 150px;
+  float: right;
+  background-color: #daebff;
+  color: #008cff;
+  border-radius: 35px;
+  align-self: flex-end;
+  margin-top: 20px;
+}
+.sizeincreaserinnerdiv img {
+  height: 35px;
+}
+.durationofFlight {
+  font-size: medium;
+  width: 2%;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-right: 40px;
+  border-bottom: 2px solid rgb(131, 236, 56);
+}
+.display {
+  display: none;
+}
+.infoFlight {
+  height: 100px;
+  width: 8%;
+  scale: 1.3;
+}
+.infoFlight p {
+  font-size: 12px;
+  font-weight: 500;
+}
+.flightNameandId {
+  height: 50px;
+  width: 20%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.boardingContainer {
+  height: 200px;
+  width: 100%;
+  justify-content: space-around;
+  border: 0.8px solid lightgray;
+}
+.divListCard h4 {
+  font-size: 16px;
+}
+.divListCard p {
+  font-size: 12px;
+}
+.timeduration h5 {
+  border-bottom: 2.5px solid greenyellow;
+  padding: 8px;
+  color: rgba(48, 47, 47, 0.751);
+}
+.timeduration p {
+  padding: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgb(120, 120, 120);
+  text-align: center;
+}
+.clicButtonnn {
+  background-color: #daebff;
+  color: #008cff;
+  width: 120px;
+  padding: 10px;
+  border: 1px solid blue;
+  border-radius: 35px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.listingCardupper {
+  justify-content: space-between;
+  height: 140px;
+  width: 100%;
+}
+.arrivalTime p {
+  color: rgb(120, 117, 117);
+}
+.rightbodycarddiv {
+  width: 55%;
+  margin-left: 50px;
+}
+.flightSorted {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  margin-top: -50px;
+  padding: 0px 15px 0px 15px;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.cheapest {
+  height: 70px;
+  width: 35%;
+  border: 1px solid #e7e7e7;
+  cursor: pointer;
+}
+.cheapest-box {
+  height: 35px;
+  width: 35px;
+  margin: 10px;
+  margin-top: 20px;
+  border-radius: 6px;
+  background-color: rgba(200, 197, 197, 0.752);
+}
+.cheapest-box img {
+  height: 35px;
+}
+.nonStop {
+  height: 70px;
+  width: 35%;
+  border: 1px solid #e7e7e7;
+  cursor: pointer;
+}
+.prefer {
+  height: 70px;
+  width: 35%;
+  border: 1px solid #e7e7e7;
+  cursor: pointer;
+}
+
+.cheapestDetails h4 {
+  padding-bottom: 3px;
+}
+.cheapestDetails div p {
+  font-size: 13px;
+  font-weight: 400;
+}
+.colorsOfSorted {
+  font-weight: 500;
+  color: black;
+  background-color: #53b1fe2e;
+  border-bottom: 4px solid #008cff;
+}
+.colorsOfSorted .cheapest-box {
+  background-color: #008cff;
+}
+
+.showMoreDiv {
+  width: 100%;
+  height: 20px;
+}
+.showMoreText {
+  float: right;
+  cursor: pointer;
+  color: #0091ff;
+}
+.showPoppp {
+  position: relative;
+  right: 20px;
+  width: 100%;
+  height: 300px;
+  padding: 0px 30px 0px 10px;
+  margin-top: 36px;
+  background-color: #fafbfc;
+  border-radius: 6px;
+  border: 2px solid lightgray;
+}
+.deparTime h3 {
+  font-size: 20px;
+}
+.deparTime p {
+  font-size: 13px;
+  text-align: center;
+  color: rgb(120, 117, 117);
+}
+.filterstype input {
+  scale: 1.4;
+}
+input:hover {
+  cursor: pointer;
+}
+.stops input {
+  scale: 1.4;
+}
+.airlines input {
+  scale: 1.4;
+}
+
+.priceSlider .wayPrice {
+  justify-content: space-between;
+}
+.priceSlider {
+  margin-top: 25px;
+  /* height: 250px;
+  width: 250px;
+  background-color: #f9d342; */
+}
+.pricefortickets p {
+  font-size: 11px;
+  text-align: center;
+  margin-left: 5px;
+}
+.departureTime img {
+  height: 35px;
+}
+.divListCard img {
+  height: 35px;
+}

@@ -1,0 +1,11 @@
+.form{
+    position: relative;
+    margin: auto;
+    top: 100px;
+}
+.agreements{
+    position: relative;
+    top: 50px;
+    /* border: 2px solid red; */
+    font-size: 10px;
+}

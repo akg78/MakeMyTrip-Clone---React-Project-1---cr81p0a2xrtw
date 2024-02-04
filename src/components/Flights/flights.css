@@ -1,0 +1,429 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.g10 {
+  gap: 10px;
+}
+.g20 {
+  gap: 20px;
+}
+.flexc {
+  display: flex;
+  flex-direction: column;
+}
+.flightsMainDiv {
+  height: 120px;
+}
+.tickets {
+  width: 1200px;
+  height: 290px;
+  background-color: #fff;
+  margin-top: -490px;
+  scale: 0.97;
+  z-index: 1;
+  border-radius: 8px;
+  padding: 20px;
+}
+.ticketType {
+  display: flex;
+  margin-top: 50px;
+}
+.book {
+  margin-left: 560px;
+}
+.oneWay {
+  margin: 20px;
+}
+.roundTrip {
+  margin: 12px;
+}
+.multiCity {
+  margin: 12px;
+}
+.flight-search {
+  border: 1px solid #e7e7e7;
+  display: flex;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.flight-from {
+  position: relative;
+  color: rgb(33, 32, 32);
+  width: 300px;
+  border-right: 1px solid #e7e7e7;
+  padding: 10px;
+  padding-left: 25px;
+  height: 105px;
+}
+.flight-from:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+
+.swap {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  left: 315px;
+  margin-top: 45px;
+  border-radius: 100%;
+  background: #ffffff;
+  box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  cursor: pointer;
+}
+.swapp{
+  color: #008cff;
+  scale: 1.1;
+}
+.flight-to {
+  position: relative;
+  color: rgb(33, 32, 32);
+  width: 300px;
+  border-right: 1px solid #e7e7e7;
+  padding: 10px;
+  padding-left: 50px;
+  height: 105px;
+}
+.flight-to:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.fare-search {
+  display: flex;
+  margin-top: 22px;
+  font-size: 12px;
+}
+.fare-select {
+  font-weight: bold;
+  color: #746a6a;
+  margin: 4px;
+}
+.calander {
+  position: relative;
+  width: 150px;
+  padding: 10px;
+  height: 105px;
+  border-right: 1px solid #e7e7e7;
+}
+.calander:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.calander p {
+  text-wrap: nowrap;
+}
+.return {
+  width: 150px;
+  padding: 10px;
+  height: 105px;
+  border-right: 1px solid #e7e7e7;
+}
+.return:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.tap {
+  margin: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #9b9b9b;
+}
+.travellers {
+  height: 105px;
+  width: 220px;
+  position: relative;
+  padding: 10px;
+}
+.travellers:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.arow {
+  fill: #008cff;
+  float: right;
+}
+.popupdivtraveller {
+  position: absolute;
+  height: 300px;
+  width: 650px;
+  z-index: 10;
+  background-color: white;
+  right: 0;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  padding: 35px 20px 0px;
+}
+.textadult {
+  font-size: 14px;
+  color: rgb(81, 80, 80);
+  font-weight: 500;
+}
+.textadultdown {
+  color: rgb(178, 176, 176);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.boxesAdult {
+  font-size: 14px;
+  height: 28px;
+  width: 30px;
+  border-radius: 5px;
+  border: 0.2 solid rgba(211, 211, 211, 0.637);
+}
+.activeboxesadult{
+  background-color: #008cFF !important;
+}
+.boxesAdult:hover {
+  background-color: rgba(211, 211, 211, 0.322);
+}
+.mapbox {
+  width: 350px;
+  gap: 10px;
+  border: 1px solid lightgrey;
+  box-shadow: 1px 1px 8px lightgray;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.textchild {
+  font-size: 14px;
+  color: rgb(81, 80, 80);
+  font-weight: 500;
+  margin-top: 30px;
+}
+.textchilddown {
+  color: rgb(178, 176, 176);
+  font-size: 12px;
+  font-weight: bold;
+}
+.mapboxtwo,
+.mapboxthree {
+  width: 250px;
+}
+.childInfant {
+  justify-content: space-between;
+}
+.one {
+  display: flex;
+}
+.type {
+  /* width: 60%; */
+  height: 40px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  background-color: #f2f2f2;
+  border-radius: 7px;
+}
+.fare {
+  font-weight: 400;
+  position: relative;
+  gap: 5px;
+  border-radius: 7px;
+  border-right: 2px solid #fff;
+  padding: 10px;
+}
+.search-button {
+  position: absolute;
+  left: 43%;
+  height: 44px;
+  width: 216px;
+  margin-top: 10px;
+  background-image: linear-gradient(93deg, #53b2fe, #065af3);
+  border-radius: 35px;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+}
+.search-button:hover {
+  cursor: pointer;
+}
+.chooseFrom {
+  padding: 0 10px;
+  width: 80%;
+  height: 60px;
+  background-color: #fff;
+  margin-top: 110px;
+  margin-left: 100px;
+  box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+.bannerrr {
+  scale: 1.2;
+}
+.bannerrr img{
+  height: 25px;
+  width: 25px;
+}
+.bannerr{
+  width: 100%;
+  justify-content: space-around;
+}
+.bannerrr p{
+  font-weight: 400;
+  font-size: 10px;
+  border-right: 2px solid #e7e7e7;
+
+}
+.sponsored {
+  position: absolute;
+  margin-top: 200px;
+  height: 100px;
+  cursor: pointer;
+}
+.sponsored img {
+  border-radius: 20px;
+}
+.sponsored .thai {
+  width: 920px;
+  height: 100px;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+.sponsored p {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 20px;
+  width: 900px;
+  margin-top: -100px;
+}
+.sponsored .s {
+  width: 72px;
+  height: 18px;
+}
+.departurePop {
+  background-color: white;
+  position: absolute;
+  top: 35px;
+  left: -1px;
+  z-index: 10;
+  width: 350px;
+  height: 316px;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+
+.departurePop::-webkit-scrollbar {
+  display: none;
+}
+.departurePop input {
+  width: 329px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.292);
+}
+.popupslide {
+  width: 330px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+.popupslide:hover {
+  background-color: rgba(173, 191, 230, 0.183);
+}
+.popupslidecity {
+  width: 250px;
+}
+.popupimg {
+  width: 40px;
+}
+.icLocAlt {
+  height: 20px;
+  width: 20px;
+}
+.toPop {
+  background-color: white;
+  position: absolute;
+  top: 35px;
+  left: -1px;
+  z-index: 10;
+  width: 350px;
+  height: 380px;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+.toPop::-webkit-scrollbar {
+  display: none;
+}
+.toPop input {
+  width: 329px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.292);
+}
+.noPop input {
+  width: 329px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.292);
+}
+.popto {
+  width: 330px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+.popto:hover {
+  background-color: rgba(173, 191, 230, 0.183);
+}
+.popcity {
+  width: 250px;
+}
+.popcode {
+  width: 40px;
+  color: #746a6abe;
+  font-weight: 600;
+}
+.popimg {
+  width: 40px;
+}
+.airname {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9b9b9b;
+}
+
+/* ----------------Calander css-------------- */
+.calendarForGoing {
+  position: absolute;
+  left: 0;
+  top: 55px;
+  width: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.205);
+  box-shadow: 1px 1px 8px rgba(211, 211, 211, 0.97);
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #f0f0f0;
+}
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-evenly;
+}
+.react-calendar__navigation__label {
+  flex-grow: none !important;
+}
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+.flightMainHeadingBottomMoverNextLine {
+  display: none;
+}

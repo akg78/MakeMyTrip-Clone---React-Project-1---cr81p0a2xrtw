@@ -1,0 +1,229 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.hotelsMainDiv {
+  width: 97vw;
+}
+.flexjsb{
+  justify-content: space-between;
+}
+.hotelBookingPanel {
+  width: 1200px;
+  height: 270px;
+  background-color: #fff;
+  margin-top: -490px;
+  scale: 0.97;
+  z-index: 1;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.upto {
+  display: flex;
+  margin-top: 50px;
+}
+.bookk {
+  margin-left: 100px;
+  font-size: 14.5px;
+}
+.oneWays {
+  margin: 20px;
+}
+.roundTripp {
+  margin: 12px;
+}
+.hotels-panel {
+  border: 2px solid #e7e7e7;
+  display: flex;
+  border-radius: 10px;
+  margin-top: 10px;
+  height: 112px;
+}
+.arrow {
+  fill: #008cff;
+}
+.search-city {
+  color: rgb(33, 32, 32);
+  width: 350px;
+  border-right: 2px solid #e7e7e7;
+  padding: 10px;
+}
+.search-city:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.check-In {
+  width: 150px;
+  position: relative;
+  padding: 10px;
+  border-right: 2px solid #e7e7e7;
+}
+.check-In span{
+  text-wrap: nowrap;
+}
+.check-Out span{
+  text-wrap: nowrap;
+}
+.check-In:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.check-Out {
+  width: 150px;
+  position: relative;
+  padding: 10px;
+  border-right: 2px solid #e7e7e7;
+}
+.check-Out:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.rooms-guest {
+  width: 250px;
+  position: relative;
+  border-right: 2px solid #e7e7e7;
+  padding: 10px;
+}
+.rooms-guest:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+.price-per-night {
+  width: 180px;
+  padding: 10px;
+}
+.price-per-night:hover {
+  cursor: pointer;
+  background-color: #53b1fe2e;
+}
+
+.hotelsMainDiv .search-button {
+  position: relative;
+  left: 40%;
+  height: 44px;
+  width: 216px;
+  margin-top: 70px;
+  background-image: linear-gradient(93deg, #53b2fe, #065af3);
+  border-radius: 35px;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+.hotelpopup {
+  position: absolute;
+  height: 316px;
+  width: 350px;
+  background-color: white;
+  left: 26px;
+  top: 145px;
+  z-index: 10;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+.hotelpopup::-webkit-scrollbar{
+  display: none;
+}
+
+.hotelpopup input{
+  width: 329px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.292);
+}
+.hotelSlide{
+  width: 330px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+
+.hotelSlide:hover{
+  background-color: rgba(173, 191, 230, 0.183);
+}
+.hotelcity{
+  width: 250px;
+
+}
+.calendarForCheckIn {
+  position: absolute;
+  width: 300px;
+  top: 110px;
+  left: 0;
+  z-index: 100;
+  border: 1px solid rgba(0, 0, 0, 0.205);
+  box-shadow: 1px 1px 8px rgba(211, 211, 211, 0.97);
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #f0f0f0;
+}
+
+.calendarForCheckOut {
+  position: absolute;
+  width: 300px;
+  top: 110px;
+  left: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.205);
+  box-shadow: 1px 1px 8px rgba(211, 211, 211, 0.97);
+  border-radius: 10px;
+  padding: 5px;
+  z-index: 100;
+  background-color: #f0f0f0;
+}
+.roomandGuests{
+  position: absolute;
+  height: 260px;
+  width: 540px;
+  top: 113px;
+  gap: 35px;
+  right: 0;
+  z-index: 10;
+  background-color: white;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  padding: 35px 20px 0px;
+}
+
+.roomandGuests button{
+  align-self: flex-end;
+  padding: 8px 30px;
+  background-color: #065af3;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+}
+.roomandGuests span{
+  position: relative;
+  border: 1px solid black;
+  height: 30px;
+  width: 70px;
+  padding: 0px 7px;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+.popguests::-webkit-scrollbar{display: none;}
+.popguests{
+  position: absolute;
+  height: 100px;
+  width: 65px;
+  border: 1px solid black;
+  top: 30px;
+  left: 0;
+  overflow-y: scroll;
+  z-index: 100;
+  background-color: white;
+
+}
+.popguests div{
+  height: 30px;
+  width: 65px;
+}
+.popguests div:hover{
+  background-color: rgba(211, 211, 211, 0.429);
+}

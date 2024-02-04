@@ -1,0 +1,337 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.txtnw {
+  text-wrap: nowrap;
+}
+.jsb {
+  justify-content: space-between;
+}
+.activecolor{
+  border-bottom: 3px solid #065af3;
+  font-weight: 800;
+  color: #008cff;
+}
+.hotelsresult .navouter {
+  width: 100%;
+  height: 100px;
+  border-bottom: 0.2px solid lightgray;
+}
+.hotelsresult .navleftmenu {
+  gap: 40px;
+}
+.hotelsresult nav {
+  width: 1150px;
+  height: 100%;
+}
+.hotelsresult .logoimg {
+  height: 35px;
+  margin-right: 60px;
+}
+.hotelsresult .bodyouter {
+  width: 100%;
+  min-height: 200vh;
+  border-bottom: 0.2px solid lightgray;
+}
+
+.hotelsresult .body {
+  width: 1150px;
+  height: 100%;
+}
+.hotelsresult .bodyinner {
+  width: 100%;
+}
+.hotelsresult .bodyheader {
+  height: 200px;
+  width: 100vw;
+  position: sticky;
+  top: 0;
+  box-sizing: border-box;
+  align-self: flex-start;
+  justify-self: flex-start;
+}
+.hotelsresult .bodyheaderupper {
+  height: 80px;
+  width: 100%;
+  background-image: linear-gradient(0deg, #15457b, #051423);
+}
+.hotelsresult .bodyheaderlower {
+  height: 40%;
+  width: 100%;
+  background-image: linear-gradient(269.96deg, #e1ebf7 0.02%, #daf8fe 99.99%);
+}
+.hotelsresult .bodyheader > div > div {
+  width: 1150px;
+  height: 100%;
+}
+.navleftmenu img {
+  height: 35px;
+}
+.childContainer {
+  position: relative;
+  background-color: #ffffff1a;
+  width: 20%;
+  height: 35px;
+  margin: 10px;
+  font-size: 14px;
+  padding: 7px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  scale: 0.9;
+}
+.childContainer span {
+  color: #0084ff;
+}
+.headContainer {
+  justify-content: space-between;
+}
+.sortingHotelNav input {
+  background-color: white;
+  width: 20%;
+  border: 1px solid red;
+}
+.sortingHotelNav {
+  padding: 9px;
+  font-weight: 500;
+}
+.mainbody {
+  height: 800px;
+  width: 28%;
+  padding-left: 20px;
+}
+.mainbodytwo {
+  height: 250px;
+  width: 100%;
+  margin-top: 40px;
+  margin-left: 10px;
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px lightgray;
+  border: 1px solid lightgrey;
+}
+.MainBodyRender {
+  width: 100%;
+}
+.mainbodytwoLeft {
+  width: 70%;
+  height: 100%;
+}
+.mainbodytwoRight {
+  width: 30%;
+  height: 100%;
+  text-align: end;
+}
+.cardTextBox p {
+  color: green;
+}
+.imgCardHotelP {
+  height: 150px;
+  width: 30%;
+  margin: 10px;
+  background-color: white;
+}
+.imgCardHotelP img {
+  height: 150px;
+  width: 100%;
+  border-radius: 6px;
+}
+.imgCardHotel {
+  height: 36px;
+  width: 6%;
+  margin: 7px;
+  margin-right: 10px;
+  border-radius: 6px;
+  background-color: #fff;
+}
+.cardTextBox {
+  margin: 10px;
+  width: 70%;
+}
+.ratings-and-price {
+  padding: 10px;
+  height: 190px;
+  border-left: 1px solid lightgrey;
+}
+.excellent > div {
+  float: right;
+}
+
+.cardTextBox span:hover {
+  cursor: pointer;
+}
+.popamenitiesrelative {
+  position: relative;
+}
+.cardTextBox .popamenities {
+  position: absolute;
+  top: 25px;
+  padding: 5px;
+  display: none;
+  border-radius: 3px;
+  box-shadow: 2px 2px 10px lightgray;
+  left: 0;
+  font-size: 15px;
+  color: black;
+  background-color: white;
+}
+.cardTextBox span:hover + .popamenities {
+  display: block;
+}
+.imgCardHotel img {
+  height: 36px;
+  width: 36px;
+  border-radius: 6px;
+}
+.cardTextBox span {
+  padding: 5px 10px;
+  font-size: 10px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  color: gray;
+}
+.excellent {
+  padding: 3px 5px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+  gap: 10px;
+  border-left: 1px solid lightgrey;
+}
+.ratings-and-price div {
+  align-self: flex-end;
+}
+.yourBudget input {
+  width: 30%;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 5px;
+}
+.yourBudget button {
+  background-color: #0084ff;
+  padding: 5px;
+  height: 30px;
+  margin: 5px;
+  width: 20%;
+  border-radius: 6px;
+}
+.yourBudget p {
+  margin: 5px;
+}
+.mainbody label {
+  gap: 10px;
+}
+
+.cityAreaSearch {
+  position: absolute;
+  height: 316px;
+  width: 350px;
+  background-color: white;
+  left: 0px;
+  top: 29px;
+  z-index: 10;
+  border-radius: 6px;
+  border: 0.5px solid lightgray;
+  gap: 5px;
+  overflow-x: hidden;
+}
+
+.CalenderContainerPop {
+  position: absolute;
+  width: 300px;
+  top: 110px;
+  left: 0;
+  z-index: 100;
+  border: 1px solid rgba(0, 0, 0, 0.205);
+  box-shadow: 1px 1px 8px rgba(211, 211, 211, 0.97);
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #f0f0f0;
+}
+
+.hotelCityProperty {
+  width: 330px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-left: 11px;
+  padding: 5px;
+  color: black;
+  background-color: #dfe9f8;
+}
+.hotelCityProperty:hover {
+  background-color: rgba(173, 191, 230, 0.183);
+  cursor: pointer;
+}
+.cityAreaSearch input {
+  width: 329px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.292);
+}
+
+.btn-nav-hotel {
+  padding: 10px;
+  height: 40px;
+  width: 15%;
+  margin: 20px;
+  border-radius: 35px;
+  background-image: linear-gradient(96deg, #53b2fe, #065af3);
+  color: #ffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* -----------calender css start-------- */
+
+.calendarForGoing {
+  position: absolute;
+  left: 0;
+  top: 55px;
+  border: 1px solid rgba(0, 0, 0, 0.205);
+  box-shadow: 1px 1px 8px rgba(211, 211, 211, 0.97);
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #f0f0f0;
+  width: 300px;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.react-calendar__navigation__label {
+  flex-grow: none !important;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+.flightMainHeadingBottomMoverNextLine {
+  display: none;
+}
+
+/* -----------calender css end-------- */
+
+.roomandGuestPop {
+  position: absolute;
+  height: 100px;
+  width: 65px;
+  border: 1px solid black;
+  top: 30px;
+  left: 0;
+  overflow-y: scroll;
+  z-index: 100;
+  background-color: white;
+}
+/* .roomandGuestPop div {
+  height: 30px;
+  width: 65px;
+} */

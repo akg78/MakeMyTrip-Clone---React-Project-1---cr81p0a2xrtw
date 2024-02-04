@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.bookingcontainerL .bookingCheckIN{
+    height: 100px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: rgba(211, 211, 211, 0.091);
+}
+.chekinBooking{
+    height: 80px;
+    width: 100%;
+}
+.checkOutBooking{
+    height: 80px;
+    width: 100%;
+}
+.adultBooking{
+    height: 80px;
+    width: 100%;
+}
