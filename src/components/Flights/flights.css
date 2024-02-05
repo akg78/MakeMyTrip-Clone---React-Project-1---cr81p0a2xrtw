@@ -145,12 +145,22 @@
   fill: #008cff;
   float: right;
 }
+.passengerbuttonsubmit{
+  margin-top: 5px;
+  height: 30px;
+  width: 20%;
+  border-radius: 6px;
+  align-self: flex-end;
+  background-color: #008cFF;
+  
+}
 .popupdivtraveller {
   position: absolute;
   height: 300px;
   width: 650px;
   z-index: 1000000 !important;
   background-color: white;
+  color: black;
   right: 0;
   border-radius: 6px;
   border: 0.5px solid lightgray;

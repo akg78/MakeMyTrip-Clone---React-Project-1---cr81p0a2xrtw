@@ -92,6 +92,7 @@
   width: 25%;
   height: 40px; 
   margin: 10px;
+  z-index: 1;
   font-size: 14px;
   padding: 7px;
   border-radius: 6px;
@@ -189,6 +190,10 @@
 .searchDetailSWrappop:hover {
   background-color: rgba(173, 191, 230, 0.183);
   cursor: pointer;
+}
+.dateFlightsDetails{
+  font-size: 15px;
+
 }
 .toDetailsSearch{
   position: absolute;

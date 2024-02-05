@@ -143,7 +143,7 @@ export default function Flights() {
                 <p>Economy/Premium Economy</p>
               </div>
               {pop["traveller"] &&
-                <div className='popupdivtraveller flexc g10'> 
+                <div className='popupdivtraveller flexc g10 cp'> 
                   <div className='g10 flexc'>
                     <div className='textadult'>ADULTS (12y+)</div>
                     <div className='textadultdown'>on the day of travel</div>
@@ -167,7 +167,7 @@ export default function Flights() {
                       </div>
                     </div>
                   </div>
-                  <button onClick={()=>{popp("traveller")}}>submit</button>
+                  <button className='passengerbuttonsubmit' onClick={()=>{popp("traveller")}}>submit</button>
                 </div>}
             </div>
           </div>

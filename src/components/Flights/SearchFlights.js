@@ -20,17 +20,20 @@ export default function SearchFlights() {
   let adult = searchParams.get("adult");
   let child = searchParams.get("child");
   let infant = searchParams.get("infant");
-  let dayOfWeek = searchParams.get("date");
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
   const dateObject = new Date(dayOfWeek);
+  let dayOfWeek = searchParams.get("date");
   const [date, setDate] = useState(new Date());
 
-  const objdropdowncity = [{ name: "BLR", fname: "Bangalore, IN", lname: "- Kempegowda International Airport (BLR)" },
-  { name: "BOM", fname: "Mumbai, IN", lname: "- Chatrapati Shivaji Airport (BOM)" },
-  { name: "DEL", fname: "New Delhi, IN", lname: "- Indira Gandhi Airport (DEL)" },
-  { name: "CCU", fname: "Kolkata, IN", lname: "- Netaji Subhas Chandra Bose Airport (CCU)" },
-  { name: "GOI", fname: "Goa, IN", lname: "- Dabolim Airport (GOI)" },
-  { name: "HYD", fname: "Hyderabad, IN", lname: "- Rajiv Gandhi International (HYD)" },
-  { name: "MAA", fname: "Chennai, IN", lname: "- Chennai Airport (MAA)" },];
+  const objdropdowncity = [{name:"AMD",fname:"Ahmedabad"},
+  { name: "BLR", fname: "Bangalore"},
+  { name: "BOM", fname: "Mumbai" },
+  { name: "DEL", fname: "New Delhi"},
+  { name: "CCU", fname: "Kolkata"},
+  { name: "GOI", fname: "Goa"},
+  { name: "HYD", fname: "Hyderabad"},
+  { name: "MAA", fname: "Chennai" }];
 
 
 
@@ -55,12 +58,12 @@ export default function SearchFlights() {
   const [popDetails, setPopDetails] = useState({});
   const [dataaa, setdataaa] = useState();
   const arrr = [0, 1, 2, 3, 4, 5, 6]; const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const [adultselect,setadultselect]=useState("adultarget1")
-  const [childselect,setachildselect]=useState("childtarget0")
-  const [infantselect,setinfantselect]=useState("infanttarget0")
+  const [adultselect,setadultselect]=useState(`adultarget${adult}`)
+  const [childselect,setachildselect]=useState(`childtarget${child}`)
+  const [infantselect,setinfantselect]=useState(`infanttarget${infant}`)
 
   const [cityfrom,setcityfrom]=useState({"name": objdropdowncity.filter(item=>JSON.stringify(item.name)==source)[0].fname ,"iata_code": source});
-  const [cityto,setcityto]=useState({"name": objdropdowncity.filter(item=>JSON.stringify(item.name)==source)[0].fname ,"iata_code": destination});
+  const [cityto,setcityto]=useState({"name": objdropdowncity.filter(item=>JSON.stringify(item.name)==destination)[0].fname ,"iata_code": destination});
   const [isButtonClicked, setISButtonClicked] = useState(false);
 
 
@@ -109,6 +112,11 @@ export default function SearchFlights() {
   }
   const closeViewMore = () => {
     setViewMorepop(false);
+  }
+
+  function navigatetonextpage(){
+    if(cityfrom.name != cityto.name)
+    navigate(`/flights/results?source="${cityfrom["iata_code"]}"&destination="${cityto["iata_code"]}"&date="${date}"&adult=${adultselect[adultselect.length-1]}&child=${childselect[childselect.length-1]}&infant=${infantselect[infantselect.length-1]}`)
   }
 
 
@@ -245,22 +253,23 @@ export default function SearchFlights() {
             <div className='flexc wrapChildContainer g5' onClick={() => { popUp("departSearch") }}>
               {popDetails["departSearch"] && <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
               <div>DEPART</div>
-              <div className='flex'><p>{dateObject.getDate()},</p><p>{days[dateObject.getDay()]}</p>, <p>{months[dateObject.getMonth()]}</p></div>
+              <div className='flexa flex g10 dateFlightsDetails'><h4 className='flex'>{date.getDate()}</h4>{months[date.getMonth()]}'{date.getDate()} <p className='flex'>{daysOfWeek[date.getDay()]}</p></div>
+              
 
             </div>
             <div className='flexc wrapChildContainer g5' onClick={() => { popUp("wrapPassangers") }}>
               <div>PASSANGERS&CLASS</div>
-              <div>{adult} Adult, economy</div>
+              <div><h5>{(+adultselect[adultselect.length-1])+(+childselect[childselect.length-1])+(+infantselect[infantselect.length-1])}</h5></div>
               {popDetails["wrapPassangers"] && 
-              <div className='popupdivtraveller flexc g10'> 
-              <div className='g10 flexc'>
+              <div onClick={(e)=>{e.stopPropagation();}} className='popupdivtraveller flexc g10'> 
+              <div className='g10 flexc cp'>
                 <div className='textadult'>ADULTS (12y+)</div>
                 <div className='textadultdown'>on the day of travel</div>
                 <div className='flex mapbox mapboxone' onClick={handleClick}>
                   {arr.map((item) => (<div className={`boxesAdult ${adultselect==`adultarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{adultvaluechanger(item);}}>{item}</div>))}
                 </div>
               </div>
-              <div className='flex childInfant'>
+              <div className='flex childInfant cp'>
                 <div className='g10 flexc'>
                   <div className='textchild'>CHILDREN (2y - 12y )</div>
                   <div className='textchilddown'>on the day of travel</div>
@@ -268,7 +277,7 @@ export default function SearchFlights() {
                     {arrr.map((item) => (<div className={`boxesAdult ${childselect==`childtarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{childvaluechanger(item);}}>{item}</div>))}
                   </div>
                 </div>
-                <div className='g10 flexc'>
+                <div className='g10 flexc cp'>
                   <div className='textchild'>INFANTS (below 2y)</div>
                   <div className='textchilddown'>on the day of travel</div>
                   <div className='flex mapbox mapboxthree'>
@@ -276,12 +285,12 @@ export default function SearchFlights() {
                   </div>
                 </div>
               </div>
-              <button onClick={()=>{popUp("wrapPassangers")}}>submit</button>
+              <button className='passengerbuttonsubmit cp' onClick={()=>{popUp("wrapPassangers")}}>submit</button>
             </div>
               }
             </div>
             <div >
-              <button className='btn-wrap-container' onClick={() => { }}>SEARCH</button>
+              <button className='btn-wrap-container cp' onClick={() => {navigatetonextpage() }}>SEARCH</button>
             </div>
           </div>
         </div>
