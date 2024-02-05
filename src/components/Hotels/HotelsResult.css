@@ -41,6 +41,7 @@
   height: 100%;
 }
 .hotelsresult .bodyinner {
+  margin-top: 45px;
   width: 100%;
 }
 .hotelsresult .bodyheader {
@@ -58,7 +59,7 @@
   background-image: linear-gradient(0deg, #15457b, #051423);
 }
 .hotelsresult .bodyheaderlower {
-  height: 40%;
+  height: 50% !important;
   width: 100%;
   background-image: linear-gradient(269.96deg, #e1ebf7 0.02%, #daf8fe 99.99%);
 }

@@ -175,6 +175,7 @@
   padding-left: 20px;
   font-size: 15px;
   border: 1px solid rgba(0, 0, 0, 0.292);
+  z-index: 1000;
 }
 .searchDetailSWrappop{
   width: 330px;
@@ -235,6 +236,21 @@
   border: 0.5px solid lightgray;
   gap: 5px;
   overflow-x: hidden;
+  padding: 35px 20px 0px;
+  border: 0.5px solid lightgray;
+
+}
+
+.adultpassanger{
+  font-size: 14px;
+  color: rgb(81, 80, 80);
+  font-weight: 500;
+}
+
+.adultPassangerstext{
+  color: rgb(178, 176, 176);
+  font-size: 12px;
+  font-weight: bold;
 }
 .stops {
   margin-top: 50px;

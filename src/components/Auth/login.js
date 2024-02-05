@@ -179,10 +179,7 @@ export default function login() {
                 id="password"
                 autoComplete="current-password"
               />
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
+              
               <Button
                 type="submit"
                 fullWidth
@@ -191,12 +188,7 @@ export default function login() {
               >
                 Sign In
               </Button>
-              <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
+              <Grid container className='cp'>
                 <Grid item onClick={() => { setSignInUp(false), console.log("hi") }}>
 
                   {"Don't have an account? Sign Up"}
@@ -208,6 +200,11 @@ export default function login() {
           </Box>
         </Grid>
       </Grid>}
+
+
+{/* -----------------------Sign Up Part------------------------------------------------ */}
+
+
       {!signInUp && <Grid className='form' container component="main" sx={{ height: '300px', width: '1000px' }}>
         <CssBaseline />
         <Grid borderRadius="20px"
@@ -238,7 +235,7 @@ export default function login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign Up
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField onChange={handleUserEmail}
@@ -256,14 +253,20 @@ export default function login() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Create Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+              <TextField onChange={handleUserPassword}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Confirm Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
               />
               <Button
                 type="submit"
@@ -271,14 +274,9 @@ export default function login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item onClick={() => { setSignInUp(true), console.log("hi") }}>
 
                   {"Aready have an account Sign In"}

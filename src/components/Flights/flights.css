@@ -149,7 +149,7 @@
   position: absolute;
   height: 300px;
   width: 650px;
-  z-index: 10;
+  z-index: 1000000 !important;
   background-color: white;
   right: 0;
   border-radius: 6px;
@@ -206,9 +206,6 @@
 }
 .childInfant {
   justify-content: space-between;
-}
-.one {
-  display: flex;
 }
 .type {
   /* width: 60%; */

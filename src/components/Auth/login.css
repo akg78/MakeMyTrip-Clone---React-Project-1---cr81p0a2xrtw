@@ -1,11 +1,13 @@
 .form{
-    position: relative;
-    margin: auto;
-    top: 100px;
+    /* position: relative;
+    margin-bottom: 100px;
+    top: 100px; */
+    
+
 }
 .agreements{
-    position: relative;
+    /* position: relative;
     top: 50px;
     /* border: 2px solid red; */
-    font-size: 10px;
+    /* font-size: 10px; */ 
 }

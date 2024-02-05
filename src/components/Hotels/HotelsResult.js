@@ -4,8 +4,12 @@ import { UseNavigate, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
+import Stack from '@mui/material/Stack';
+import Pagination from '@mui/material/Pagination';
+
 
 export default function HotelsResult() {
+
   const [fieldValue, setFieldValue] = useState('')
   const [HotelLocation, setHotelLocation] = useState('');
   const [inputSearch, setInputSearch] = useState("");
@@ -24,8 +28,10 @@ export default function HotelsResult() {
   const [pricefilter, setpricefilter] = useState({ "0-1000": true, "1000-2000": true, "2000-4500": true, "4500-8000": true, "8000-11500": true, "11500-15000": true, "15000-30000": true, "30000++": true });
 
 
+
   const navigate = useNavigate();
   function clickToSearch(hotelID) {
+
     navigate(`/hotels/results/details?hotelID=${hotelID}`)
 
   }
@@ -55,7 +61,7 @@ export default function HotelsResult() {
   const hotelSearch = useMemo(async (hotels) => {
     try {
       const response = await (await fetch(
-        `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}`,
+        `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}&limit=${"10"}&page=${currentPage}`,
         {
           method: "GET",
           headers: {
@@ -69,17 +75,36 @@ export default function HotelsResult() {
     } catch (error) {
       // alert(error);
     }
-  }, [])
+  }, [currentPage])
 
   useEffect(() => {
     hotelSearch;
   }, [])
+
+
+  // function handlePrevPage() {
+  //   if (prev > 1) {
+  //     setPage(page - 1);
+  //   }
+  // };
+
+  // function handleNextPage() {
+  //   setPage(page + 1);
+  // };
 
   const [activenav, setactivenav] = useState({ "flights": true });
   function activenavmaker(key) {
     setactivenav({});
     setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
   }
+
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const onPageChange = (event, value) => {
+    setCurrentPage(value);
+    // console.log(currentPage)
+  };
+
 
   return (
     <div className='hotelsresult'>
@@ -237,6 +262,12 @@ export default function HotelsResult() {
                     </div>
                   </div>
                 </div>)))}
+
+
+              <Stack spacing={2} justifyContent="center" alignItems="center" mt={3} padding={2} >
+                <Pagination count={10}  onChange={onPageChange}/>
+              </Stack>
+
             </div>
           </div>
         </div>

@@ -8,10 +8,6 @@ import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
 
 
-
-
-
-
 export default function SearchFlights() {
   const [filter, setfilter] = useState({ "6E": true, "SG": true, "I5": true, "UK": true, "AI": true, "QP": true, "S5": true, "stops": null });
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -20,7 +16,7 @@ export default function SearchFlights() {
   const searchParams = new URLSearchParams(location.search);
   let source = searchParams.get("source");
   let destination = searchParams.get("destination");
-  let from =searchParams.get("boxdatasearchdeparture")
+  let from = searchParams.get("boxdatasearchdeparture")
   let adult = searchParams.get("adult");
   let child = searchParams.get("child");
   let infant = searchParams.get("infant");
@@ -28,13 +24,13 @@ export default function SearchFlights() {
   const dateObject = new Date(dayOfWeek);
   const [date, setDate] = useState(new Date());
 
-const objdropdowncity = [{ name: "BLR", fname: "Bangalore, IN", lname: "- Kempegowda International Airport (BLR)" },
-{ name: "BOM", fname: "Mumbai, IN", lname: "- Chatrapati Shivaji Airport (BOM)" },
-{ name: "DEL", fname: "New Delhi, IN", lname: "- Indira Gandhi Airport (DEL)" },
-{ name: "CCU", fname: "Kolkata, IN", lname: "- Netaji Subhas Chandra Bose Airport (CCU)" },
-{ name: "GOI", fname: "Goa, IN", lname: "- Dabolim Airport (GOI)" },
-{ name: "HYD", fname: "Hyderabad, IN", lname: "- Rajiv Gandhi International (HYD)" },
-{ name: "MAA", fname: "Chennai, IN", lname: "- Chennai Airport (MAA)"},];
+  const objdropdowncity = [{ name: "BLR", fname: "Bangalore, IN", lname: "- Kempegowda International Airport (BLR)" },
+  { name: "BOM", fname: "Mumbai, IN", lname: "- Chatrapati Shivaji Airport (BOM)" },
+  { name: "DEL", fname: "New Delhi, IN", lname: "- Indira Gandhi Airport (DEL)" },
+  { name: "CCU", fname: "Kolkata, IN", lname: "- Netaji Subhas Chandra Bose Airport (CCU)" },
+  { name: "GOI", fname: "Goa, IN", lname: "- Dabolim Airport (GOI)" },
+  { name: "HYD", fname: "Hyderabad, IN", lname: "- Rajiv Gandhi International (HYD)" },
+  { name: "MAA", fname: "Chennai, IN", lname: "- Chennai Airport (MAA)" },];
 
 
 
@@ -57,15 +53,42 @@ const objdropdowncity = [{ name: "BLR", fname: "Bangalore, IN", lname: "- Kempeg
   const [toggleText, setToggleText] = useState(true);
   const [sizeincreaser, setsizeincreaser] = useState({});
   const [popDetails, setPopDetails] = useState({});
-  const [dataaa,setdataaa]=useState();
-  const arrr = [0, 1, 2, 3, 4, 5, 6];
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [dataaa, setdataaa] = useState();
+  const arrr = [0, 1, 2, 3, 4, 5, 6]; const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [adultselect,setadultselect]=useState("adultarget1")
+  const [childselect,setachildselect]=useState("childtarget0")
+  const [infantselect,setinfantselect]=useState("infanttarget0")
+
   const [cityfrom,setcityfrom]=useState({"name": objdropdowncity.filter(item=>JSON.stringify(item.name)==source)[0].fname ,"iata_code": source});
+  const [cityto,setcityto]=useState({"name": objdropdowncity.filter(item=>JSON.stringify(item.name)==source)[0].fname ,"iata_code": destination});
+  const [isButtonClicked, setISButtonClicked] = useState(false);
+
+
+  function adultvaluechanger(item){
+    setadultselect(`adultarget${item}`)
+
+  }
+  function childvaluechanger(item){
+    setachildselect(`childtarget${item}`)
+  }
+  function infantvaluechanger(item){
+    setinfantselect(`infanttarget${item}`)
+  }
+
+
+  const handleClick = () => {
+    setISButtonClicked(true);
+  }
 
   function fromCityChanger(city, iata_code){
     setcityfrom((prev)=> ({...prev,"name":city }))
     setcityfrom((prev)=>({...prev,"iata_code":iata_code}))
   }
+  function toCityChanger(city, iata_code){
+    setcityto((prev)=> ({...prev,"name":city }))
+    setcityto((prev)=>({...prev,"iata_code":iata_code}))
+  }
+
   const cabinBaggage = "7 kg";
   const checkInBaggage = "20 kg";
 
@@ -90,35 +113,31 @@ const objdropdowncity = [{ name: "BLR", fname: "Bangalore, IN", lname: "- Kempeg
 
 
 
- async function Search() {
+  async function Search() {
     const endpoint = `https://academics.newtonschool.co/api/v1/bookingportals/airport?search={"city":""}`;
-    
+
     try {
       const response = await fetch(endpoint, {
-            method: 'GET',
-            headers: {
-                projectID: "cr81p0a2xrtw",
-            },
-        })
-        const res = await response.json();
-        setdataaa(res.data.airports)
-        // console.log(res);
-      } catch (error) {
-        console.error('Error fetching flight', error);
-      }
+        method: 'GET',
+        headers: {
+          projectID: "cr81p0a2xrtw",
+        },
+      })
+      const res = await response.json();
+      setdataaa(res.data.airports)
+      console.log(res);
+    } catch (error) {
+      console.error('Error fetching flight', error);
     }
-    
-    useEffect(() => {
-      fetchData();
-      Search();
-    }, [rangeprice, stopFromm])
+  }
 
+  
   function airlineSelector(key) {
     setTimeout(() => {
       setfilter((prev) => ({ ...prev, [key]: !filter[key] }));
     }, 10);
   }
-
+  
   const [activenav, setactivenav] = useState({ "flights": true });
   function activenavmaker(key) {
     setactivenav({});
@@ -159,18 +178,23 @@ const objdropdowncity = [{ name: "BLR", fname: "Bangalore, IN", lname: "- Kempeg
   async function fetchData() {
     try {
       const res = await (await fetch(`https://academics.newtonschool.co/api/v1/bookingportals/flight?search={"source":${source},"destination":${destination}}&day=${days[dateObject.getDay()]}&filter={"ticketPrice":{"$lte":${rangeprice}}${stopFromm != "" ? `,"stops":${stopFromm}` : ""}}`,
-        {
-          method: 'GET',
-          headers: {
-            projectID: "cr81p0a2xrtw",
-          },
-        })).json();
+      {
+        method: 'GET',
+        headers: {
+          projectID: "cr81p0a2xrtw",
+        },
+      })).json();
       setFlightData(res.data.flights)
     } catch (error) {
       console.error('Error fetching flight', error);
     }
   }
 
+  useEffect(() => {
+    fetchData();
+    Search();
+  }, [rangeprice, stopFromm])
+  
   const navigate = useNavigate();
   function clickToBook(flightID, item) {
     navigate(`/flights/results/flightBooking?flight_id=${flightID}&date=${dateObject}`)
@@ -192,46 +216,72 @@ const objdropdowncity = [{ name: "BLR", fname: "Bangalore, IN", lname: "- Kempeg
       <div className='backgrounddd'>
 
         <div className='bg-gradiant'>
-          <div className='b1 parentWrapDetails'>
-            <div className='flex flexa g20 wrapDetails'>
-              <div className='flexc wrapChildContainer g5' onClick={() => { popUp("detailsWrap") }}>
-                <div>From</div>
-                <div>{cityfrom.name}</div>
-                {popDetails["detailsWrap"] && <div className='fromDetailsSearch'>
-                  <input type='text' placeholder='Enter City' onClick={(e) => { e.stopPropagation(); }} value={inputSearchh} onChange={(e) => { setInputSearchh(e.target.value) }} />
-                  {dataaa && console.log(dataaa) && dataaa.map((item, index) => (<div className='searchDetailSWrappop'>
-                    <div><CiLocationOn /></div>
-
-                    <div onClick={() => {fromCityChanger(item.city, item.iata_code)}}>{item.city}</div>
-                  </div>))}
-                </div>}
-              </div>
-              <div>icon</div>
-
-              <div className='flexc wrapChildContainer g5' onClick={()=>{popUp("toDetailsWrap")}}>
-                {popDetails["toDetailsWrap"] && <div className='toDetailsSearch'>
-                  <input type='text' placeholder='Enter City' onClick={(e) => { e.stopPropagation(); }} value={inputSearchh} onChange={(e) => { setInputSearchh(e.target.value) }}/>
-                  {flightData && flightData.map((item)=>(<div className='searchDetailSWrappop'>
+          <div className='flex flexa g20 wrapDetails'>
+            <div className='flexc wrapChildContainer g5' onClick={() => { popUp("detailsWrap") }}>
+              <div>From</div>
+              <div>{cityfrom.name}</div>
+              {popDetails["detailsWrap"] && <div className='fromDetailsSearch'>
+                <input type='text' placeholder='Enter City' onClick={(e) => { e.stopPropagation(); }} value={inputSearchh} onChange={(e) => { setInputSearchh(e.target.value) }} />
+                {dataaa && dataaa.map((item, index) => (<div className='searchDetailSWrappop flex g5' onClick={() => { fromCityChanger(item.city, item.iata_code) }}>
                   <div><CiLocationOn /></div>
-                  </div>))}
-                  </div>}
-                <div>TO</div>
-                <div>BENGALURU</div>
-              </div>
-              <div className='flexc wrapChildContainer g5' onClick={()=>{popUp("departSearch")}}>
-                {popDetails["departSearch"] &&  <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date}/>}
-                <div>DEPART</div>
-                <div className='flex'><p>{dateObject.getDate()},</p><p>{days[dateObject.getDay()]}</p>, <p>{months[dateObject.getMonth()]}</p></div>
 
+                  <div>{item.city}</div>
+                </div>))}
+              </div>}
+            </div>
+            <div>icon</div>
+
+            <div className='flexc wrapChildContainer g5' onClick={() => { popUp("toDetailsWrap") }}>
+              {popDetails["toDetailsWrap"] && <div className='toDetailsSearch'>
+                <input type='text' placeholder='Enter City' onClick={(e) => { e.stopPropagation(); }} value={inputSearchh} onChange={(e) => { setInputSearchh(e.target.value) }} />
+                {dataaa && dataaa.map((item) => (<div className='searchDetailSWrappop flex g5' onClick={() => { toCityChanger(item.city, item.iata_code) }}>
+                  <div><CiLocationOn /></div>
+                  <div>{item.city}</div>
+                </div>))}
+              </div>}
+              <div>TO</div>
+              <div>{cityto.name}</div>
+            </div>
+            <div className='flexc wrapChildContainer g5' onClick={() => { popUp("departSearch") }}>
+              {popDetails["departSearch"] && <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
+              <div>DEPART</div>
+              <div className='flex'><p>{dateObject.getDate()},</p><p>{days[dateObject.getDay()]}</p>, <p>{months[dateObject.getMonth()]}</p></div>
+
+            </div>
+            <div className='flexc wrapChildContainer g5' onClick={() => { popUp("wrapPassangers") }}>
+              <div>PASSANGERS&CLASS</div>
+              <div>{adult} Adult, economy</div>
+              {popDetails["wrapPassangers"] && 
+              <div className='popupdivtraveller flexc g10'> 
+              <div className='g10 flexc'>
+                <div className='textadult'>ADULTS (12y+)</div>
+                <div className='textadultdown'>on the day of travel</div>
+                <div className='flex mapbox mapboxone' onClick={handleClick}>
+                  {arr.map((item) => (<div className={`boxesAdult ${adultselect==`adultarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{adultvaluechanger(item);}}>{item}</div>))}
+                </div>
               </div>
-              <div className='flexc wrapChildContainer g5' onClick={()=>{popUp("wrapPassangers")}}>
-                {popDetails["wrapPassangers"] && <div className='wraPassanger'></div>}
-                <div>PASSANGERS&CLASS</div>
-                <div>{adult} Adult, economy</div>
+              <div className='flex childInfant'>
+                <div className='g10 flexc'>
+                  <div className='textchild'>CHILDREN (2y - 12y )</div>
+                  <div className='textchilddown'>on the day of travel</div>
+                  <div className='flex mapbox mapboxtwo'>
+                    {arrr.map((item) => (<div className={`boxesAdult ${childselect==`childtarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{childvaluechanger(item);}}>{item}</div>))}
+                  </div>
+                </div>
+                <div className='g10 flexc'>
+                  <div className='textchild'>INFANTS (below 2y)</div>
+                  <div className='textchilddown'>on the day of travel</div>
+                  <div className='flex mapbox mapboxthree'>
+                    {arrr.map((item) => (<div className={`boxesAdult ${infantselect==`infanttarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{infantvaluechanger(item);}}>{item}</div>))}
+                  </div>
+                </div>
               </div>
-              <div >
-                <button className='btn-wrap-container' onClick={()=>{}}>SEARCH</button>
-              </div>
+              <button onClick={()=>{popUp("wrapPassangers")}}>submit</button>
+            </div>
+              }
+            </div>
+            <div >
+              <button className='btn-wrap-container' onClick={() => { }}>SEARCH</button>
             </div>
           </div>
         </div>

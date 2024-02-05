@@ -139,11 +139,11 @@ export default function Flights() {
             <div className='travellers' ><IoIosArrowDown className='arow' />
               <div onClick={() => { popp("traveller") }}>
                 <p>Travellers& Class</p>
-                <div className='one flexa'><h1>{(+adultselect[adultselect.length-1])+(+childselect[childselect.length-1])+(+infantselect[infantselect.length-1])}</h1><p>Traveller</p></div>
+                <div className='one  flex flexa'><h1>{(+adultselect[adultselect.length-1])+(+childselect[childselect.length-1])+(+infantselect[infantselect.length-1])}</h1><p>Traveller</p></div>
                 <p>Economy/Premium Economy</p>
               </div>
               {pop["traveller"] &&
-                <div className='popupdivtraveller flexc g10'>
+                <div className='popupdivtraveller flexc g10'> 
                   <div className='g10 flexc'>
                     <div className='textadult'>ADULTS (12y+)</div>
                     <div className='textadultdown'>on the day of travel</div>
