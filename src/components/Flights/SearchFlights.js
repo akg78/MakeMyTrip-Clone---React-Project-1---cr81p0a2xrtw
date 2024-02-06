@@ -6,6 +6,7 @@ import Slider from '@mui/material/Slider';
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
+import { TbArrowsExchange } from "react-icons/tb";
 
 
 export default function SearchFlights() {
@@ -27,13 +28,13 @@ export default function SearchFlights() {
   const [date, setDate] = useState(new Date());
 
   const objdropdowncity = [{name:"AMD",fname:"Ahmedabad"},
-  { name: "BLR", fname: "Bangalore"},
-  { name: "BOM", fname: "Mumbai" },
-  { name: "DEL", fname: "New Delhi"},
-  { name: "CCU", fname: "Kolkata"},
-  { name: "GOI", fname: "Goa"},
-  { name: "HYD", fname: "Hyderabad"},
-  { name: "MAA", fname: "Chennai" }];
+  { name:"BLR", fname:"Bangalore"},
+  { name:"BOM", fname:"Mumbai" },
+  { name:"DEL", fname:"New Delhi"},
+  { name:"CCU", fname:"Kolkata"},
+  { name:"GOI", fname:"Goa"},
+  { name:"HYD", fname:"Hyderabad"},
+  { name:"MAA", fname:"Chennai" }];
 
 
 
@@ -195,6 +196,7 @@ export default function SearchFlights() {
       setFlightData(res.data.flights)
     } catch (error) {
       console.error('Error fetching flight', error);
+      console.log(setFlightData);
     }
   }
 
@@ -211,7 +213,7 @@ export default function SearchFlights() {
   return (
     <div className='flexa searchhhhhhhhhhh'>
       <div className='navheader flexa'>
-        <div className='imggg flexa'><img src='/logo@2x.png' /></div>
+        <div className='imggg flexa'><a href='/'><img src='/logo@2x.png' /></a></div>
         <div className='navList '>
           <div className='flex  imgSearchbar g20'>
             <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
@@ -224,7 +226,7 @@ export default function SearchFlights() {
       <div className='backgrounddd'>
 
         <div className='bg-gradiant'>
-          <div className='flex flexa g20 wrapDetails'>
+          <div className='flex flexa g10 wrapDetails'>
             <div className='flexc wrapChildContainer g5' onClick={() => { popUp("detailsWrap") }}>
               <div>From</div>
               <div>{cityfrom.name}</div>
@@ -237,7 +239,9 @@ export default function SearchFlights() {
                 </div>))}
               </div>}
             </div>
-            <div>icon</div>
+            <div>
+              <TbArrowsExchange className='swapp cp'  />
+            </div>
 
             <div className='flexc wrapChildContainer g5' onClick={() => { popUp("toDetailsWrap") }}>
               {popDetails["toDetailsWrap"] && <div className='toDetailsSearch'>

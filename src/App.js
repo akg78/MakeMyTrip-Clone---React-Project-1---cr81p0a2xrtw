@@ -9,8 +9,6 @@ import Trains from "./components/Trains/trains";
 import Holiday from "./components/underConstruction/Holiday";
 import Cabs from "./components/underConstruction/Cabs";
 import Bus from "./components/underConstruction/Bus";
-import Login from "./components/Auth/login";
-import Register from "./components/Auth/register";
 import BookingConfirmationPage from "./components/BookingPage/BookingConfirmationPage";
 import Bottom from "./components/Bottoms/Bottom";
 import Homestay from "./components/underConstruction/Homestay";
@@ -35,9 +33,7 @@ function App() {
             <Route path="/holidays" element={<Holiday/>}/>
             <Route path="/trains" element={<Trains/>}/>
             <Route path="/buses" element={<Bus/>}/>
-            <Route path="/register" element={<Register/>}/>
             <Route path="/cabs" element={<Cabs/>}/>
-            <Route path="/login" element={<Login/>} />
           </Route>
             <Route path="/flights/results/flightBooking/:PaymentDetails" element={<PaymentDetails/>}></Route>
             <Route path="/flights/results/:flightBooking" element={<BookingConfirmationPage/>}/>

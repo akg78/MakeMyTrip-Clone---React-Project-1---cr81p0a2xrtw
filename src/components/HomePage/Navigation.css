@@ -43,6 +43,9 @@ a{
   height: 35px;
   
 }
+.navcomp{
+  position: relative;
+}
 .logo {
   position: relative;
   justify-content: space-between;
@@ -131,6 +134,7 @@ a{
   text-align: center;
 }
 .my-login {
+  /* position: relative; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,15 +151,21 @@ a{
   font-size: 13px;
   text-align: center;
 }
-.arrow {
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  margin-left: 50px;
-  margin-bottom: 3px;
+.popLogin{
+  position: absolute;
+  height:  100%;
+  width: 100%;
+  z-index: 10000!important;
+  background-color: rgba(20, 16, 16, 0.484);
+  color: black;
+  right: 0;
 }
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
+.hello{
+  position: absolute;
+  left: 200px;
+  top: 90px;
+  z-index: 100000;
+  /* height: 100px;
+  width: 100px; */
+  /* background-color: wheat; */
 }

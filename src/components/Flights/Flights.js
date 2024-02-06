@@ -124,10 +124,10 @@ export default function Flights() {
 
             <div className='calander' onClick={() => { popp("cl") }}>
 
-              <IoIosArrowDown className='arow' />{pop["cl"] && <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
+              <IoIosArrowDown className='arow' />{pop["cl"] && <Calendar className="calendarForGoing " minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
               <p>Departure</p>
-              <p className='flexa g20'><h1>{date.getDate()}</h1>{months[date.getMonth()]}'{date.getDate()}</p>
-              <p>{daysOfWeek[date.getDay()]}</p>
+              <span className='flexa g5 dateP'><h1>{date.getDate()}</h1><p className='fullYear'>{months[date.getMonth()]}'{date.getFullYear()}</p></span>
+              <p className='datePP'>{daysOfWeek[date.getDay()]}</p>
             </div>
 
 
@@ -138,9 +138,9 @@ export default function Flights() {
             </div>
             <div className='travellers' ><IoIosArrowDown className='arow' />
               <div onClick={() => { popp("traveller") }}>
-                <p>Travellers& Class</p>
-                <div className='one  flex flexa'><h1>{(+adultselect[adultselect.length-1])+(+childselect[childselect.length-1])+(+infantselect[infantselect.length-1])}</h1><p>Traveller</p></div>
-                <p>Economy/Premium Economy</p>
+                <p className='travellerss'>Travellers& Class</p>
+                <div className='one  flex flexa'><h1>{(+adultselect[adultselect.length-1])+(+childselect[childselect.length-1])+(+infantselect[infantselect.length-1])}</h1><p className='tra'>Traveller</p></div>
+                <p className='econo'>Economy/Premium Economy</p>
               </div>
               {pop["traveller"] &&
                 <div className='popupdivtraveller flexc g10 cp'> 

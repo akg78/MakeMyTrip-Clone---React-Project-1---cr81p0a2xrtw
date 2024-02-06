@@ -68,6 +68,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CloseIcon from '@mui/icons-material/Close';
 
 function Copyright(props) {
   return (
@@ -84,7 +85,53 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function login() {
+export default function Login({ setToken, showSignUp, setShowSignUp }) {
+
+  // const [tokenChange, setTokenChange] = useState(false);
+
+  const [name, setName] = useState("");
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://academics.newtonschool.co/api/v1/bookingportals/signup",
+        {
+          method: "POST",
+          headers: {
+            projectID: "cr81p0a2xrtw",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            appType: 'bookingportals' 
+          }),
+        }
+      );
+      if (!response.ok) {
+        alert("Please Signup");
+        return;
+      }
+      const newData = await response.json();
+      console.log("newData", newData);
+      const token = newData.token;
+      localStorage.setItem("authToken", JSON.stringify(token));
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
   const [signInUp, setSignInUp] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -108,8 +155,14 @@ export default function login() {
       );
       const newData = await response.json();
       console.log("newData", newData);
-      const { token = "" } = newData;
-      localStorage.setItem("authToken", token);
+      if(newData.status === 'success'){
+      const token = newData.token;
+      localStorage.setItem("authToken", JSON.stringify(token));
+      setShowSignUp(false)
+      setToken(localStorage.getItem("authToken"))
+      }else{
+        alert("Login or Password incorrect!")
+      }
     } catch (error) {
       alert(error);
     }
@@ -119,13 +172,20 @@ export default function login() {
     setEmail(e.target.value);
   };
 
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+  
+
   const handleUserPassword = (e) => {
     setPassword(e.target.value);
   };
 
-  return (
 
+  return (
+    // <Box sx={{display : "flex", justifyContent : "center" , alignItems : "center"}}>
     <ThemeProvider theme={defaultTheme}>
+
       {signInUp && <Grid className='form' container component="main" sx={{ height: '300px', width: '1000px' }}>
         <CssBaseline />
         <Grid borderRadius="20px"
@@ -152,6 +212,11 @@ export default function login() {
               alignItems: 'center',
             }}
           >
+
+            <CloseIcon onClick={()=>{setShowSignUp(false)}}
+              sx={{ position: "relative", top: "-75px", left: "240px", bgcolor: "white", borderRadius: "50px", color: "black", cursor: "pointer" }}
+            />
+
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -179,8 +244,8 @@ export default function login() {
                 id="password"
                 autoComplete="current-password"
               />
-              
-              <Button
+
+              <Button onClick={(e)=>{handleSubmit(e)}}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -189,7 +254,7 @@ export default function login() {
                 Sign In
               </Button>
               <Grid container className='cp'>
-                <Grid item onClick={() => { setSignInUp(false), console.log("hi") }}>
+                <Grid item onClick={() => { setSignInUp(false) }}>
 
                   {"Don't have an account? Sign Up"}
 
@@ -202,7 +267,7 @@ export default function login() {
       </Grid>}
 
 
-{/* -----------------------Sign Up Part------------------------------------------------ */}
+      {/* -----------------------Sign Up Part------------------------------------------------ */}
 
 
       {!signInUp && <Grid className='form' container component="main" sx={{ height: '300px', width: '1000px' }}>
@@ -248,15 +313,15 @@ export default function login() {
                 autoComplete="email"
                 autoFocus
               />
-              <TextField onChange={handleUserPassword}
+              <TextField onChange={handleName}
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                label="Create Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                name="name"
+                label="Enter Name"
+                type="text"
+                id="name"
+                autoFocus
               />
               <TextField onChange={handleUserPassword}
                 margin="normal"
@@ -268,7 +333,7 @@ export default function login() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button
+              <Button onClick={(e)=>{handleSignup(e)}}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -276,8 +341,8 @@ export default function login() {
               >
                 Sign Up
               </Button>
-              <Grid container>
-                <Grid item onClick={() => { setSignInUp(true), console.log("hi") }}>
+              <Grid container className='cp'>
+                <Grid item onClick={() => { setSignInUp(true) }}>
 
                   {"Aready have an account Sign In"}
 
@@ -289,5 +354,6 @@ export default function login() {
         </Grid>
       </Grid>}
     </ThemeProvider>
+    // </Box>
   );
 }

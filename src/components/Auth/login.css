@@ -1,7 +1,9 @@
 .form{
-    /* position: relative;
-    margin-bottom: 100px;
-    top: 100px; */
+    
+    /* margin-left: 220px; */
+    /* margin-bottom: 1000px; */
+    
+  
     
 
 }
@@ -10,4 +12,29 @@
     top: 50px;
     /* border: 2px solid red; */
     /* font-size: 10px; */ 
+}
+
+
+
+
+
+.MuiGrid-root{ /*base bg with img*/
+    /* height: 100px;
+    width: 100px; */
+}
+
+.css-1y8ugea{ /*email box background*/
+    /* height: 50px; */
+}
+
+.css-164r41r{  /*email box*/
+
+}
+
+.css-ag7rrr-MuiTypography-root{ /*sign-in upper*/
+
+}
+
+.css-lguxed-MuiAvatar-root{ /*protected box*/
+
 }
