@@ -24,7 +24,7 @@ export default function OffersCarousel() {
     console.log(offerData)
     try {
       const response = await (await fetch(
-        `https://academics.newtonschool.co/api/v1/bookingportals/offers?filter={"type":"${data}"}`,
+        `https://academics.newtonschool.co/api/v1/bookingportals/offers?filter={"type":"${data}"}&limit=50`,
         {
           method: "GET",
           headers: {
@@ -48,14 +48,14 @@ export default function OffersCarousel() {
           <h2>
             <font color="393939">Offers</font>
           </h2>
-          <ul className='offer-list cp'>
+          <ul className='offer-list c'>
             <li onClick={() => { setVisibleOffer("ALL"); clickedOfferNav("ALL"); handleSubmit("ALL") }}><a className={isClicked["ALL"] ? "colorOfferNav" : ""} >All Offers</a></li>
             <li onClick={() => { setVisibleOffer("FLIGHTS"); clickedOfferNav("FLIGHTS"); handleSubmit("FLIGHTS") }}><a className={isClicked["FLIGHTS"] ? "colorOfferNav" : ""} >Flights</a></li>
             <li onClick={() => { setVisibleOffer("HOTELS"); clickedOfferNav("HOTELS"); handleSubmit("HOTELS") }}><a className={isClicked["HOTELS"] ? "colorOfferNav" : ""} >Hotels</a></li>
             <li onClick={() => { setVisibleOffer("RAILS"); clickedOfferNav("RAILS"); handleSubmit("RAILS") }}><a className={isClicked["RAILS"] ? "colorOfferNav" : ""} >Train</a></li>
           </ul>
           <div className='createCarousel flex flexja'>
-            <div className='backArrow flexja'><MdOutlineArrowBackIos /></div>
+            <div className='backArrow flexja'><MdOutlineArrowBackIos onClick={()=>{}} /></div>
             <div className='forwardArrow flexja'><MdOutlineArrowForwardIos /></div>
           </div>
         </div>

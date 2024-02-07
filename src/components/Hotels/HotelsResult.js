@@ -58,7 +58,7 @@ export default function HotelsResult() {
     }
 
   }
-  const hotelSearch = useMemo(async (hotels) => {
+  const hotelSearch = async (hotels) => {
     try {
       const response = await (await fetch(
         `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}&limit=${"10"}&page=${currentPage}`,
@@ -70,16 +70,18 @@ export default function HotelsResult() {
           },
         }
       )).json();
+      // setHotels(prevHotels => [...prevHotels, ...response.data.hotels]);
       setHotels(response.data.hotels)
       console.log(response)
     } catch (error) {
       // alert(error);
     }
-  }, [currentPage])
+  }
 
   useEffect(() => {
-    hotelSearch;
-  }, [])
+    hotelSearch();
+
+  }, [currentPage])
 
 
   // function handlePrevPage() {
@@ -102,7 +104,7 @@ export default function HotelsResult() {
   const [currentPage, setCurrentPage] = useState(1);
   const onPageChange = (event, value) => {
     setCurrentPage(value);
-    // console.log(currentPage)
+    console.log(value)
   };
 
 
