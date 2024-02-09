@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react';
 import "./HotelsResult.css";
 import { UseNavigate, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
@@ -7,33 +7,56 @@ import Calendar from 'react-calendar';
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 
-
-export default function HotelsResult() {
-
-  const [fieldValue, setFieldValue] = useState('')
-  const [HotelLocation, setHotelLocation] = useState('');
-  const [inputSearch, setInputSearch] = useState("");
+export default function HotelsResult() {  
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const counting = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
   const [hotels, setHotels] = useState([]);
   const [searchpop, setSearchPop] = useState({ hotelSearchPop: false });
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   let dplocation = searchParams.get("location");
+  const [inputSearch, setInputSearch] = useState('');
+  const [dplocations, setdplocations] = useState(dplocation)
+  let guest = searchParams.get("guest") 
   let dayOfWeek = searchParams.get("date");
-  let guest = searchParams.get("guest")
+  let returnDate = searchParams.get("returndate");
   const dateObject = new Date(dayOfWeek);
-  const [date, setDate] = useState(new Date());
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const [date, setDate] = useState(dateObject);
+  let dateObjReturnDate = new Date(returnDate);
+  const [dateReturn, setDateReturn] = useState(dateObjReturnDate);
   const [ratingfilter, setratingfilter] = useState({ "excellent": true, "verygood": true, "average": true });
   const [pricefilter, setpricefilter] = useState({ "0-1000": true, "1000-2000": true, "2000-4500": true, "4500-8000": true, "8000-11500": true, "11500-15000": true, "15000-30000": true, "30000++": true });
+  const [sortings, setsortings] = useState("");
+  const [guests, setguests] = useState({ "room": 1, "adults": 1, "children": 0 });
+  const [guestspopcount, setguestspopcount] = useState({"room":false,"adults":false,"children":false});
+  const [guestss, setguestss] = useState(guests["adults"] + guests["children"])
+  const [room, setroom] = useState(guests["room"]);
+  const [cities,setcities]=useState();
+  function guestscoutntpop(key){
+    setguestspopcount({})
+    setguestspopcount((prev)=>({...prev,[key]:!guestspopcount[key]}))
+  }
 
+  function guestsmanage(key, value) {
+    setguests((prev) => ({ ...prev, [key]: value }));
+  }
 
-
+  function sortingsfun(val) {
+    setsortings({});
+    setsortings({ [val]: true });
+  }
   const navigate = useNavigate();
   function clickToSearch(hotelID) {
 
-    navigate(`/hotels/results/details?hotelID=${hotelID}`)
+    navigate(`/hotels/results/details?hotelID=${hotelID}&=location=${dplocation}&date=${date}&returndate=${returnDate}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`)
 
+  }
+  
+
+  function selfNagigation(){
+    hotelSearch()
+    navigate(`/hotels/results?location=${dplocations}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`);
   }
   function hotelSearchPop(key) {
     setSearchPop({ hotelSearch: key });
@@ -58,10 +81,27 @@ export default function HotelsResult() {
     }
 
   }
-  const hotelSearch = async (hotels) => {
+
+  function sorting(value) {
+    if (sortings["priceLtoH"]) {
+      return value.sort((a, b) => a.avgCostPerNight - b.avgCostPerNight);
+    }
+    else if (sortings["priceHtoL"]) {
+      return value.sort((a, b) => b.avgCostPerNight - a.avgCostPerNight);
+    }
+    else if (sortings["rating"]) {
+      return value.sort((a, b) => b.rating - a.rating);
+    }
+    else {
+      return value
+    }
+
+  }
+
+  const hotelSearch = async () => {
     try {
       const response = await (await fetch(
-        `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}&limit=${"10"}&page=${currentPage}`,
+        `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${dplocation}"}&limit=${"10"}&page=${currentPage}`,
         {
           method: "GET",
           headers: {
@@ -70,29 +110,37 @@ export default function HotelsResult() {
           },
         }
       )).json();
-      // setHotels(prevHotels => [...prevHotels, ...response.data.hotels]);
-      setHotels(response.data.hotels)
-      console.log(response)
+      setHotels(sorting(response.data.hotels))
     } catch (error) {
-      // alert(error);
+      alert(error);
     }
   }
+  const fetchcities = async () => {
+    try {
+      const response = await (await fetch(
+        `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}`,
+        {
+          method: "GET",
+          headers: {
+            projectId: "cr81p0a2xrtw",
+            "content-type": "application/json",
+          },
+        }
+      )).json();
+      setcities(response.data.hotels)
+    } catch (error) {
+      alert(error);
+    }
+  }
+  useEffect(()=>{
+    fetchcities();
+  },[inputSearch])
 
   useEffect(() => {
     hotelSearch();
 
-  }, [currentPage])
+  }, [currentPage, sortings])
 
-
-  // function handlePrevPage() {
-  //   if (prev > 1) {
-  //     setPage(page - 1);
-  //   }
-  // };
-
-  // function handleNextPage() {
-  //   setPage(page + 1);
-  // };
 
   const [activenav, setactivenav] = useState({ "flights": true });
   function activenavmaker(key) {
@@ -100,11 +148,10 @@ export default function HotelsResult() {
     setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
   }
 
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const onPageChange = (event, value) => {
     setCurrentPage(value);
-    console.log(value)
   };
 
 
@@ -117,8 +164,6 @@ export default function HotelsResult() {
             <div className='navleftmenu flex g20 cp'>
               <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
               <span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
-              <span className={activenav["trains"] ? "activecolor" : ""} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' /> : <img src='/trainsblue.png' />}<p className='flexja'><a href='/trains'>Trains</a></p></span>
-              <span className={activenav["bus"] ? "activecolor" : ""} onClick={() => { activenavmaker("bus") }}>{!activenav["bus"] ? <img src='/bus.png' /> : <img src='/busblue.png' />}<p className='flexja'><a href='/bus'>Buses</a></p></span>
             </div>
           </div>
           <div className='navrightmenu'>Login</div>
@@ -132,50 +177,75 @@ export default function HotelsResult() {
                 <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                   {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
                     <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
-                    {hotels && hotels.map((item, index) => (<div key={index} className='hotelCityProperty' >
+                    {cities && cities.map((item, index) => (<div key={index} className='hotelCityProperty' onClick={() => {setdplocations(item.location.toString().split(",")[0])}} >
                       <div><CiLocationOn /></div>
-                      <div onClick={() => { (item.location.toString().match(/^([^,]+)/)[1]) }}>{(item.location.toString().match(/^([^,]+)/)[1])}</div>
+                      <div >{item.location.toString().split(",")[0]}</div>
                     </div>))}
                   </div>}
                   <span>CITY, AREA OR PROPERTY <IoIosArrowDown /></span>
-                  <p>{dplocation}</p>
+                  <p>{dplocations}</p>
                 </div>
-
-                <div className='childContainer' onClick={() => { hotelSearchPop("checkin") }}>
+                <div className='childContainer cp' onClick={() => { hotelSearchPop("checkin") }}>
                   {searchpop["checkin"] && <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
                   <span>CHECK-IN <IoIosArrowDown /></span>
                   <div className='flex g5'>
-                    <p>{dateObject.getDate()},</p> <p>{days[dateObject.getDay()]}</p> <p>{months[dateObject.getMonth()]}</p>
+                    <p>{date.getDate()},</p> <p>{months[date.getMonth()]}</p> <p>{[date.getFullYear()]}</p>
                   </div>
                 </div >
-                <div className='childContainer' onClick={() => { hotelSearchPop("checkout") }}>
-                  {searchpop["checkout"] && <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
+                <div className='childContainer cp' onClick={() => { hotelSearchPop("checkout") }}>
+                  {searchpop["checkout"] && <Calendar className="calendarForGoing" minDate={date} onChange={(e) => { setDateReturn(e) }} value={dateReturn} />}
                   <span>CHECK-OUT <IoIosArrowDown /></span>
                   <div className='flex g5'>
-                    <p>{dateObject.getDate()},</p> <p>{days[dateObject.getDay()]}</p> <p>{months[dateObject.getMonth()]}</p>
+                    <p>{dateReturn.getDate()},</p><p>{months[dateReturn.getMonth()]}</p><p>{[dateReturn.getFullYear()]}</p>
                   </div>
                 </div>
+
                 <div className='childContainer flexc' onClick={() => { hotelSearchPop("roomContainer") }}>
-                  {searchpop["roomContainer"] && <div className='roomandGuestPop'></div>}
                   <span>ROOMS & GUESTS</span>
-                  <p>{guest}</p>
+                  <p>{room} Rooms ,{guestss} Guests</p>
+                  {searchpop["roomContainer"] && <div className='roomandGuestsResults flex flexc g20'>
+                    <div className='flex flexjsb'>
+                      <h3>Rooms</h3>
+                      <span className='flexa flexjsb' onClick={(e) => { guestscoutntpop('room'); e.stopPropagation() }}>
+                        <p>{guests["room"]}</p><IoIosArrowDown />
+                        {guestspopcount["room"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("room", item)}>{item}</div>))}</div>}
+                      </span>
+                    </div>
+                    <div className='flex flexjsb'>
+                      <h3>Adults</h3>
+                      <span className='flexa flexjsb' onClick={(e) => { guestscoutntpop('adults'); e.stopPropagation() }}>
+                        <p>{guests["adults"]}</p><IoIosArrowDown />
+                        {guestspopcount["adults"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("adults", item)}>{item}</div>))}</div>}
+                      </span>
+                    </div>
+                    <div className='flex flexjsb g20'>
+                      <h3>Children <p className='childResults'>0 - 17 Years Old</p></h3>
+                      
+                      <span className='flexa flexjsb' onClick={(e) => { guestscoutntpop('children'); e.stopPropagation() }}>
+                        <p>{guests["children"]}</p><IoIosArrowDown />
+                        {guestspopcount["children"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("children", item)}>{item}</div>))}</div>}
+                      </span>
+                    </div>
+                    <p className='childResults'>Please provide right number of children along with their right age for best options and prices.</p>
+                    <button onClick={() => { hotelSearchPop("roomContainer"); setroom(guests["room"]); setguestss(guests["adults"] + guests["children"]) }}>APPLY</button>
+                  </div>}
                 </div>
-                <button className='btn-nav-hotel'>SEARCH</button>
+                <button className='btn-nav-hotel' onClick={()=>selfNagigation()}>SEARCH</button>
               </div>
             </div>
           </div>
+
           <div className='bodyheaderlower flexja b1'>
             <div className=''>
-              <div className='flexr jsb sortingHotelNav '>
+              <div className='flexr jsb sortingHotelNav cp'>
                 <p>SORT BY:</p>
-                <p>Popular</p>
-                <p>User Rating</p>
-                <p>Price</p>
-                <p>Price</p>
-                <input id='seachLocality' type='button' placeholder='Search for locality/ hotel name' />
+                <p className={sortings["rating"] ? "activecolor" : ""} onClick={() => { sortingsfun("rating") }}>User Rating</p>
+                <p className={sortings["priceLtoH"] ? "activecolor" : ""} onClick={() => { sortingsfun("priceLtoH") }}>Price</p>
+                <p className={sortings["priceHtoL"] ? "activecolor" : ""} onClick={() => { sortingsfun("priceHtoL") }}>Price</p>
               </div>
             </div>
           </div>
+
         </div>
         <div className='body'>
           <div className='bodyinner flex '>
@@ -267,7 +337,7 @@ export default function HotelsResult() {
 
 
               <Stack spacing={2} justifyContent="center" alignItems="center" mt={3} padding={2} >
-                <Pagination count={10}  onChange={onPageChange}/>
+                <Pagination count={10} onChange={onPageChange} />
               </Stack>
 
             </div>

@@ -9,10 +9,15 @@ export default function BookingConfirmationPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  let dayOfWeek = searchParams.get("date");
+  let returnDate = searchParams.get("returndate");
+  const dateObject = new Date(dayOfWeek);
+  const [date, setDate] = useState(dateObject);
+  let dateObjReturnDate = new Date(returnDate)
+  const [dateReturn, setDateReturn] = useState(dateObjReturnDate);
   let hotel_id = searchParams.get("hotel_id");
   let number = searchParams.get("number");
-  let dayOfWeek = searchParams.get("date");
-  const dateObject = new Date(dayOfWeek);
+
   const [name, setname] = useState();
   const [locationn, setlocationn] = useState();
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -24,6 +29,13 @@ export default function BookingConfirmationPage() {
   const [proceedcolor, setproceedcolor] = useState(false);
   const [dataa, setdataa] = useState();
   const [activenav, setactivenav] = useState({ "flights": true });
+  const [guests, setguests] = useState({ "room": 1, "adults": 1, "children": 0 });
+  const [guestspopcount, setguestspopcount] = useState({ "room": false, "adults": false, "children": false });
+  const [guestss, setguestss] = useState(guests["adults"] + guests["children"]);
+  const [room, setroom] = useState(guests["room"]);
+  const [hotels, setHotels] = useState([]);
+
+
 
   function detailsChanger(key, value) {
     setdetails((prev) => ({ ...prev, [key]: value }))
@@ -77,8 +89,6 @@ export default function BookingConfirmationPage() {
       console.error('Error fetching flight', error);
     }
   }
-  // console.log(locationn)
-  // console.log(dataa);
 
   useEffect(() => {
     fetchData();
@@ -103,8 +113,6 @@ export default function BookingConfirmationPage() {
             <div className='navleftmenu flexa g20 cp'>
               <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
               <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
-              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' /> : <img src='/trainsblue.png' />}<p className='flexja'><a >Trains</a></p></span></NavLink>
-              <NavLink to="/bus"><span className={`${activenav["bus"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("bus") }}>{!activenav["bus"] ? <img src='/bus.png' /> : <img src='/busblue.png' />}<p className='flexja'><a>Buses</a></p></span></NavLink>
             </div>
           </div>
           <div className='backgroundddd flexja flexc'>
@@ -117,16 +125,26 @@ export default function BookingConfirmationPage() {
                   <div className='flex flexa bookingCheckIN'>
                     <div className='flexc flex chekinBooking g5'>
                       <div>CHECK IN</div>
-                      <div className='flex'><p>{todayDate[dateObject.getDate()]},</p> <p>{days[dateObject.getDay()]}</p> <p>{months[dateObject.getMonth()]}</p></div>
+                      <div className='flex g5'>
+                        <p>{date.getDate()},</p> <p>{months[date.getMonth()]}</p> <p>{[date.getFullYear()]}</p>
+                      </div>
                       <div>{dateObject.getHours()}h: {dateObject.getMinutes()}m</div>
                     </div>
                     <div className='flexc flex checkOutBooking g5'>
                       <div>CHECK OUT</div>
-                      <div className='flex'><p>{todayDate[dateObject.getDate()]},</p> <p>{days[dateObject.getDay()]}</p> <p>{months[dateObject.getMonth()]}</p></div>
-                      <div>{Math.floor(dateObject.getHours()*1.1)}h: {dateObject.getMinutes()*5}m</div>
+                      <div className='flex g5'>
+                        <p>{dateReturn.getDate()},</p><p>{months[dateReturn.getMonth()]}</p><p>{[dateReturn.getFullYear()]}</p>
+                      </div>
+                      <div>{Math.floor(dateObject.getHours() * 1.1)}h: {dateObject.getMinutes() * 5}m</div>
                     </div>
-                    <div className='flex flex adultBooking'>
-                      <div>adult child</div>
+                    <div className='flex flex adultBooking g10'>
+                      <h4>Guest</h4>
+                    <p>{guests["room"]}</p>
+                    {guestspopcount["room"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("room", item)}>{item}</div>))}</div>}
+                    <h4>Rooms</h4>
+                    <p>{guests["adults"]}</p>
+                    {guestspopcount["adults"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("adults", item)}>{item}</div>))}</div>}
+
                     </div>
                   </div>
                 </div>

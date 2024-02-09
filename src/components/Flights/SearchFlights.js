@@ -23,8 +23,8 @@ export default function SearchFlights() {
   let infant = searchParams.get("infant");
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-  const dateObject = new Date(dayOfWeek);
   let dayOfWeek = searchParams.get("date");
+  const dateObject = new Date(dayOfWeek);
   const [date, setDate] = useState(new Date());
 
   const objdropdowncity = [{name:"AMD",fname:"Ahmedabad"},
@@ -46,7 +46,6 @@ export default function SearchFlights() {
   ])
 
   const [inputSearchh, setInputSearchh] = useState("");
-  const [showlessandmore, setShowLessandmore] = useState(true);
   const [flightData, setFlightData] = useState();
   const [rangeprice, setrangeprice] = useState(3000);
   const [stopFromm, setstopFromm] = useState("");
@@ -105,15 +104,15 @@ export default function SearchFlights() {
     setClickedSorted((prev) => ({ ...prev, [key]: true }))
   }
 
-  function openViewMore(key, index) {
-    setToggleText(true)
-    setPopUpIndex(index);
-    setViewMorepop(true);
-    setViewMorepop((prev) => ({ ...prev, [key]: !viewMorePop[key] }));
-  }
-  const closeViewMore = () => {
-    setViewMorepop(false);
-  }
+  // function openViewMore(key, index) {
+  //   setToggleText(true)
+  //   setPopUpIndex(index);
+  //   setViewMorepop(true);
+  //   setViewMorepop((prev) => ({ ...prev, [key]: !viewMorePop[key] }));
+  // }
+  // const closeViewMore = () => {
+  //   setViewMorepop(false);
+  // }
 
   function navigatetonextpage(){
     if(cityfrom.name != cityto.name)
@@ -184,6 +183,18 @@ export default function SearchFlights() {
     if ((item.flightID[0] + item.flightID[1]) == "G8") { return logoflights[6]; }
   }
 
+  function sorting(value){
+    if (clickedSorted["cheapest"]) {
+      return value.sort((a, b) => a.ticketPrice - b.ticketPrice);
+    }
+    else if (clickedSorted["nonStop"]) {
+      return value.sort((a, b) => a.stops - b.stops);
+    }
+    else if (clickedSorted["prefer"]) {
+      return value;
+    }
+  }
+
   async function fetchData() {
     try {
       const res = await (await fetch(`https://academics.newtonschool.co/api/v1/bookingportals/flight?search={"source":${source},"destination":${destination}}&day=${days[dateObject.getDay()]}&filter={"ticketPrice":{"$lte":${rangeprice}}${stopFromm != "" ? `,"stops":${stopFromm}` : ""}}`,
@@ -193,17 +204,17 @@ export default function SearchFlights() {
           projectID: "cr81p0a2xrtw",
         },
       })).json();
-      setFlightData(res.data.flights)
+      setFlightData(sorting(res.data.flights))
+      
     } catch (error) {
       console.error('Error fetching flight', error);
-      console.log(setFlightData);
     }
   }
 
   useEffect(() => {
     fetchData();
     Search();
-  }, [rangeprice, stopFromm])
+  }, [rangeprice, stopFromm,clickedSorted])
   
   const navigate = useNavigate();
   function clickToBook(flightID, item) {
@@ -425,7 +436,7 @@ export default function SearchFlights() {
                   <div className='pricefortickets'>
                     <h3>₹{item.ticketPrice}<br /></h3><p>per adult</p>
                   </div>
-                  <button className='clicButtonnn cp'>SELECT</button>
+                  <button className='clicButtonnn cp' onClick={() => clickToBook(item._id, item)}>BOOK NOW</button>
                 </div>
                 <div className={`${sizeincreaser[`listingcarddiv${index}`] ? "sizeincreaserinnerdiv flexc flex" : "display"}`}>
 

@@ -48,9 +48,12 @@ font-weight: 400;
     border-radius: 6px;
     justify-content: space-between;
     background-image: url(../../../public/payment-done.png);
-    background-size: contain;
+    background-size: cover;
     background-color: white;
     width: 480px;
+    background-repeat: no-repeat;
+    background-position-y: -50px;
+    
 }
 .paymentbooking .backgroundwhite p{
     font-size: 20px;

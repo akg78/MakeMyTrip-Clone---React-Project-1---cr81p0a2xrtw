@@ -59,7 +59,7 @@
   background-image: linear-gradient(0deg, #15457b, #051423);
 }
 .hotelsresult .bodyheaderlower {
-  height: 50% !important;
+  height: 40px !important;
   width: 100%;
   background-image: linear-gradient(269.96deg, #e1ebf7 0.02%, #daf8fe 99.99%);
 }
@@ -95,8 +95,8 @@
   border: 1px solid red;
 }
 .sortingHotelNav {
-  padding: 9px;
   font-weight: 500;
+  margin-top: 10px;
 }
 .mainbody {
   height: 800px;
@@ -321,18 +321,47 @@
 
 /* -----------calender css end-------- */
 
-.roomandGuestPop {
+.roomandGuestsResults{
   position: absolute;
-  height: 100px;
-  width: 65px;
-  border: 1px solid black;
-  top: 30px;
-  left: 0;
-  overflow-y: scroll;
-  z-index: 100;
+  height: 300px;
+  width: 300px;
+  top: 55px;
+  gap: 35px;
+  color: black;
+  right: 0;
+  z-index: 10;
   background-color: white;
+  border-radius: 6px;
+  padding: 35px 20px 0px;
+  box-shadow: 1px 1px 3px rgba(200, 198, 198, 0.97);
 }
-/* .roomandGuestPop div {
+
+.roomandGuestsResults button{
+  position: absolute;
+  align-self: flex-end;
+  bottom: 15px;
+  padding: 8px 30px;
+  background-color: #065af3;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  box-shadow: 1px 1px 3px rgba(200, 198, 198, 0.97);
+
+}
+.roomandGuestsResults span{
+  position: relative;
+  border: 1px solid black;
   height: 30px;
-  width: 65px;
-} */
+  width: 70px;
+  padding: 0px 7px;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+.roomandGuestsResults h3{
+  opacity: 0.6;
+}
+.childResults{
+  opacity: 0.4;
+  font-size: 12px;
+
+}

@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.div1{
+    padding: 0px 135px 0 135px;
+}
+.div1 p{
+    font-size: 11px;
+    
+}
+
+.div4{
+    background-color: black;
+    color: #fff;
+    width: 100%;
+    padding-top: 50px;
+}
+.div3{
+    background-color: #e7e7e797;
+    padding: 60px 0px;
+    margin-top: 20px;
+}
+
+.fb{
+    justify-content: space-around;
+}
+
+.copy .usa{
+    margin-left: 60px;
+    margin-bottom: 20px;
+}
+.onee{
+    margin-bottom: 20px;
+}
+.whymmt{
+    padding: 0px 135px 0 135px;
+    gap: 50px;
+}

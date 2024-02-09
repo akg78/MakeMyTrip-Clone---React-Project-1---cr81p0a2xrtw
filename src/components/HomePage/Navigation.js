@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import './Navigation.css'
 import { IoIosArrowDown } from "react-icons/io";
-import Login from '../Auth/Login';
-import Register from '../Auth/Register';
+import Login from '../Auth/login';
+import Register from '../Auth/register';
 
 export default function Navigation() {
     const [showSignIn, setShowSignIn] = useState(false);
@@ -28,9 +28,9 @@ export default function Navigation() {
 
     function handleUser(){
         if(token){
-            setShowSignIn(true);
+            setShowSignIn(!showSignIn);
         }else{
-            setShowSignUp(true)
+            setShowSignUp(true);
         }
     }
 
@@ -53,7 +53,8 @@ export default function Navigation() {
                                 <p className='p2'>Manage your bookings</p>
                             </div>
                             <div className='my-login cp' onClick={() => handleUser()}>
-                                <p>{token ? "My Account" : "Login or Create Account"} </p> <IoIosArrowDown /> 
+                                
+                                <p>{token ? "Hi user" : "Login or Create Account"} </p> <IoIosArrowDown /> 
                                 {/* <p>Login or Create Account</p> */}
                             </div>
                         </div>

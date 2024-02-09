@@ -2,6 +2,7 @@ import './flights.css'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import OffersCarousel from './OffersCarousel';
+import Bottom from '../Bottoms/Bottom';
 import { Search } from "./SearchPanel";
 import { IoIosArrowDown } from "react-icons/io";
 import Calendar from 'react-calendar';
@@ -10,8 +11,6 @@ import { TbArrowsExchange } from "react-icons/tb";
 export default function Flights() {
   const [pop, setpop] = useState({});
   const [fares, setfares] = useState("");
-  const [departureSwap, setDepartureSwap] = useState("");
-  const [destinationSwap, setDestinationSwap] = useState("");
   const [ways, setways] = useState("");
   const [dataa, setdataa] = useState();
   const [inputvalue, setinputvalue] = useState("");
@@ -40,17 +39,12 @@ export default function Flights() {
     setinfantselect(`infanttarget${item}`)
   }
 
-  const handleDepartureSwap =(e)=>{
-    setDepartureSwap(e.target.value);
-  }
-  const handleDestinationSwap =(e)=>{
-    setDestinationSwap(e.tartget.value);
-  }
-
   const handleSwap =()=>{
-    const temp = departureSwap;
-    setDepartureSwap(destinationSwap);
-    setDestinationSwap(temp);
+    const temp = boxdatasearchdeparture.city;
+    const temp1 = boxdatasearchdeparture.name;
+    const temp2 = boxdatasearchdeparture.iata_code;
+    setboxdatasearchdeparture({["city"] : departureTo.city, ["name"] : departureTo.name, ["iata_code"] : departureTo.iata_code});
+    setDepartureTo({["city"] : temp , ["name"] : temp1 , ["iata_code"] : temp2});
   }
 
   const handleClick = () => {
@@ -101,7 +95,7 @@ export default function Flights() {
               </div>}
             </div>
             
-            <span className='swap flexja' onClick={()=>(handleSwap)}>
+            <span className='swap flexja' onClick={()=>{handleSwap()}}>
               <TbArrowsExchange className='swapp'  />
             </span>
 
@@ -219,6 +213,7 @@ export default function Flights() {
       </div>
 
       <OffersCarousel />
+      <Bottom />
     </div>
 
   )

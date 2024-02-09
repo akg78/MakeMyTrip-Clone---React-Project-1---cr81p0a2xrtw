@@ -15,10 +15,11 @@ export default function () {
   const [dplocation, setdplocation] = useState("Kolkata");
   const [hotelData, setHotelData] = useState([]);
   const [date, setDate] = useState(new Date())
+  const [dateReturn, setDateReturn] = useState(new Date())
   const [guests, setguests] = useState({ "room": 1, "adults": 1, "children": 0 });
   const [guestspopcount, setguestspopcount] = useState({});
   const [room, setroom] = useState(guests["room"]);
-  const [guestss, setguestss] = useState(guests["adults"] + guests["children"])
+  const [guestss, setguestss] = useState(guests["adults"] + guests["children"]);
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const counting = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
@@ -36,11 +37,10 @@ export default function () {
   }
 
   function navigatetonextpage() {
-    navigate(`/hotels/results?location=${dplocation}&date=${date}&room=${guests["room"]}&adults=${guests["adults"]}&children=${guests["children"]}`);
+    navigate(`/hotels/results?location=${dplocation}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&adults=${guests["adults"]}&children=${guests["children"]}`);
   }
 
   const hotelSubmit = useMemo(async (data) => {
-    console.log(hotelData)
     try {
       const response = await (await fetch(
         `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputvall}"}`,
@@ -91,16 +91,16 @@ export default function () {
           <div className='check-In' onClick={() => { hotelPop("check-Inn") }}><IoIosArrowDown className='arrow' />
             {searchCityPop["check-Inn"] && <Calendar className="calendarForCheckIn" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
             <span>Check-In</span>
-            <p className='flexa g20'><h1>{date.getDate()}</h1>{months[date.getMonth()]}'{date.getDate()}</p>
+            <p className='flexa g20'><h1>{date.getDate()}</h1>{months[date.getMonth()]}'{date.getFullYear()}</p>
             <p>{daysOfWeek[date.getDay()]}</p>
           </div>
 
           <div className='check-Out' onClick={() => { hotelPop("check-Outt") }}>
-            <div className='flex'><IoIosArrowDown className='arrow' /> {searchCityPop["check-Outt"] && <Calendar className="calendarForCheckOut" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
+            <div className='flex'><IoIosArrowDown className='arrow' /> {searchCityPop["check-Outt"] && <Calendar className="calendarForCheckOut" minDate={date} onChange={(e) => { setDateReturn(e) }} value={dateReturn} />}
               <span>Check-Out</span>
             </div>
-            <p className='flexa g20'><h1>{date.getDate()}</h1>{months[date.getMonth()]}'{date.getDate()}</p>
-            <p>{daysOfWeek[date.getDay()]}</p>
+            <p className='flexa g20'><h1>{dateReturn.getDate()}</h1>{months[dateReturn.getMonth()]}'{dateReturn.getFullYear()}</p>
+            <p>{daysOfWeek[dateReturn.getDay()]}</p>
           </div>
 
           <div className='rooms-guest flexa' onClick={() => { hotelPop("room-guests") }}><IoIosArrowDown className='arrow' />

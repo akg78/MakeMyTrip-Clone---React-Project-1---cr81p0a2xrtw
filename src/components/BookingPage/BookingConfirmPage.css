@@ -28,7 +28,6 @@
   margin-top: 81px;
 }
 .bookingCard {
-  /* height: 300vh; */
   width: 90%;
   padding-bottom: 50px;
   gap: 3%;
@@ -218,6 +217,7 @@ outline: none;
   margin-top: 40px;
   padding: 4px;
   border: 1px solid rgb(194, 193, 193);
+  
 }
 
 .clickToPay button{

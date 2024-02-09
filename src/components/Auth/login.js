@@ -1,58 +1,3 @@
-// const login = () => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const response = await fetch(
-//         "https://academics.newtonschool.co/api/v1/bookingportals/login",
-//         {
-//           method: "POST",
-//           headers: {
-//             projectID: "cr81p0a2xrtw",
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//               email: email,
-//               password: password,
-//               appType: 'bookingportals' 
-//           }),
-
-//         }
-//       );
-//       const newData = await response.json();
-//       console.log("newData", newData);
-//       const { token = "" } = newData;
-//       localStorage.setItem("authToken", token);
-//     } catch (error) {
-//       alert(error);
-//     }
-//   };
-
-//   const handleUserEmail = (e) => {
-//     setEmail(e.target.value);
-//   };
-
-//   const handleUserPassword = (e) => {
-//     setPassword(e.target.value);
-//   };
-
-//   return (
-//     <div className="form">
-//       <form onSubmit={handleSubmit}>
-//         <label>Email</label><br/>
-//         <input value={email} type="email" onChange={handleUserEmail} /><br/>
-//         <label>PassWord</label><br/>
-//         <input name="password" type="password" onChange={handleUserPassword} /><br/>
-//         <button type="submit">Create </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default login;
-
-
 import React, { useState } from 'react';
 import "./login.css"
 import Avatar from '@mui/material/Avatar';
@@ -69,6 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
+import { colors } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -106,7 +52,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
             name: name,
             email: email,
             password: password,
-            appType: 'bookingportals' 
+            appType: 'bookingportals'
           }),
         }
       );
@@ -118,16 +64,11 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
       console.log("newData", newData);
       const token = newData.token;
       localStorage.setItem("authToken", JSON.stringify(token));
+      setShowSignUp(false);
     } catch (error) {
       alert(error);
     }
   };
-
-
-
-
-
-
 
 
 
@@ -155,12 +96,12 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
       );
       const newData = await response.json();
       console.log("newData", newData);
-      if(newData.status === 'success'){
-      const token = newData.token;
-      localStorage.setItem("authToken", JSON.stringify(token));
-      setShowSignUp(false)
-      setToken(localStorage.getItem("authToken"))
-      }else{
+      if (newData.status === 'success') {
+        const token = newData.token;
+        localStorage.setItem("authToken", JSON.stringify(token));
+        setShowSignUp(false)
+        setToken(localStorage.getItem("authToken"))
+      } else {
         alert("Login or Password incorrect!")
       }
     } catch (error) {
@@ -175,7 +116,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
   const handleName = (e) => {
     setName(e.target.value);
   };
-  
+
 
   const handleUserPassword = (e) => {
     setPassword(e.target.value);
@@ -213,7 +154,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
             }}
           >
 
-            <CloseIcon onClick={()=>{setShowSignUp(false)}}
+            <CloseIcon onClick={() => { setShowSignUp(false) }}
               sx={{ position: "relative", top: "-75px", left: "240px", bgcolor: "white", borderRadius: "50px", color: "black", cursor: "pointer" }}
             />
 
@@ -245,7 +186,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 autoComplete="current-password"
               />
 
-              <Button onClick={(e)=>{handleSubmit(e)}}
+              <Button onClick={(e) => { handleSubmit(e) }}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -254,10 +195,8 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 Sign In
               </Button>
               <Grid container className='cp'>
-                <Grid item onClick={() => { setSignInUp(false) }}>
-
-                  {"Don't have an account? Sign Up"}
-
+                <Grid sx={{display: "flex", gap: "10px"}} item >
+                  Don't have an account? <Grid sx={{bgcolor : "primary.main", color : "white", p : "2px", borderRadius : "3px", fontSize : "16px", ":hover" : {transform : "scale(1.1)" }}} onClick={() => { setSignInUp(false) }}>Sign Up</Grid>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
@@ -333,7 +272,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button onClick={(e)=>{handleSignup(e)}}
+              <Button onClick={(e) => { handleSignup(e) }}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -342,9 +281,9 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 Sign Up
               </Button>
               <Grid container className='cp'>
-                <Grid item onClick={() => { setSignInUp(true) }}>
+                <Grid item className='flex g10'>
 
-                  {"Aready have an account Sign In"}
+                  Aready have an account <Grid sx={{bgcolor : "primary.main", color : "white", p : "2px", borderRadius : "3px", fontSize : "16px", ":hover" : {transform : "scale(1.1)" }}} onClick={() => { setSignInUp(true) }} >Sign In</Grid>
 
                 </Grid>
               </Grid>
