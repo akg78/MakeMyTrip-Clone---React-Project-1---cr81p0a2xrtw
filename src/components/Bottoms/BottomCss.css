@@ -38,3 +38,9 @@
     padding: 0px 135px 0 135px;
     gap: 50px;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+    .div1{
+        
+    }
+}

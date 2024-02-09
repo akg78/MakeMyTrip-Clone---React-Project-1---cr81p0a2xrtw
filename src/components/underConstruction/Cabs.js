@@ -1,11 +1,8 @@
 import React from 'react'
+import "./cabs.css";
 
 export default function Cabs() {
   return (
-    <div>
-      <div>
-        <img src='./Assets/construction.png' alt='construction' ></img>
-      </div>
-    </div>
+    <div className='cabssection'></div>
   )
 }

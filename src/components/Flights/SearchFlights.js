@@ -32,7 +32,7 @@ export default function SearchFlights() {
   { name:"BOM", fname:"Mumbai" },
   { name:"DEL", fname:"New Delhi"},
   { name:"CCU", fname:"Kolkata"},
-  { name:"GOI", fname:"Goa"},
+  { name:"GOI", fname:"Goa"}, 
   { name:"HYD", fname:"Hyderabad"},
   { name:"MAA", fname:"Chennai" }];
 
@@ -53,7 +53,6 @@ export default function SearchFlights() {
   const [sotedPrice, setSortedPrice] = useState("Cheapest")
   const [clickedSorted, setClickedSorted] = useState({ "cheapest": true });
   const [popUpIndex, setPopUpIndex] = useState(null);
-  const [toggleText, setToggleText] = useState(true);
   const [sizeincreaser, setsizeincreaser] = useState({});
   const [popDetails, setPopDetails] = useState({});
   const [dataaa, setdataaa] = useState();
@@ -62,8 +61,8 @@ export default function SearchFlights() {
   const [childselect,setachildselect]=useState(`childtarget${child}`)
   const [infantselect,setinfantselect]=useState(`infanttarget${infant}`)
 
-  const [cityfrom,setcityfrom]=useState({"name": objdropdowncity.filter(item=>JSON.stringify(item.name)==source)[0].fname ,"iata_code": source});
-  const [cityto,setcityto]=useState({"name": objdropdowncity.filter(item=>JSON.stringify(item.name)==destination)[0].fname ,"iata_code": destination});
+  const [cityfrom,setcityfrom]=useState({"name":"" ,"iata_code": source});
+  const [cityto,setcityto]=useState({"name":"" ,"iata_code": destination});
   const [isButtonClicked, setISButtonClicked] = useState(false);
 
 
@@ -104,15 +103,6 @@ export default function SearchFlights() {
     setClickedSorted((prev) => ({ ...prev, [key]: true }))
   }
 
-  // function openViewMore(key, index) {
-  //   setToggleText(true)
-  //   setPopUpIndex(index);
-  //   setViewMorepop(true);
-  //   setViewMorepop((prev) => ({ ...prev, [key]: !viewMorePop[key] }));
-  // }
-  // const closeViewMore = () => {
-  //   setViewMorepop(false);
-  // }
 
   function navigatetonextpage(){
     if(cityfrom.name != cityto.name)
@@ -122,7 +112,7 @@ export default function SearchFlights() {
 
 
   async function Search() {
-    const endpoint = `https://academics.newtonschool.co/api/v1/bookingportals/airport?search={"city":""}`;
+    const endpoint = `https://academics.newtonschool.co/api/v1/bookingportals/airport?search={"city": "${inputSearchh}"}`;
 
     try {
       const response = await fetch(endpoint, {
@@ -152,9 +142,6 @@ export default function SearchFlights() {
     setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
   }
 
-  // function stopFrom(){
-  //   setstopFromm()
-  // }
 
   function popUp(key) {
     setPopDetails({});
@@ -211,6 +198,9 @@ export default function SearchFlights() {
     }
   }
 
+  useEffect(()=>{
+    fetchData();
+  },[])
   useEffect(() => {
     fetchData();
     Search();
@@ -229,8 +219,6 @@ export default function SearchFlights() {
           <div className='flex  imgSearchbar g20'>
             <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
             <span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
-            <span className={activenav["trains"] ? "activecolor" : ""} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' /> : <img src='/trainsblue.png' />}<p className='flexja'><a href='/trains'>Trains</a></p></span>
-            <span className={activenav["bus"] ? "activecolor" : ""} onClick={() => { activenavmaker("bus") }}>{!activenav["bus"] ? <img src='/bus.png' /> : <img src='/busblue.png' />}<p className='flexja'><a href='/bus'>Buses</a></p></span>
           </div>
         </div>
       </div>
@@ -305,7 +293,7 @@ export default function SearchFlights() {
               }
             </div>
             <div >
-              <button className='btn-wrap-container cp' onClick={() => {navigatetonextpage() }}>SEARCH</button>
+              <button className='btn-wrap-container cp' onClick={() => {navigatetonextpage();fetchData() }}>SEARCH</button>
             </div>
           </div>
         </div>

@@ -88,55 +88,62 @@ export default function () {
             </div>}
           </div>
 
-          <div className='check-In' onClick={() => { hotelPop("check-Inn") }}><IoIosArrowDown className='arrow' />
+          <div className='check-In' onClick={() => { hotelPop("check-Inn") }}>
             {searchCityPop["check-Inn"] && <Calendar className="calendarForCheckIn" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
-            <span>Check-In</span>
+            <span className='fw'>Check-In</span><IoIosArrowDown className='arrow' />
             <p className='flexa g20'><h1>{date.getDate()}</h1>{months[date.getMonth()]}'{date.getFullYear()}</p>
-            <p>{daysOfWeek[date.getDay()]}</p>
+            <p className='dayyy'>{daysOfWeek[date.getDay()]}</p>
           </div>
 
           <div className='check-Out' onClick={() => { hotelPop("check-Outt") }}>
-            <div className='flex'><IoIosArrowDown className='arrow' /> {searchCityPop["check-Outt"] && <Calendar className="calendarForCheckOut" minDate={date} onChange={(e) => { setDateReturn(e) }} value={dateReturn} />}
-              <span>Check-Out</span>
+            <div className='flex'> {searchCityPop["check-Outt"] && <Calendar className="calendarForCheckOut" minDate={date} onChange={(e) => { setDateReturn(e) }} value={dateReturn} />}
+              <span className='fw'>Check-Out</span><IoIosArrowDown className='arrow' />
             </div>
             <p className='flexa g20'><h1>{dateReturn.getDate()}</h1>{months[dateReturn.getMonth()]}'{dateReturn.getFullYear()}</p>
-            <p>{daysOfWeek[dateReturn.getDay()]}</p>
+            <p className='dayyy'>{daysOfWeek[dateReturn.getDay()]}</p>
           </div>
 
-          <div className='rooms-guest flexa' onClick={() => { hotelPop("room-guests") }}><IoIosArrowDown className='arrow' />
+          <div className='rooms-guest flexa' onClick={() => { hotelPop("room-guests") }}>
             {searchCityPop["room-guests"] && <div className='roomandGuests flex flexc g20'>
               <div className='flex flexjsb'>
                 <h4>Rooms</h4>
                 <span className='flexa flexjsb' onClick={(e) => { guestscoutntpop('room'); e.stopPropagation() }}>
-                  <p>{guests["room"]}</p><IoIosArrowDown />
+                  <p>{guests["room"]}</p>
                   {guestspopcount["room"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("room", item)}>{item}</div>))}</div>}
                 </span>
               </div>
               <div className='flex flexjsb'>
                 <h4>Adults</h4>
                 <span className='flexa flexjsb' onClick={(e) => { guestscoutntpop('adults'); e.stopPropagation() }}>
-                  <p>{guests["adults"]}</p><IoIosArrowDown />
+                  <p>{guests["adults"]}</p>
                   {guestspopcount["adults"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("adults", item)}>{item}</div>))}</div>}
                 </span>
               </div>
               <div className='flex flexjsb'>
                 <h4>Children</h4>
                 <span className='flexa flexjsb' onClick={(e) => { guestscoutntpop('children'); e.stopPropagation() }}>
-                  <p>{guests["children"]}</p><IoIosArrowDown />
+                  <p>{guests["children"]}</p>
                   {guestspopcount["children"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("children", item)}>{item}</div>))}</div>}
                 </span>
               </div>
               <button onClick={() => { setroom(guests["room"]); setguestss(guests["adults"] + guests["children"]) }}>APPLY</button>
             </div>}
-            <span>Rooms & Guest</span>
-            <p><h1>{room}</h1> Room</p>
-            <p><h1>{guestss}</h1> Guests</p>
+            <div className='flexc wraprg g10'>
+              <div className='roost'>Rooms & Guest<IoIosArrowDown className='arroww' />
+                <div className='flex flexa rhotel g10'>
+                  <span className='flex j'><h1 className='flex'>{room}</h1>Room</span>
+                  <span className='flex j'><h1 className='flex'>{guestss}</h1> Guests</span>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
         <button className='search-button flexja' onClick={() => { navigatetonextpage() }}>
           SEARCH
         </button>
-        <OffersCarousel  />
+        <div className='vh'></div>
+        <OffersCarousel />
       </div>
     </div>
   )

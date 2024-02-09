@@ -1,12 +1,7 @@
 import React from 'react'
-
+import "./bus.css";
 export default function Bus() {
   return (
-    <div>
-      <div>
-        <img src='./Assets/construction.png' alt='construction' ></img>
-
-      </div>
-    </div>
+    <div className='bussection'></div>
   )
 }

@@ -49,7 +49,7 @@ export default function HotelsResult() {
   const navigate = useNavigate();
   function clickToSearch(hotelID) {
 
-    navigate(`/hotels/results/details?hotelID=${hotelID}&=location=${dplocation}&date=${date}&returndate=${returnDate}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`)
+    navigate(`/hotels/results/details?hotelID=${hotelID}&location=${dplocation}&date=${date}&returndate=${returnDate}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`)
 
   }
   
@@ -111,10 +111,13 @@ export default function HotelsResult() {
         }
       )).json();
       setHotels(sorting(response.data.hotels))
+      console.log(response.data.hotels)
     } catch (error) {
       alert(error);
     }
   }
+
+  
   const fetchcities = async () => {
     try {
       const response = await (await fetch(

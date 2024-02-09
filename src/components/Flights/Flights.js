@@ -212,7 +212,7 @@ export default function Flights() {
         </div>
       </div>
 
-      <OffersCarousel />
+       <OffersCarousel />
       <Bottom />
     </div>
 

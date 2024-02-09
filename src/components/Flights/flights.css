@@ -459,3 +459,18 @@
   font-size: 14px;
   margin-left: 7px;
 }
+
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+ 
+  .flightsMainDiv {
+    /* height: 120px; */
+  }
+  
+
+  .tickets{
+    position: absolute;
+    top: 420px;
+    scale: 0.25;
+  }
+} 

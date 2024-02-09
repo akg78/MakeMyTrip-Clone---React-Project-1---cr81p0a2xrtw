@@ -42,12 +42,6 @@
     right: 70px;
     width: 9%;
     height: 40px;
-
-    /* background-color: #252575; */
-    /* border-radius: 50px;
-    border: 1px solid rgba(0, 0, 0, 0.423);
-    border-color: ;
-    */
 }
 .forwardArrow{
     border-radius: 0px 50px 50px 0px;
@@ -145,6 +139,13 @@
     color: #008cff;
 }
 
+@media only screen and (min-width: 360px) and (max-width: 768px) {
 
+    .offer-container{
+        position: absolute;
+        top: 10px;
+        scale: 0.28;
+    }
+}
 
 

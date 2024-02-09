@@ -8,15 +8,16 @@ import Register from '../Auth/register';
 export default function Navigation() {
     const [showSignIn, setShowSignIn] = useState(false);
     const [showSignUp, setShowSignUp] = useState(true);
-
     const [token, setToken] = useState(localStorage.getItem("authToken"));
     const [activenav, setactivenav] = useState({ "flights": true });
+
     function activenavmaker(key) {
         setactivenav({});
         setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
 
     }
 
+    
     useEffect(() => {
       if(token){
         setShowSignUp(false)

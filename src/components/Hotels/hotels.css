@@ -5,7 +5,7 @@
 .hotelsMainDiv {
   width: 97vw;
 }
-.flexjsb{
+.flexjsb {
   justify-content: space-between;
 }
 .hotelBookingPanel {
@@ -18,7 +18,9 @@
   border-radius: 8px;
   padding: 25px;
 }
-
+.vh {
+  height: 50px;
+}
 .upto {
   display: flex;
   margin-top: 50px;
@@ -59,10 +61,10 @@
   padding: 10px;
   border-right: 2px solid #e7e7e7;
 }
-.check-In span{
+.check-In span {
   text-wrap: nowrap;
 }
-.check-Out span{
+.check-Out span {
   text-wrap: nowrap;
 }
 .check-In:hover {
@@ -124,11 +126,11 @@
   gap: 5px;
   overflow-x: hidden;
 }
-.hotelpopup::-webkit-scrollbar{
+.hotelpopup::-webkit-scrollbar {
   display: none;
 }
 
-.hotelpopup input{
+.hotelpopup input {
   width: 329px;
   height: 35px;
   margin-bottom: 10px;
@@ -136,7 +138,7 @@
   font-size: 15px;
   border: 1px solid rgba(0, 0, 0, 0.292);
 }
-.hotelSlide{
+.hotelSlide {
   width: 329px;
   font-size: 14.5px;
   opacity: 0.9;
@@ -146,10 +148,10 @@
   margin-left: 10px;
 }
 
-.hotelSlide:hover{
+.hotelSlide:hover {
   background-color: rgba(173, 191, 230, 0.183);
 }
-.hotelcity{
+.hotelcity {
   width: 250px;
 }
 .calendarForCheckIn {
@@ -177,40 +179,45 @@
   z-index: 100;
   background-color: #f0f0f0;
 }
-.roomandGuests{
+.roomandGuests {
   position: absolute;
-  height: 260px;
-  width: 540px;
-  top: 113px;
+  height: 300px;
+  width: 300px;
+  top: 100px;
   gap: 35px;
+  color: black;
   right: 0;
   z-index: 10;
   background-color: white;
   border-radius: 6px;
-  border: 0.5px solid rgb(3, 1, 1);
   padding: 35px 20px 0px;
+  box-shadow: 1px 2px 3px rgba(200, 198, 198, 0.97);
 }
 
-.roomandGuests button{
+.roomandGuests button {
+  position: absolute;
   align-self: flex-end;
+  bottom: 15px;
   padding: 8px 30px;
   background-color: #065af3;
   color: white;
   border-radius: 6px;
   font-size: 16px;
+  box-shadow: 1px 1px 3px rgba(200, 198, 198, 0.97);
 }
-.roomandGuests span{
+.roomandGuests span {
   position: relative;
   border: 1px solid black;
   height: 30px;
   width: 70px;
-  color: #0084ff;
   padding: 0px 7px;
   box-sizing: border-box;
   border-radius: 2px;
 }
-.popguests::-webkit-scrollbar{display: none;}
-.popguests{
+.popguests::-webkit-scrollbar {
+  display: none;
+}
+.popguests {
   position: absolute;
   height: 100px;
   width: 65px;
@@ -220,12 +227,42 @@
   overflow-y: scroll;
   z-index: 100;
   background-color: white;
-
 }
-.popguests div{
+.roomandGuests h4 {
+  opacity: 0.6;
+}
+.popguests div {
   height: 30px;
   width: 65px;
 }
-.popguests div:hover{
+.popguests div:hover {
   background-color: rgba(211, 211, 211, 0.429);
+}
+
+.roost {
+  font-weight: 500;
+  text-wrap: nowrap;
+}
+.arroww {
+  fill: #008cff;
+}
+.fw {
+  font-weight: 500;
+}
+
+.rhotel {
+  margin-right: 50px;
+  margin-top: 20px;
+}
+.j{
+  font-size: 17px;
+}
+.wraprg{
+  margin-left: 40px;
+}
+.dayyy{
+  position: absolute;
+  top: 65px;
+  left: 50px;
+
 }

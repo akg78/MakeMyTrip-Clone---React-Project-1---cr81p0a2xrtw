@@ -1,16 +1,8 @@
 import React from 'react'
+import "./homestay.css"
 
-export default function () {
-    const myStyle ={
-        height: "500px",
-        width: "500px",
-        margin: "250px"
-    };
-    return (
-        <div>
-            <div>
-                <img src='./Assets/construction.png' alt='construction' style={myStyle} ></img>
-            </div>
-        </div>
-    )
+export default function Homestay() {
+  return (
+    <div className='homestaysection'></div>
+  )
 }

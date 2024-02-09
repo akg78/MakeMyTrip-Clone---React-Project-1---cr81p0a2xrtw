@@ -19,9 +19,9 @@ export default function HotelsDetails() {
     let hotel_id = searchParams.get("hotelID");
     let dayOfWeek = searchParams.get("date");
     let returnDate = searchParams.get("returndate");
-    const loca = searchParams.get("location")
-    const [inputSearch, setInputSearch] = useState(loca);
-
+    let dplocation = searchParams.get("location");
+    const [inputSearch, setInputSearch] = useState('');
+    const [dplocate, setdplocate] = useState(dplocation)
     const dateObject = new Date(dayOfWeek);
     const [date, setDate] = useState(dateObject);
     let dateObjReturnDate = new Date(returnDate)
@@ -42,61 +42,34 @@ export default function HotelsDetails() {
         navigate(`/hotels/results/details/hotelBooking?hotel_id=${hotel_id}&number=${val}&date=${dateObject}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}&name=${dataa.name}`)
     }
 
-    function selfNavigation() {
-        navigate(`/hotels/results/details?hotelID=${hotel_id}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}  `)
+    function prevNavigation() {
+    navigate(`/hotels/results?location=${dplocate}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`);
     }
+
+
 
     const hotelSearch = async (hotels) => {
         try {
-          const response = await (await fetch(
-            `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}`,
-            {
-              method: "GET",
-              headers: {
-                projectId: "cr81p0a2xrtw",
-                "content-type": "application/json",
-              },
-            }
-          )).json();
-          setHotels(response.data.hotels)
+            const response = await (await fetch(
+                `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}`,
+                {
+                    method: "GET",
+                    headers: {
+                        projectId: "cr81p0a2xrtw",
+                        "content-type": "application/json",
+                    },
+                }
+            )).json();
+            setHotels(response.data.hotels)
         } catch (error) {
-          alert(error);
+            alert(error);
         }
-      }
-    
-      useEffect(() => {
+    }
+
+    useEffect(() => {
         hotelSearch();
-    
-      }, [])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }, [inputSearch])
 
 
 
@@ -125,6 +98,11 @@ export default function HotelsDetails() {
     useEffect(() => {
         hoteldetailsfetch;
     }, [])
+
+
+
+
+
 
     function activenavmaker(key) {
         setactivenav({});
@@ -173,13 +151,13 @@ export default function HotelsDetails() {
                                         <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                                             {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
                                                 <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
-                                                {hotels && hotels.map((item, index) => (<div key={index} className='hotelCityProperty' >
+                                                {hotels && hotels.map((item, index) => (<div key={index} className='hotelCityProperty' onClick={() => { setdplocate(item.location.toString().split(",")[0]) }} >
                                                     <div><CiLocationOn /></div>
-                                                    <div onClick={() => { (item.location.toString().match(/^([^,]+)/)[1]) }}>{(item.location.toString().match(/^([^,]+)/)[1])}</div>
+                                                    <div >{item.location.toString().split(",")[0]}</div>
                                                 </div>))}
                                             </div>}
                                             <span>CITY, AREA OR PROPERTY <IoIosArrowDown /></span>
-                                            {/* <p>{location}</p> */}
+                                            {dplocate}
                                         </div>
 
                                         <div className='childContainer cp' onClick={() => { hotelSearchPop("checkin") }}>
@@ -227,7 +205,7 @@ export default function HotelsDetails() {
                                                 <button onClick={() => { hotelSearchPop("roomContainer"); setroom(guests["room"]); setguestss(guests["adults"] + guests["children"]) }}>APPLY</button>
                                             </div>}
                                         </div>
-                                        <button className='btn-nav-hotel' onClick={()=>{selfNavigation()}}>SEARCH</button>
+                                        <button className='btn-nav-hotel' onClick={() => { prevNavigation() }}>SEARCH</button>
                                     </div>
                                 </div>
                             </div>
