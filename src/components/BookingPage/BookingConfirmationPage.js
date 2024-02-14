@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate, NavLink, useLocation, Link } from 'react-router-dom';
 import "./BookingConfirmPage.css"
-import { FaUserCircle } from "react-icons/fa";
-import { getValue } from '@mui/system';
 
 export default function BookingConfirmationPage() {
   const submitbtnref = useRef();
@@ -112,12 +110,6 @@ export default function BookingConfirmationPage() {
   useEffect(() => {
     fetchData();
   }, [])
-
-
-
-
-
-
 
   return (
     <>

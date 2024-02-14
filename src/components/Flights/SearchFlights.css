@@ -286,6 +286,8 @@
   padding: 0px 15px;
 }
 .listingCard {
+  position: relative;
+  top: 80px;
   height: 170px;
   width: 100%;
   background-color: #fff;
@@ -398,14 +400,17 @@
   color: rgb(120, 117, 117);
 }
 .rightbodycarddiv {
+  position: relative;
   width: 55%;
   margin-left: 50px;
 }
 .flightSorted {
-  position: relative;
+  position: absolute;
+  z-index: 100000;
   width: 100%;
   height: 150px;
-  margin-top: -50px;
+  top: 0;
+  margin-top: -100px;
   padding: 0px 15px 0px 15px;
   justify-content: space-between;
   background-color: #fff;
@@ -503,9 +508,7 @@ input:hover {
 }
 .priceSlider {
   margin-top: 25px;
-  /* height: 250px;
-  width: 250px;
-  background-color: #f9d342; */
+  
 }
 .pricefortickets p {
   font-size: 11px;

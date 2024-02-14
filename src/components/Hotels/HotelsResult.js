@@ -7,7 +7,7 @@ import Calendar from 'react-calendar';
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 
-export default function HotelsResult() {  
+export default function HotelsResult() {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const counting = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
@@ -18,7 +18,7 @@ export default function HotelsResult() {
   let dplocation = searchParams.get("location");
   const [inputSearch, setInputSearch] = useState('');
   const [dplocations, setdplocations] = useState(dplocation)
-  let guest = searchParams.get("guest") 
+  let guest = searchParams.get("guest")
   let dayOfWeek = searchParams.get("date");
   let returnDate = searchParams.get("returndate");
   const dateObject = new Date(dayOfWeek);
@@ -29,13 +29,13 @@ export default function HotelsResult() {
   const [pricefilter, setpricefilter] = useState({ "0-1000": true, "1000-2000": true, "2000-4500": true, "4500-8000": true, "8000-11500": true, "11500-15000": true, "15000-30000": true, "30000++": true });
   const [sortings, setsortings] = useState("");
   const [guests, setguests] = useState({ "room": 1, "adults": 1, "children": 0 });
-  const [guestspopcount, setguestspopcount] = useState({"room":false,"adults":false,"children":false});
+  const [guestspopcount, setguestspopcount] = useState({ "room": false, "adults": false, "children": false });
   const [guestss, setguestss] = useState(guests["adults"] + guests["children"])
   const [room, setroom] = useState(guests["room"]);
-  const [cities,setcities]=useState();
-  function guestscoutntpop(key){
+  const [cities, setcities] = useState();
+  function guestscoutntpop(key) {
     setguestspopcount({})
-    setguestspopcount((prev)=>({...prev,[key]:!guestspopcount[key]}))
+    setguestspopcount((prev) => ({ ...prev, [key]: !guestspopcount[key] }))
   }
 
   function guestsmanage(key, value) {
@@ -52,9 +52,9 @@ export default function HotelsResult() {
     navigate(`/hotels/results/details?hotelID=${hotelID}&location=${dplocation}&date=${date}&returndate=${returnDate}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`)
 
   }
-  
 
-  function selfNagigation(){
+
+  function selfNagigation() {
     hotelSearch()
     navigate(`/hotels/results?location=${dplocations}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`);
   }
@@ -117,7 +117,7 @@ export default function HotelsResult() {
     }
   }
 
-  
+
   const fetchcities = async () => {
     try {
       const response = await (await fetch(
@@ -135,9 +135,9 @@ export default function HotelsResult() {
       alert(error);
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchcities();
-  },[inputSearch])
+  }, [inputSearch])
 
   useEffect(() => {
     hotelSearch();
@@ -169,7 +169,7 @@ export default function HotelsResult() {
               <span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
             </div>
           </div>
-          <div className='navrightmenu'>Login</div>
+          {/* <div className='navrightmenu'>Login</div> */}
         </nav>
       </div>
       <div className='bodyouter flexa flexc'>
@@ -180,7 +180,7 @@ export default function HotelsResult() {
                 <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                   {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
                     <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
-                    {cities && cities.map((item, index) => (<div key={index} className='hotelCityProperty' onClick={() => {setdplocations(item.location.toString().split(",")[0])}} >
+                    {cities && cities.map((item, index) => (<div key={index} className='hotelCityProperty' onClick={() => { setdplocations(item.location.toString().split(",")[0]) }} >
                       <div><CiLocationOn /></div>
                       <div >{item.location.toString().split(",")[0]}</div>
                     </div>))}
@@ -223,7 +223,7 @@ export default function HotelsResult() {
                     </div>
                     <div className='flex flexjsb g20'>
                       <h3>Children <p className='childResults'>0 - 17 Years Old</p></h3>
-                      
+
                       <span className='flexa flexjsb' onClick={(e) => { guestscoutntpop('children'); e.stopPropagation() }}>
                         <p>{guests["children"]}</p><IoIosArrowDown />
                         {guestspopcount["children"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("children", item)}>{item}</div>))}</div>}
@@ -233,7 +233,7 @@ export default function HotelsResult() {
                     <button onClick={() => { hotelSearchPop("roomContainer"); setroom(guests["room"]); setguestss(guests["adults"] + guests["children"]) }}>APPLY</button>
                   </div>}
                 </div>
-                <button className='btn-nav-hotel' onClick={()=>selfNagigation()}>SEARCH</button>
+                <button className='btn-nav-hotel' onClick={() => selfNagigation()}>SEARCH</button>
               </div>
             </div>
           </div>
@@ -252,9 +252,9 @@ export default function HotelsResult() {
         </div>
         <div className='body'>
           <div className='bodyinner flex '>
-            <div className='mainbody b'>
+            <div className='mainbody g10'>
               <h4>Price per night</h4>
-              <div className='flexc'>
+              <div className='flexc g10 ppn'>
                 <label onClick={() => { pricefilterchanger("0-1000") }} className='flexa'>
                   <div><input type='checkbox' checked={pricefilter["0-1000"]} /></div>
                   <div> ₹4000 - ₹4500</div>
@@ -291,15 +291,17 @@ export default function HotelsResult() {
 
               <br />
               <h4>User Rating</h4>
-              <label className='flexa' onClick={() => { ratingfilterchanger("excellent") }}>
-                <div><input type='checkbox' checked={ratingfilter["excellent"]} />Excellent</div>
-              </label>
-              <label className='flexa' onClick={() => { ratingfilterchanger("verygood") }}>
-                <div><input type='checkbox' checked={ratingfilter["verygood"]} />Very Good</div>
-              </label>
-              <label className='flexa' onClick={() => { ratingfilterchanger("average") }}>
-                <div><input type='checkbox' checked={ratingfilter["average"]} />Good</div>
-              </label>
+              <div className='ur flexc g10'>
+                <label className='flexa' onClick={() => { ratingfilterchanger("excellent") }}>
+                  <div><input type='checkbox' checked={ratingfilter["excellent"]} />Excellent</div>
+                </label>
+                <label className='flexa' onClick={() => { ratingfilterchanger("verygood") }}>
+                  <div><input type='checkbox' checked={ratingfilter["verygood"]} />Very Good</div>
+                </label>
+                <label className='flexa' onClick={() => { ratingfilterchanger("average") }}>
+                  <div><input type='checkbox' checked={ratingfilter["average"]} />Good</div>
+                </label>
+              </div>
             </div>
             <div className='MainBodyRender flex flexc' onClick={() => { }}>
               {hotels && hotels.map((item, index) => (((item.rating < 2 ? ratingfilter["average"] : true) && (item.rating >= 2 && item.rating < 4 ? ratingfilter["verygood"] : true) && (item.rating >= 4 ? ratingfilter["excellent"] : true)) && ((item.avgCostPerNight < 4500 && item.avgCostPerNight >= 4000 ? pricefilter["0-1000"] : true) && (item.avgCostPerNight < 5000 && item.avgCostPerNight >= 4500 ? pricefilter["1000-2000"] : true) && (item.avgCostPerNight < 5500 && item.avgCostPerNight >= 5000 ? pricefilter["2000-4500"] : true) && (item.avgCostPerNight < 6000 && item.avgCostPerNight >= 5500 ? pricefilter["4500-8000"] : true) && (item.avgCostPerNight < 6500 && item.avgCostPerNight >= 6000 ? pricefilter["8000-11500"] : true) && (item.avgCostPerNight < 7000 && item.avgCostPerNight >= 6500 ? pricefilter["11500-15000"] : true) && (item.avgCostPerNight < 75000 && item.avgCostPerNight >= 7000 ? pricefilter["15000-30000"] : true) && (item.avgCostPerNight > 75000 ? pricefilter["30000++"] : true)) &&
