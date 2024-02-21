@@ -1,14 +1,130 @@
-*{
+* {
     margin: 0;
     padding: 0;
-}
-.trainsSection{
+  }
+  .booksTrainTickets {
+    margin-top: 50px;
+  }
+  .wrapHeader {
+    font-size: 14px;
+    opacity: 0.8;
+    text-align: center;
+  }
+  .searchCityTrain {
+    position: relative;
+    color: rgb(33, 32, 32);
+    width: 350px;
+    border-right: 2px solid #e7e7e7;
+    padding: 10px;
+  }
+  .trainCityFrom {
+    position: relative;
+  }
+  
+  .trainpopup {
     position: absolute;
-    top: 200px;
-    left: 480px;
-    height: 500px;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: 40% 500px;
-    background-image: url(../../../public/under-maintaince.jpg);
-}
+    height: 316px;
+    width: 350px;
+    background-color: white;
+    left: 0px;
+    top: 30px;
+    z-index: 10;
+    border-radius: 6px;
+    border: 0.5px solid lightgray;
+    gap: 5px;
+    overflow-x: hidden;
+  }
+  .trainpopup::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .trainpopup input {
+    width: 329px;
+    height: 35px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.292);
+  }
+  .trainSlide {
+    width: 329px;
+    font-size: 14.5px;
+    opacity: 0.9;
+    font-weight: 500;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    margin-left: 10px;
+  }
+  .trainSlide:hover {
+    background-color: rgba(173, 191, 230, 0.183);
+  }
+  .traincity {
+    width: 250px;
+  }
+  
+  .toTrainPop {
+    position: absolute;
+    height: 316px;
+    width: 350px;
+    background-color: white;
+    left: 0px;
+    top: 30px;
+    z-index: 10;
+    border-radius: 6px;
+    border: 0.5px solid lightgray;
+    gap: 5px;
+    overflow-x: hidden;
+  }
+  .toTrainPop::-webkit-scrollbar {
+    display: none;
+  }
+  .toTrainPop input {
+    width: 329px;
+    height: 35px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.292);
+  }
+  
+  .trainToSlide {
+    width: 329px;
+    font-size: 14.5px;
+    opacity: 0.9;
+    font-weight: 500;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    margin-left: 10px;
+  }
+  .trainToSlide:hover {
+    background-color: rgba(173, 191, 230, 0.183);
+  }
+  .trainTocity {
+    width: 250px;
+  }
+  
+  .trainBookingPanel {
+    width: 1200px;
+    height: 225px;
+    background-color: #fff;
+    margin-top: -490px;
+    scale: 0.97;
+    z-index: 1;
+    border-radius: 8px;
+    padding: 25px;
+  }
+  
+  .search-button-train {
+    position: relative;
+    left: 40%;
+    height: 44px;
+    width: 216px;
+    margin-top: 20px;
+    background-image: linear-gradient(93deg, #53b2fe, #065af3);
+    border-radius: 35px;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+  }
+  

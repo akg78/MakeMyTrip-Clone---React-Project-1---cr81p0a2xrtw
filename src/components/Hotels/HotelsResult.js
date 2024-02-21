@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import "./HotelsResult.css";
-import { UseNavigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
@@ -165,8 +165,8 @@ export default function HotelsResult() {
           <div className='navinner flex'>
             <a href='/'><img className='logoimg cp' src='/logo@2x.png' /></a>
             <div className='navleftmenu flex g20 cp'>
-              <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
-              <span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
+              <span className={activenav["flights"] ? "activecolorHotel" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
+              <span className={activenav["hotels"] ? "activecolorHotel" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
             </div>
           </div>
           {/* <div className='navrightmenu'>Login</div> */}
@@ -238,13 +238,13 @@ export default function HotelsResult() {
             </div>
           </div>
 
-          <div className='bodyheaderlower flexja b1'>
+          <div className='bodyheaderlower flexja flexa flex'>
             <div className=''>
-              <div className='flexr jsb sortingHotelNav cp'>
+              <div className=' flex flexr jsb sortingHotelNav cp flexja'>
                 <p>SORT BY:</p>
-                <p className={sortings["rating"] ? "activecolor" : ""} onClick={() => { sortingsfun("rating") }}>User Rating</p>
-                <p className={sortings["priceLtoH"] ? "activecolor" : ""} onClick={() => { sortingsfun("priceLtoH") }}>Price</p>
-                <p className={sortings["priceHtoL"] ? "activecolor" : ""} onClick={() => { sortingsfun("priceHtoL") }}>Price</p>
+                <p className={sortings["rating"] ? "activecolor" : ""} onClick={() => { sortingsfun("rating") }}>User Rating<span className='highestHotels'> (Highest First)</span></p>
+                <p className={sortings["priceLtoH"] ? "activecolor" : ""} onClick={() => { sortingsfun("priceLtoH") }}>Price <span className='highestHotels'> (Lowest First)</span></p>
+                <p className={sortings["priceHtoL"] ? "activecolor" : ""} onClick={() => { sortingsfun("priceHtoL") }}>Price<span className='highestHotels'> (Highest First)</span></p>
               </div>
             </div>
           </div>
@@ -293,13 +293,13 @@ export default function HotelsResult() {
               <h4>User Rating</h4>
               <div className='ur flexc g10'>
                 <label className='flexa' onClick={() => { ratingfilterchanger("excellent") }}>
-                  <div><input type='checkbox' checked={ratingfilter["excellent"]} />Excellent</div>
+                  <div><input type='checkbox' checked={ratingfilter["excellent"]} /> Excellent</div>
                 </label>
                 <label className='flexa' onClick={() => { ratingfilterchanger("verygood") }}>
-                  <div><input type='checkbox' checked={ratingfilter["verygood"]} />Very Good</div>
+                  <div><input type='checkbox' checked={ratingfilter["verygood"]} /> Very Good</div>
                 </label>
                 <label className='flexa' onClick={() => { ratingfilterchanger("average") }}>
-                  <div><input type='checkbox' checked={ratingfilter["average"]} />Good</div>
+                  <div><input type='checkbox' checked={ratingfilter["average"]} /> Good</div>
                 </label>
               </div>
             </div>
@@ -341,7 +341,7 @@ export default function HotelsResult() {
                 </div>)))}
 
 
-              <Stack spacing={2} justifyContent="center" alignItems="center" mt={3} padding={2} >
+              <Stack spacing={2} justifyContent="center" alignItems="center" mt={3} padding={2} position={""}>
                 <Pagination count={10} onChange={onPageChange} />
               </Stack>
 

@@ -5,16 +5,10 @@ import { MdOutlineArrowBackIos } from "react-icons/md";
 
 export default function OffersCarousel() {
   const [offerData, setOfferData] = useState([])
-  const [visibleOffer, setVisibleOffer] = useState("ALL")
+  const [visibleOffer, setVisibleOffer] = useState("")
   const [isClicked, setIsClicked] = useState({ "ALL": true })
-  const [activeCarousel, setActiveCarousel] = useState(0);
 
-  const handleCarouselNext = () => {
-    setActiveCarousel((prev) => prev + 1);
-  }
-  const handleCarouselBack = () => {
-    setActiveCarousel((prev) => prev - 1);
-  }
+
 
   function clickedOfferNav(key) {
     setIsClicked({})
@@ -48,16 +42,12 @@ export default function OffersCarousel() {
           <h2>
             <font color="393939">Offers</font>
           </h2>
-          <ul className='offer-list c'>
+          <ul className='offer-list cp'>
             <li onClick={() => { setVisibleOffer("ALL"); clickedOfferNav("ALL"); handleSubmit("ALL") }}><a className={isClicked["ALL"] ? "colorOfferNav" : ""} >All Offers</a></li>
             <li onClick={() => { setVisibleOffer("FLIGHTS"); clickedOfferNav("FLIGHTS"); handleSubmit("FLIGHTS") }}><a className={isClicked["FLIGHTS"] ? "colorOfferNav" : ""} >Flights</a></li>
             <li onClick={() => { setVisibleOffer("HOTELS"); clickedOfferNav("HOTELS"); handleSubmit("HOTELS") }}><a className={isClicked["HOTELS"] ? "colorOfferNav" : ""} >Hotels</a></li>
             <li onClick={() => { setVisibleOffer("RAILS"); clickedOfferNav("RAILS"); handleSubmit("RAILS") }}><a className={isClicked["RAILS"] ? "colorOfferNav" : ""} >Train</a></li>
           </ul>
-          <div className='createCarousel flex flexja'>
-            <div className='backArrow flexja'><MdOutlineArrowBackIos onClick={()=>{}} /></div>
-            <div className='forwardArrow flexja'><MdOutlineArrowForwardIos /></div>
-          </div>
         </div>
 
         <div className='offers-card'>
@@ -71,7 +61,6 @@ export default function OffersCarousel() {
               <h5>INTL FLIGHTS</h5>
               <h4>Get up to 50% OFF* on<br />International Flights!</h4>
               <p>Grab & make all your dream trips come true.</p>
-              <h3>BOOK NOW</h3>
             </div>
           </div>
           ))) : "...Loading"}
@@ -86,3 +75,8 @@ export default function OffersCarousel() {
 
 
 {/* {visibleOffer=="ALL"&& <div>{offerData?offerData.map(item=>(<div>{item}</div>)):"...Loading"}</div>} */ }
+
+{/* <div className='createCarousel flex flexja'>
+            <div className='backArrow flexja'><MdOutlineArrowBackIos onClick={() => { }} /></div>
+            <div className='forwardArrow flexja'><MdOutlineArrowForwardIos /></div>
+          </div> */}

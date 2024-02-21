@@ -214,7 +214,7 @@ export default function SearchFlights() {
       <div className='navheader flexa'>
         <div className='imggg flexa'><a href='/'><img src='/logo@2x.png' /></a></div>
         <div className='navList '>
-          <div className='flex  imgSearchbar g20'>
+          <div className='flex imgSearchbar g10'>
             <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
             <span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
           </div>
@@ -266,7 +266,7 @@ export default function SearchFlights() {
                   <div className='g10 flexc cp'>
                     <div className='textadult'>ADULTS (12y+)</div>
                     <div className='textadultdown'>on the day of travel</div>
-                    <div className='flex mapbox mapboxone' onClick={handleClick}>
+                    <div className='flex mapbox mapboxone' onClick={() => { handleClick }}>
                       {arr.map((item) => (<div className={`boxesAdult ${adultselect == `adultarget${item}` ? "activeboxesadult" : ""} flexja`} onClick={() => { adultvaluechanger(item); }}>{item}</div>))}
                     </div>
                   </div>
@@ -299,7 +299,7 @@ export default function SearchFlights() {
           <div className='filters flexc flexa'>
 
             <div className='priceSlider flexc'>
-              <h3>One Way Price</h3>
+              <h4>One Way Price</h4>
               <Box sx={{ width: 250 }}>
                 <Slider
                   size="large"
@@ -317,35 +317,22 @@ export default function SearchFlights() {
               </div>
             </div>
             <div className='stops flexc'>
-              <h3>Stops From { }</h3>
+              <h4>Stops From {cityfrom.name}</h4>
               <label for="searchFlightsStops" className='flexc'>
                 <div onClick={() => { setstopFromm("0") }}><input type='radio' id='earchFlightsStops' name='earchFlightsStops' /> Non Stop</div>
                 <div onClick={() => { setstopFromm("1") }}><input type='radio' id='earchFlightsStops' name='earchFlightsStops' /> 1 Stop</div>
                 <div onClick={() => { setstopFromm("2") }}><input type='radio' id='earchFlightsStops' name='earchFlightsStops' /> 2 Stop</div>
               </label>
             </div>
-            {/* <div className='departureCity flexc'>
-              <h3>Departure From { }</h3>
-              <div className='departureTime flex flexa'>
-                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/morning_inactive.png?v=1' />
-                  <p className=''>Before 6 AM</p></div>
-                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/noon_inactive.png?v=1' />
-                  <p className=''>6 AM - 12 PM</p></div>
-                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/evening_inactive.png?v=1' />
-                  <p className=''>6 AM - 12 PM</p></div>
-                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/night_inactive.png?v=1' />
-                  <p className=''>After 6 PM</p></div>
-              </div>
-            </div> */}
-            <div className='airlines flexc flex g10'>
-              <h3>Airlines</h3>
-              <div className="filterstypeairline g10">
+            <div className='airlines flexc flex g10 '>
+              <h4>Airlines</h4>
+              <div className="filterstypeairline">
                 <label className='flexa' onClick={() => { airlineSelector("6E") }}>
                   <div><input type='checkbox' checked={filter["6E"]} /> IndiGo</div>
                   <div>₹ 11,197</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("AI") }}>
-                  <div><input type='checkbox' checked={filter["AI"]} />  Air India</div>
+                  <div><input type='checkbox' checked={filter["AI"]} /> Air India</div>
                   <div>₹ 9,247</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("UK") }}>
@@ -353,7 +340,7 @@ export default function SearchFlights() {
                   <div>₹ 23,745</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("SG") }}>
-                  <div><input type='checkbox' checked={filter["SG"]} />SpiceJet</div>
+                  <div><input type='checkbox' checked={filter["SG"]} /> SpiceJet</div>
                   <div>₹ 36,209</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("I5") }}>
@@ -412,8 +399,8 @@ export default function SearchFlights() {
                     <p>{item.source}</p>
                   </div>
                   <div className='timeduration flexc flexja'>
-                    <h5>{item.duration}</h5>
-                    <p>{item.stops}</p>
+                    <h5>0{item.duration} h 00 m</h5>
+                    <p>{item.stops} Stop</p>
                   </div>
                   <div className='arrivalTime flexc flexja'>
                     <h3>{item.departureTime}</h3>
@@ -438,7 +425,14 @@ export default function SearchFlights() {
                       <p>{days[dateObject.getDay()]},{dateObject.getDate()}{months[dateObject.getMonth()]},{dateObject.getFullYear()}</p>
                       <p>{item.source}</p>
                     </div>
-                    <h6 className='durationofFlight'>{item.duration}</h6>
+                    <div className='flexc durationofFlight g5'>
+                      <h6 className='stopss'>0{item.duration} h 00 m</h6>
+                      <p className='stopsss'>{item.stops} Stop</p>
+                    </div>
+
+
+
+
                     <div className='flex flexc infoFlight'>
                       <h4>{item.departureTime}</h4>
                       <p>{days[dateObject.getDay()]},{dateObject.getDate()}{months[dateObject.getMonth()]},{dateObject.getFullYear()}</p>
@@ -479,3 +473,21 @@ export default function SearchFlights() {
     </div>
   )
 }
+
+
+
+
+
+{/* <div className='departureCity flexc'>
+              <h3>Departure From { }</h3>
+              <div className='departureTime flex flexa'>
+                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/morning_inactive.png?v=1' />
+                  <p className=''>Before 6 AM</p></div>
+                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/noon_inactive.png?v=1' />
+                  <p className=''>6 AM - 12 PM</p></div>
+                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/evening_inactive.png?v=1' />
+                  <p className=''>6 AM - 12 PM</p></div>
+                <div><img src='https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/night_inactive.png?v=1' />
+                  <p className=''>After 6 PM</p></div>
+              </div>
+            </div> */}

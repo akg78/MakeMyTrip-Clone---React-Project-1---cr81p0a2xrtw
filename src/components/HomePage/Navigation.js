@@ -40,7 +40,7 @@ export default function Navigation() {
         <div className='navcomp'>
                 <div className='hello'>{showSignUp && <Login  token = {token} setToken = {setToken} showSignUp ={showSignUp} setShowSignUp = {setShowSignUp}/>}</div>
                 <div>{showSignIn && <Register token = {token} setToken = {setToken} showSignIn = {showSignIn} setShowSignIn = {setShowSignIn}/>}</div>
-            {showSignUp && <div className='popLogin' >
+            {showSignUp && <div className='popLogin'>
             </div>}
             <div className='full-bg'>
                 <div className='background'>
@@ -56,7 +56,6 @@ export default function Navigation() {
                             <div className='my-login cp' onClick={() => handleUser()}>
                                 
                                 <p>{token ? "Hi user" : "Login or Create Account"} </p> <IoIosArrowDown /> 
-                                {/* <p>Login or Create Account</p> */}
                             </div>
                         </div>
 
@@ -66,12 +65,11 @@ export default function Navigation() {
                                     <NavLink to={`/flights`}> <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='flights.png' /> : <img src='flightsblue.png' />}<p>Flights</p></span> </NavLink>
                                 </NavLink>
                                 <NavLink to="/hotels"><span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='hotels.png' className='icons' /> : <img src='hotelblue.png' />}<p>Hotels</p></span></NavLink>
-                                <NavLink to='homestay'><span className={activenav["homestays"] ? "activecolor" : ""} onClick={() => { activenavmaker("homestays") }}>{!activenav["homestays"] ? <img src='homestays.png' className='homestays' /> : <img src='homestaysblue.png' />}<p className='stays'>Homestays<br />& Villas</p></span></NavLink>
-                                <NavLink to="/holidays"><span className={activenav["holidays"] ? "activecolor" : ""} onClick={() => { activenavmaker("holidays") }}>{!activenav["holidays"] ? <img src='holidays.png' /> : <img src='holidayblue.png' />}<p className='package'>Holiday<br />Packages</p></span></NavLink>
                                 <NavLink to="/trains"><span className={activenav["trains"] ? "activecolor" : ""} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='trains.png' /> : <img src='trainsblue.png' />}<p>Trains</p></span></NavLink>
                                 <NavLink to="/buses"><span className={activenav["bus"] ? "activecolor" : ""} onClick={() => { activenavmaker("bus") }}>{!activenav["bus"] ? <img src='bus.png' /> : <img src='busblue.png' />}<p>Buses</p></span></NavLink>
+                                <NavLink to='homestay'><span className={activenav["homestays"] ? "activecolor" : ""} onClick={() => { activenavmaker("homestays") }}>{!activenav["homestays"] ? <img src='homestays.png' className='homestays' /> : <img src='homestaysblue.png' />}<p className='stays'>Homestays<br />& Villas</p></span></NavLink>
+                                <NavLink to="/holidays"><span className={activenav["holidays"] ? "activecolor" : ""} onClick={() => { activenavmaker("holidays") }}>{!activenav["holidays"] ? <img src='holidays.png' /> : <img src='holidayblue.png' />}<p className='package'>Holiday<br />Packages</p></span></NavLink>
                                 <NavLink to="/cabs"><span className={activenav["cabs"] ? "activecolor" : ""} onClick={() => { activenavmaker("cabs") }}>{!activenav["cabs"] ? <img src='cabs.png' /> : <img src='cabsblue.png' />}<p>Cabs</p></span></NavLink>
-                                {/* <NavLink to="/Login"><p>Login</p></NavLink> */}
                             </div>
                         </div>
                     </nav>

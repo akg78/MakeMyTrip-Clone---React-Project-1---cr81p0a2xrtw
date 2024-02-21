@@ -29,7 +29,6 @@
     align-items: center;
     margin-left: 40px;
     list-style-type: none;
-    padding-bottom: 0px;
 }
 .offer-list li{
     padding: 5px;
@@ -134,9 +133,11 @@
 }
 .colorOfferNav{
     border-bottom: 3px solid #008cff;
-    padding-bottom: 5px;
+    padding-bottom: 7px;
     font-weight: 800;
     color: #008cff;
+    width: calc(100% - 30px);
+    
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px) {

@@ -9,15 +9,16 @@
 .jsb {
   justify-content: space-between;
 }
-.activecolor{
+.activecolorHotel{
   border-bottom: 3px solid #065af3;
   font-weight: 800;
   color: #008cff;
+  padding-top: 2px;
 }
-.hotelsresult .navouter {
+.navouter {
   width: 100%;
-  height: 100px;
-  border-bottom: 0.2px solid lightgray;
+  height: 80  px;
+  /* border-bottom: 0.2px solid lightgray; */
 }
 .hotelsresult .navleftmenu {
   gap: 40px;
@@ -25,6 +26,7 @@
 .hotelsresult nav {
   width: 1150px;
   height: 100%;
+  scale: 0.9;
 }
 .hotelsresult .logoimg {
   height: 35px;
@@ -35,17 +37,20 @@
   min-height: 200vh;
   border-bottom: 0.2px solid lightgray;
 }
-
+.highestHotels{
+  color: rgba(128, 128, 128, 0.745);
+  font-size: 15px;
+}
 .hotelsresult .body {
   width: 1150px;
   height: 100%;
 }
 .hotelsresult .bodyinner {
-  margin-top: 45px;
+  margin-top: 50px;
   width: 100%;
 }
 .hotelsresult .bodyheader {
-  height: 200px;
+  height: 80px;
   width: 100vw;
   position: sticky;
   top: 0;
@@ -59,9 +64,10 @@
   background-image: linear-gradient(0deg, #15457b, #051423);
 }
 .hotelsresult .bodyheaderlower {
-  height: 40px !important;
+  height: 60px;
   width: 100%;
   background-image: linear-gradient(269.96deg, #e1ebf7 0.02%, #daf8fe 99.99%);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.311);
 }
 .hotelsresult .bodyheader > div > div {
   width: 1150px;
@@ -89,19 +95,15 @@
 .headContainer {
   justify-content: space-between;
 }
-.sortingHotelNav input {
-  background-color: white;
-  width: 20%;
-  border: 1px solid red;
-}
+
 .sortingHotelNav {
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: 17px;
 }
 .mainbody {
   height: 500px;
   width: 28%;
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 20px 20px;
   background-color: white;
   box-shadow: 2px 2px 10px lightgray;
