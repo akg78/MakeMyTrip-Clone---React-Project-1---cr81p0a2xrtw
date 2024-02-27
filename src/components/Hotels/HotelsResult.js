@@ -111,7 +111,7 @@ export default function HotelsResult() {
         }
       )).json();
       setHotels(sorting(response.data.hotels))
-      console.log(response.data.hotels)
+      // console.log(response.data.hotels)
     } catch (error) {
       alert(error);
     }

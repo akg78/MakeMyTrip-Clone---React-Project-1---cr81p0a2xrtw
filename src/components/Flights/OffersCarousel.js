@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import "./OffersCarousel.css"
-import { MdOutlineArrowForwardIos } from "react-icons/md";
-import { MdOutlineArrowBackIos } from "react-icons/md";
 
 export default function OffersCarousel() {
   const [offerData, setOfferData] = useState([])

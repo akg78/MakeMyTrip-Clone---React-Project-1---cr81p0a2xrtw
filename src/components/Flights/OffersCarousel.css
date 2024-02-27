@@ -12,6 +12,7 @@
     border-radius: 10px;
     padding: 25px 40px 40px;
     margin: 20px 0px;
+    margin-left: -20px;
 }
 .offers-tittle{
     display: flex;

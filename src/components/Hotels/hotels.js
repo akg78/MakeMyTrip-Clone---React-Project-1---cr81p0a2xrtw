@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom';
-import OffersCarousel from '../Flights/OffersCarousel'
 import "./hotels.css"
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
@@ -8,6 +7,41 @@ import Calendar from 'react-calendar';
 
 export default function () {
   const navigate = useNavigate();
+
+  const [offerData, setOfferData] = useState([])
+  const [visibleOffer, setVisibleOffer] = useState("")
+  const [isClicked, setIsClicked] = useState({ "HOTELS": true })
+
+  function clickedOfferNav(key) {
+    setIsClicked({})
+    setIsClicked((prev) => ({ ...prev, [key]: true }))
+  }
+  const handleSubmit = async (data) => {
+    console.log(offerData)
+    try {
+      const response = await (await fetch(
+        `https://academics.newtonschool.co/api/v1/bookingportals/offers?filter={"type":"${data}"}&limit=50`,
+        {
+          method: "GET",
+          headers: {
+            projectID: "cr81p0a2xrtw",
+            "Content-Type": "application/json",
+          },
+        }
+      )).json();
+      setOfferData(response.data.offers)
+    } catch (error) {
+      alert(error);
+    }
+  };
+  useEffect(() => {
+    handleSubmit("HOTELS");
+  }, [])
+
+
+  // ----------------------------------------OfferCrousel Part Over---------------------------------------------------
+
+
   const [ways, setways] = useState("");
   const [searchCityPop, setSearchCityPop] = useState({ hotelPop: false });
   const [citySearch, setCitySearch] = useState({});
@@ -143,7 +177,39 @@ export default function () {
           SEARCH
         </button>
         <div className='vh'></div>
-        <OffersCarousel />
+
+        {                                        /* Offers Carousel Part */}
+
+
+        <div className='offer-container'>
+          <div className='offers-tittle'>
+            <h2>
+              <font color="393939">Offers</font>
+            </h2>
+            <ul className='offer-list cp'>
+              <li onClick={() => { setVisibleOffer("HOTELS"); clickedOfferNav("HOTELS"); handleSubmit("HOTELS") }}><a className={isClicked["HOTELS"] ? "colorOfferNav" : ""} >Hotels</a></li>
+              <li onClick={() => { setVisibleOffer("RAILS"); clickedOfferNav("RAILS"); handleSubmit("RAILS") }}><a className={isClicked["RAILS"] ? "colorOfferNav" : ""} >Train</a></li>
+              <li onClick={() => { setVisibleOffer("ALL"); clickedOfferNav("ALL"); handleSubmit("ALL") }}><a className={isClicked["ALL"] ? "colorOfferNav" : ""} >All Offers</a></li>
+              <li onClick={() => { setVisibleOffer("FLIGHTS"); clickedOfferNav("FLIGHTS"); handleSubmit("FLIGHTS") }}><a className={isClicked["FLIGHTS"] ? "colorOfferNav" : ""} >Flights</a></li>
+            </ul>
+          </div>
+
+          <div className='offers-card'>
+            {offerData ? (offerData.map((item, index) =>
+            (<div className='cards-container'>
+              <div className='card-img'>
+                <img src={item.newHeroUrl} alt="image" />
+                <p>T&C's Apply</p>
+              </div>
+              <div className='card-box'>
+                <h5>INTL FLIGHTS</h5>
+                <h4>Get up to 50% OFF* on<br />International Flights!</h4>
+                <p>Grab & make all your dream trips come true.</p>
+              </div>
+            </div>
+            ))) : "...Loading"}
+          </div>
+        </div>
       </div>
     </div>
   )

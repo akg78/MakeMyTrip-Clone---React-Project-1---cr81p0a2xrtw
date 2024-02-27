@@ -10,12 +10,16 @@ export default function Navigation() {
     const [showSignUp, setShowSignUp] = useState(true);
     const [token, setToken] = useState(localStorage.getItem("authToken"));
     const [activenav, setactivenav] = useState({ "flights": true });
+    const [showBgImg, SetShowBgImg] = useState(true);
 
     function activenavmaker(key) {
         setactivenav({});
         setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
-
     }
+
+    const handleBgimg = () => {
+        SetShowBgImg(false);
+      };
 
     
     useEffect(() => {
@@ -48,14 +52,15 @@ export default function Navigation() {
                         <a href='/' ><img src='./Assets/logo.png' className='navlogoimg' /></a>
 
                         <div className='trip-container flexa'>
-                            <div className='my-trips'>
+                        <img src='./Assets/triplogo.png' height={"45px"} />
+                            <div className='my-trips cp' onClick={()=> {handleUser()}}  >
                                 <p className='p1'>My Trips</p>
                                 <br />
-                                <p className='p2'>Manage your bookings</p>
+                                <p className='p2'> Manage your bookings</p>
                             </div>
-                            <div className='my-login cp' onClick={() => handleUser()}>
+                            <div className='my-login cp' onClick={() => {handleUser(), handleBgimg()}} style={{backgroundImage: showBgImg ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none"}}>
                                 
-                                <p>{token ? "Hi user" : "Login or Create Account"} </p> <IoIosArrowDown /> 
+                                <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown /> 
                             </div>
                         </div>
 

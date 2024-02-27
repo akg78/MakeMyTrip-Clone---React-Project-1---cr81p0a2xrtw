@@ -5,11 +5,15 @@
 .backgroundddd {
   width: 100%;
 }
+.bgBooking {
+  background-color: rgba(239, 234, 234, 0.512);
+}
 .navheaderBookingPage {
   top: 0;
   width: 100%;
   height: 80px;
   position: fixed;
+  z-index: 100;
   background-color: #fff;
 }
 .navheaderBookingPage img {
@@ -27,6 +31,9 @@
   height: 300px;
   margin-top: 81px;
 }
+.flightBg {
+  height: 220px;
+}
 .bookingCard {
   width: 90%;
   padding-bottom: 50px;
@@ -34,8 +41,7 @@
   margin-top: -100px;
 }
 .bookingcardLeft {
-  width: 76%;
-  background-color: #fff;
+  width: 70%;
 }
 .bookingcardRight {
   width: 20%;
@@ -44,11 +50,19 @@
   border-radius: 4px;
 }
 .bookingcontainerL {
-  width: 80%;
-  margin: 25px 62px;
+  width: 90%;
+  margin-left: 50px;
   padding: 20px;
-  border: 1px solid  rgb(194, 193, 193);
-  box-shadow: 1px 1px 8px lightgray;
+  border: 1px solid rgb(194, 193, 193);
+  box-shadow: 1px 2px 5px lightgray;
+  background-color: #fff;
+}
+.completeBooking {
+  position: absolute;
+  color: #fff;
+  top: 160px;
+  left: 140px;
+  font-size: 21px;
 }
 .bookingcontainerR {
   padding: 20px;
@@ -62,6 +76,8 @@
   border-bottom: 1px solid rgb(194, 193, 193);
   padding-bottom: 10px;
   margin-bottom: 10px;
+  margin-top: 15px;
+  font-size: 16px;
 }
 .taxSurcharge {
   justify-content: space-between;
@@ -70,157 +86,140 @@
   margin-bottom: 5px;
 }
 .totalA {
-  justify-content: space-between;
-
+  margin-top: 10px;
+  gap: 40px;
 }
 .fromTo {
   height: 100px;
   width: 98%;
-  background-color: blanchedalmond;
+  background-color: #f4f4f4;
   margin-top: 30px;
+  border-radius: 4px;
+  padding: 10px 0px 10px 0px;
 }
 .fromTo input {
   background-color: aqua;
 }
-
-.travellerssDetails >button,.submitform{
-border-radius: 6px;
-padding: 8px 20px;
-color: white;
-margin-top: 10px;
-font-weight: 600;
-background-color: rgb(20, 113, 235);
+.bookingTime {
+  scale: 0.9;
 }
-.bookingcardRight>p{
+.lineBooking {
+  scale: 0.8;
+}
+.bookingCity {
+  scale: 0.9;
+}
+.travellerssDetails > button,
+.submitform {
+  border-radius: 6px;
+  padding: 8px 20px;
+  color: white;
+  font-weight: 600;
+  background-color: rgb(20, 113, 235);
+}
+.bookingcardRight > p {
   color: red;
   font-size: 13px;
 }
-.submitform{
+.submitform {
   float: right;
   padding: 12px 40px;
   margin-right: 110px;
 }
 
-.travellerssDetailsInput input{
-width: 200px;
-border: 2px solid black;
-height: 30px;
-}
-.travellerssDetails{
-  height: 450px;
-  width: 80%;
+.travellerssDetails {
+  height: 380px;
+  width: 86%;
   padding: 40px;
   overflow-y: scroll;
-  margin-left: 20px;
+  margin-top: 30px;
+  margin-left: 50px;
   background-color: #fff;
+  box-shadow: 1px 2px 5px lightgray;
 }
-.travellerssDetails::-webkit-scrollbar{
+.travellerssDetails::-webkit-scrollbar {
   display: none;
 }
-.idText{
-  margin-top: 10px;
-  width: 75%;
-  padding: 10px;
+.idText {
+  margin-top: 15px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 4px;
   background-color: blanchedalmond;
-  
+  text-wrap: nowrap;
+  border-radius: 2px;
 }
-.travellerssDetailsInput input{
-  height: 22px;
-  border-radius: 5px;
-  margin-top: 20px;
-  padding: 10px;
-  margin-left: 10px;
-  border: 1px solid rgb(194, 193, 193);
+
+.travellerssDetailsInput input {
+  width: 100%;
+  border: 1px solid rgba(155, 155, 155, 0.5);
+  height: 28px;
+  padding: 5px;
+  margin-top: 3px;
+  border-radius: 3px;
+  color: rgb(74, 74, 74);
+  outline: 0px;
 }
-.colorinputactive{
-  background-color: rgba(0, 255, 255, 0.286);
+
+.colorinputactive {
+  background-color: rgba(12, 36, 36, 0.114);
   border-bottom: 4px solid #008cff !important;
 }
 .travellerssDetailsInput .genderdiv input{
 width: 100px;
 margin-left: 0px;
+margin-top: 22px;
 border-radius: 0px;
 border: none;
 outline: none;
 }
-.travellerssDetailsInput{
+.travellerssDetailsInput {
   height: 200px;
+  padding: 10px 30px 0px 30px;
   border: 1px solid rgb(194, 193, 193);
   border-radius: 0px 0px 6px 6px;
   box-shadow: 1px 1px 8px lightgray;
 }
-.adult1{
+.adult1 {
   height: 30px;
   padding: 11px;
   margin-top: 15px;
+  font-weight: 600;
   border-radius: 6px 6px 0px 0px;
   border: 1px solid rgb(194, 193, 193);
 }
 .travellerssDetails h3 {
   margin-bottom: 10px;
 }
-.sentTo{
+
+.PinCodeAndState input {
+  width: 100%;
+}
+
+.PinCodeAndState {
   height: 100px;
-  width: 80%;
+  width: 90%;
   padding: 20px;
-  margin: 20px 60px;
+  margin: 20px 52px;
   background-color: #fff;
   border: 1px solid rgb(194, 193, 193);
   box-shadow: 1px 1px 8px lightgray;
-  border-radius: 6px;
-}
-.PinCodeAndState input{
-  width: 200px !important ;
-}
-
-.sentTo input{
-  height: 20px;
-  width: 20%;
-  height: 22px;
-  border-radius: 5px;
-  margin-top: 20px;
-  padding: 4px;
-  margin-left: 10px;
-  border: 1px solid rgb(194, 193, 193);
-}
-
-.senToLabels{
-  height: 9px;
-  width: 28%;
-  padding-left: 10px;
-  justify-content: space-between;
-}
-
-.sentTo select option{
-  border: 1px solid rgb(194, 193, 193);
-}
-
-.PinCodeAndState{
-  height: 100px;
-  width: 80%;
-  padding: 20px;
-  margin: 40px 60px;
-  background-color: #fff;
-  border: 1px solid rgb(194, 193, 193);
-  box-shadow: 1px 1px 8px lightgray;
-  border-radius: 6px;
 }
 .pinCodeInput{
-  justify-content: space-between;
-  width: 55%;
+  margin-top: 6px;
 }
-.pinCodeInput input{
-  height: 20px;
-  width: 20%;
-  height: 22px;
-  border-radius: 5px;
-  margin-top: 40px;
-  padding: 4px;
-  border: 1px solid rgb(194, 193, 193);
-  
+.pinCodeInput input {
+  width: 100%;
+  border: 1px solid rgba(155, 155, 155, 0.5);
+  height: 28px;
+  padding: 5px;
+  margin-top: 3px;
+  border-radius: 3px;
+  color: rgb(74, 74, 74);
+  outline: 0px;
 }
 
-.clickToPay button{
+.clickToPay button {
   height: 30px;
   width: 100px !important;
   border-radius: 10px;
@@ -232,43 +231,69 @@ outline: none;
   cursor: pointer;
   font-weight: 600;
 }
-.bookingconfirmationpage .navleftmenu span img{
+.bookingconfirmationpage .navleftmenu span img {
   margin-left: 0px;
 }
-.bookingconfirmationpage .navleftmenu span{
+.bookingconfirmationpage .navleftmenu span {
   margin-left: 40px;
 }
 
 /* ---------------------------mcss */
-.cardupper .cardupperright div{
+.cardupper {
+  box-shadow: 1px 1px 8px lightgray;
+  padding: 20px;
+}
+.cardupper .cardupperright div {
   justify-content: flex-end;
   display: flex;
 }
-.fromTo{
+.fromTo {
   gap: 30px;
   padding-left: 20px;
-
 }
-.fromTo >div{
+.fromTo > div {
   height: 100%;
 }
-.cardupper .cardupperright div:first-child{
-  background-image: linear-gradient(to right, rgb(45, 193, 140), rgb(33, 147, 147));
+.cardupper .cardupperright div:first-child {
+  background-image: linear-gradient(
+    to right,
+    rgb(45, 193, 140),
+    rgb(33, 147, 147)
+  );
   color: white;
   font-size: 13px;
   padding-bottom: 1px;
 }
-.cardupper .cardupperright div:nth-child(2){
- color: blue;
+.cardupper .cardupperright div:nth-child(2) {
+  color: blue;
 }
-.cardupper .cardupperright div:last-child span{
- color: rgb(45, 193, 140);
- font-weight: 600;
+.cardupper .cardupperright div:last-child span {
+  color: rgb(45, 193, 140);
+  font-weight: 600;
 }
-.cardupper .cardupperleft div span{
-  background-color:  rgb(255, 237, 209);
-  padding: 2px 5px;
+.cardupper .cardupperleft div span {
+  background-color: rgb(255, 237, 209);
+  padding: 1px 4px;
+  font-weight: 700;
 }
-.countdiable{
+.countdiable {
   display: none;
+}
+.bookingDt {
+  margin-left: 16px;
+  margin-top: 5px;
+}
+.bookingFlightlogo {
+  margin-top: 5px;
+  margin-left: 17px;
+  font-weight: 600;
+}
+
+.mapForm {
+  align-items: center;
+}
+.wrapNameDetails{
+  width: 100%;
+  gap: 50px;
+  padding: 10px;
 }

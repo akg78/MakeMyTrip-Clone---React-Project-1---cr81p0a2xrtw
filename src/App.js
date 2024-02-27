@@ -10,15 +10,16 @@ import Holiday from "./components/underConstruction/Holiday";
 import Cabs from "./components/underConstruction/Cabs";
 import Bus from "./components/underConstruction/Bus";
 import BookingConfirmationPage from "./components/BookingPage/BookingConfirmationPage";
-import Bottom from "./components/Bottoms/Bottom";
 import Homestay from "./components/underConstruction/Homestay";
-import Offers from "./components/Flights/OffersCarousel";
 import SearchFlights from "./components/Flights/SearchFlights";
 import PaymentDetails from "./components/BookingPage/PaymentDetails";
 import HotelsResult from "./components/Hotels/HotelsResult";
 import HotelsDetails from "./components/Hotels/HotelsDetails";
 import BookingHotels from "./components/BookingPage/BookingHotels";
 import TrainSearch from "./components/Trains/TrainSearch";
+import BookingPageTrain from "./components/BookingPage/BookingPageTrain";
+import OffersCarousel from "./components/Flights/OffersCarousel";
+
 function App() {
   return (
     <>
@@ -26,8 +27,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Navigation />}>
             <Route index element={<Flights />} />
-            <Route path="bottom" element={<Bottom />} />
-            <Route path="offers" element={<Offers />} />
             <Route path='/flights' element={<Flights />} />
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/homestay" element={<Homestay />} />
@@ -35,6 +34,7 @@ function App() {
             <Route path="/trains" element={<Trains />} />
             <Route path="/buses" element={<Bus />} />
             <Route path="/cabs" element={<Cabs />} />
+            <Route path="/offers" element={<OffersCarousel/>}></Route>
           </Route>
           <Route path="/flights/results/flightBooking/:PaymentDetails" element={<PaymentDetails />}></Route>
           <Route path="/flights/results/:flightBooking" element={<BookingConfirmationPage />} />
@@ -43,6 +43,7 @@ function App() {
           <Route path="/hotels/:results" element={<HotelsResult />} />
           <Route path="/hotels/results/:details" element={<HotelsDetails />}></Route>
           <Route path="/trains/:results" element={<TrainSearch/>}></Route>
+          <Route path="/trains/results/:trainBooking" element={<BookingPageTrain/>}></Route>
         </Routes>
       </Router>
 

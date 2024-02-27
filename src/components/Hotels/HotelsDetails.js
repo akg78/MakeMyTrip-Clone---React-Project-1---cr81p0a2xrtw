@@ -11,6 +11,7 @@ import { MdLocalBar } from "react-icons/md";
 import { FaSpa } from "react-icons/fa";
 import { PiSwimmingPoolBold } from "react-icons/pi";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import Login from '../Auth/login';
 
 export default function HotelsDetails() {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -301,6 +302,7 @@ export default function HotelsDetails() {
                                         ))}
                                     </div>
                                     <hr className='hrLine'></hr>
+                                    {/* <Login/> */}
                                 </div>
                             </div>
                         </div>

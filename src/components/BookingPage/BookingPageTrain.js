@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate, NavLink, useLocation, Link } from 'react-router-dom';
-import "./BookingConfirmPage.css"
+import "./BookingPageTrain.css"
 
-export default function BookingConfirmationPage() {
+export default function BookingPageTrain() {
   const submitbtnref = useRef();
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  let flight_id = searchParams.get("flight_id");
+  // let flight_id = searchParams.get("flight_id");
   let dayOfWeek = searchParams.get("date");
   const dateObject = new Date(dayOfWeek);
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -43,7 +43,7 @@ export default function BookingConfirmationPage() {
   }
   function gotopayment() {
     if (details["fname"] && details["lname"] && details["mobile"] && details["email"] && details["pincode"] && details["state"] && details["address"]) {
-      navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
+      // navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
     }
     else {
       alert("fill the form first");
@@ -54,41 +54,7 @@ export default function BookingConfirmationPage() {
     variable.push(variable[variable.length - 1] + 1)
     setarr(variable)
   }
-  const objdropdowncity = [{ name: "BLR", fname: "Bangalore", lname: "- Kempegowda International Airport (BLR)" },
-  { name: "BOM", fname: "Mumbai", lname: "- Chatrapati Shivaji Airport (BOM)" },
-  { name: "DEL", fname: "New Delhi", lname: "- Indira Gandhi Airport (DEL)" },
-  { name: "CCU", fname: "Kolkata", lname: "- Netaji Subhas Chandra Bose Airport (CCU)" },
-  { name: "GOI", fname: "Goa", lname: "- Dabolim Airport (GOI)" },
-  { name: "HYD", fname: "Hyderabad", lname: "- Rajiv Gandhi International (HYD)" },
-  { name: "MAA", fname: "Chennai", lname: "- Chennai Airport (MAA)" },];
 
-  function logofinder(item) {
-    if ((item.flightID[0] + item.flightID[1]) == "6E") { return logoflights[0]; }
-    if ((item.flightID[0] + item.flightID[1]) == "SG") { return logoflights[1]; }
-    if ((item.flightID[0] + item.flightID[1]) == "I5") { return logoflights[2]; }
-    if ((item.flightID[0] + item.flightID[1]) == "UK") { return logoflights[3]; }
-    if ((item.flightID[0] + item.flightID[1]) == "AI") { return logoflights[4]; }
-    if ((item.flightID[0] + item.flightID[1]) == "QP") { return logoflights[5]; }
-    if ((item.flightID[0] + item.flightID[1]) == "S5") { return logoflights[6]; }
-  }
-
-  function airlineNamefinder(item) {
-    if ((item.flightID[0] + item.flightID[1]) == "6E") { return "IndiGo"; }
-    if ((item.flightID[0] + item.flightID[1]) == "SG") { return "SpiceJet"; }
-    if ((item.flightID[0] + item.flightID[1]) == "I5") { return "Air India Express"; }
-    if ((item.flightID[0] + item.flightID[1]) == "UK") { return "Vistara"; }
-    if ((item.flightID[0] + item.flightID[1]) == "AI") { return "Air India"; }
-    if ((item.flightID[0] + item.flightID[1]) == "QP") { return "Akasa Air"; }
-    if ((item.flightID[0] + item.flightID[1]) == "S5") { return "Star Air"; }
-  }
-  const [logoflights, setlogoflights] = useState([
-    "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/6E.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/SG.svg",
-    "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/I5.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/UK.svg",
-    "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/AI.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/QP.svg",
-    "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/S5.svg"
-  ])
-
-  const [dataa, setdataa] = useState();
   const [activenav, setactivenav] = useState({ "flights": true });
 
 
@@ -97,29 +63,9 @@ export default function BookingConfirmationPage() {
     setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
   }
 
-  async function fetchData() {
-    try {
-      const response = await (await fetch(
-        `https://academics.newtonschool.co/api/v1/bookingportals/flight/${flight_id}`,
-        {
-          method: "GET",
-          headers: {
-            projectID: "cr81p0a2xrtw",
-          },
-        })).json();
-      setdataa(response.data)
-    } catch (error) {
-      console.error('Error fetching flight', error);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, [])
-
   return (
     <>
-      {dataa && <div className='bookingconfirmationpage'>
+      <div className='bookingconfirmationpage'>
         <div className='flexja flexc mainBody'>
           <div className='navheaderBookingPage flex'>
             <div className='flexa'>
@@ -143,12 +89,12 @@ export default function BookingConfirmationPage() {
                   <div className='cardupper flex jsb '>
                     <div className='cardupperleft flex flexc g10'>
                       <h3 className='flexa g5'>
-                        {objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))}
+                        {/* {objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))} */}
                         {">"}
-                        {objdropdowncity.map((item) => (<h3>{item.name == dataa.destination ? item.fname : ""}</h3>))}
+                        {/* {objdropdowncity.map((item) => (<h3>{item.name == dataa.destination ? item.fname : ""}</h3>))} */}
                       </h3>
-                      <div className='bookingDt'><span>{days[dateObject.getDay()]}, {months[dateObject.getMonth()]} {dateObject.getDate()}</span> {dataa.stops == 0 ? "Non Stop" : `${dataa.stops} stops`} 0{dataa.duration}h 0m</div>
-                      <div className='flexa g10 bookingFlightlogo'><img src={logofinder(dataa)} /> {airlineNamefinder(dataa)} {dataa.flightID[0] + dataa.flightID[1]} {dataa.flightID[dataa.flightID.length - 5] + dataa.flightID[dataa.flightID.length - 3] + dataa.flightID[dataa.flightID.length - 2] + dataa.flightID[dataa.flightID.length - 1]}</div>
+                      {/* <div className='bookingDt'><span>{days[dateObject.getDay()]}, {months[dateObject.getMonth()]} {dateObject.getDate()}</span> {dataa.stops == 0 ? "Non Stop" : `${dataa.stops} stops`} 0{dataa.duration}h 0m</div> */}
+                      {/* <div className='flexa g10 bookingFlightlogo'><img src={logofinder(dataa)} /> {airlineNamefinder(dataa)} {dataa.flightID[0] + dataa.flightID[1]} {dataa.flightID[dataa.flightID.length - 5] + dataa.flightID[dataa.flightID.length - 3] + dataa.flightID[dataa.flightID.length - 2] + dataa.flightID[dataa.flightID.length - 1]}</div> */}
                     </div>
                     <div className='cardupperright flex flexc g10'>
                       <div className='flexja'>CANCELLATION FEES APPLY</div>
@@ -157,14 +103,14 @@ export default function BookingConfirmationPage() {
                   </div>
                   <div className='fromTo flexa '>
                     <div className='flex flexc jsb bookingTime '>
-                      <h3>{dataa.departureTime}</h3>
-                      <h3>{dataa.arrivalTime}</h3>
+                      {/* <h3>{dataa.departureTime}</h3> */}
+                      {/* <h3>{dataa.arrivalTime}</h3> */}
                     </div>
                     <div className='lineBooking'><svg width="9" height="97" viewBox="0 0 9 97"><g fill="none" fill-rule="evenodd"><circle fill="#999" cx="4.5" cy="4.5" r="4.5"></circle><circle fill="#999" cx="4.5" cy="92.5" r="4.5"></circle><path stroke="#999" stroke-linecap="square" stroke-dasharray="7" d="M4.5 7v84"></path></g></svg></div>
                     <div className='flex flexc jsb bookingCity' >
-                      <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))}</h3></div>
-                      <div>0{dataa.duration}h 00m</div>
-                      <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.destination ? item.fname : ""}</h3>))}</h3></div>
+                      {/* <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))}</h3></div> */}
+                      {/* <div>0{dataa.duration}h 00m</div> */}
+                      {/* <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.destination ? item.fname : ""}</h3>))}</h3></div> */}
                     </div>
                   </div>
                 </div>
@@ -229,15 +175,15 @@ export default function BookingConfirmationPage() {
                   <h3>Fare Summary</h3>
                   <div className='flex baseFare'>
                     <h5>Base Fare</h5>
-                    <p>₹ {dataa.ticketPrice}</p>
+                    {/* <p>₹ {dataa.ticketPrice}</p> */}
                   </div>
                   <div className='flex taxSurcharge'>
                     <h5>Tax and Surcharges</h5>
-                    <p>₹ {(dataa.ticketPrice * 12) / 100}</p>
+                    {/* <p>₹ {(dataa.ticketPrice * 12) / 100}</p> */}
                   </div>
                   <div className='flex totalA '>
                     <h4>Total Amount</h4>
-                    <h4>₹ {(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}</h4>
+                    {/* <h4>₹ {(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}</h4> */}
                   </div>
                 </div>
                 <div className='clickToPay flexj'>
@@ -249,7 +195,7 @@ export default function BookingConfirmationPage() {
             </div>
           </div>
         </div>
-      </div>}
+      </div>
     </>
   )
 }

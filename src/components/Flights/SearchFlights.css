@@ -110,12 +110,14 @@
   font-size: 16px;
   font-weight: 600;
 }
-
+.wrapFlightsBody{
+  display: flex;
+  justify-content: center;
+}
 .filters {
   position: sticky;
   top: 80px;
   width: 300px;
-  margin-left: 160px;
   margin-top: -100px;
   height: 900px !important;
   background-color: #fff;
@@ -137,13 +139,7 @@
   justify-content: space-between;
   width: 100%;
 }
-.showless {
-  height: 150px;
-  overflow: hidden;
-}
-.showmore {
-  height: 280px;
-}
+
 .departureTime div {
   margin: 5px;
   height: 60px;
@@ -268,7 +264,9 @@
 .stops label div {
   margin-top: 16px;
   margin-left: 2px;
-
+}
+.stops label{
+  width: 90%;
 }
 .departureCity {
   margin-top: 50px;
@@ -289,6 +287,9 @@
 .airlinesPrice{
  display: flex;
  align-self: flex-end;
+}
+.airlineSpace{
+  margin-left: 8px;
 }
 .listingCard {
   position: relative;
@@ -417,6 +418,7 @@
   width: 55%;
   margin-left: 50px;
 }
+
 .flightSorted {
   position: absolute;
   width: 100%;

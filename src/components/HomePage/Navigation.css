@@ -116,26 +116,22 @@ a {
 .my-trips {
   height: 38px;
   color: #fff;
-  width: 15%;
-  margin-right: 15px;
 }
 .my-trips p {
   text-align: start;
-  font-size: 11px;
+  font-size: 15px;
+  margin-right: 20px;
 }
 .p1 {
-  font-size: 12px;
-  font-weight: 500;
-  text-wrap: nowrap;
+  font-weight: 600;
 }
 .p2 {
-  font-size: 12px;
+  font-size: 11px !important;
   margin-top: -23px;
   text-wrap: nowrap;
   text-align: center;
 }
 .my-login {
-  /* position: relative; */
   display: flex;
   justify-content: center;
   align-items: center;

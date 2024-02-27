@@ -9,21 +9,6 @@ import { TbArrowsExchange } from "react-icons/tb";
 
 
 export default function SearchFlights() {
-  const [filter, setfilter] = useState({ "6E": true, "SG": true, "I5": true, "UK": true, "AI": true, "QP": true, "S5": true, "stops": null });
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  let source = searchParams.get("source");
-  let destination = searchParams.get("destination");
-  let adult = searchParams.get("adult");
-  let child = searchParams.get("child");
-  let infant = searchParams.get("infant");
-  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  let dayOfWeek = searchParams.get("date");
-  const dateObject = new Date(dayOfWeek);
-  const [date, setDate] = useState(new Date());
 
   const objdropdowncity = [{ name: "AMD", fname: "Ahmedabad" },
   { name: "BLR", fname: "Bangalore" },
@@ -34,8 +19,6 @@ export default function SearchFlights() {
   { name: "HYD", fname: "Hyderabad" },
   { name: "MAA", fname: "Chennai" }];
 
-
-
   const [logoflights, setlogoflights] = useState([
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/6E.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/SG.svg",
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/I5.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/UK.svg",
@@ -43,6 +26,45 @@ export default function SearchFlights() {
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/S5.svg"
   ])
 
+  function airlineNamefinder(item) {
+    if ((item.flightID[0] + item.flightID[1]) == "6E") { return "IndiGo"; }
+    if ((item.flightID[0] + item.flightID[1]) == "SG") { return "SpiceJet"; }
+    if ((item.flightID[0] + item.flightID[1]) == "I5") { return "Air India Express"; }
+    if ((item.flightID[0] + item.flightID[1]) == "UK") { return "Vistara"; }
+    if ((item.flightID[0] + item.flightID[1]) == "AI") { return "Air India"; }
+    if ((item.flightID[0] + item.flightID[1]) == "QP") { return "Akasa Air"; }
+    if ((item.flightID[0] + item.flightID[1]) == "S5") { return "Star Air"; }
+    if ((item.flightID[0] + item.flightID[1]) == "G8") { return "Go Air"; }
+  }
+  function logofinder(item) {
+    if ((item.flightID[0] + item.flightID[1]) == "6E") { return logoflights[0]; }
+    if ((item.flightID[0] + item.flightID[1]) == "SG") { return logoflights[1]; }
+    if ((item.flightID[0] + item.flightID[1]) == "I5") { return logoflights[2]; }
+    if ((item.flightID[0] + item.flightID[1]) == "UK") { return logoflights[3]; }
+    if ((item.flightID[0] + item.flightID[1]) == "AI") { return logoflights[4]; }
+    if ((item.flightID[0] + item.flightID[1]) == "QP") { return logoflights[5]; }
+    if ((item.flightID[0] + item.flightID[1]) == "S5") { return logoflights[6]; }
+    if ((item.flightID[0] + item.flightID[1]) == "G8") { return logoflights[6]; }
+  }
+
+
+
+
+
+  const [filter, setfilter] = useState({ "6E": true, "SG": true, "I5": true, "UK": true, "AI": true, "QP": true, "S5": true, "stops": null });
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  let source = searchParams.get("source");
+  let destination = searchParams.get("destination");
+  let adult = searchParams.get("adult");
+  let child = searchParams.get("child");
+  let infant = searchParams.get("infant");
+  let dayOfWeek = searchParams.get("date");
+  const dateObject = new Date(dayOfWeek);
+  const [date, setDate] = useState(new Date());
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const [inputSearchh, setInputSearchh] = useState("");
   const [flightData, setFlightData] = useState();
   const [rangeprice, setrangeprice] = useState(3000);
@@ -58,10 +80,17 @@ export default function SearchFlights() {
   const [adultselect, setadultselect] = useState(`adultarget${adult}`)
   const [childselect, setachildselect] = useState(`childtarget${child}`)
   const [infantselect, setinfantselect] = useState(`infanttarget${infant}`)
-
   const [cityfrom, setcityfrom] = useState({ "name": "", "iata_code": source });
   const [cityto, setcityto] = useState({ "name": "", "iata_code": destination });
   const [isButtonClicked, setISButtonClicked] = useState(false);
+  // const [boxdatasearchdeparture, setboxdatasearchdeparture] = useState({ "city": "Kolkata", "country": "India", "iata_code": "CCU", "name": "Netaji Subhas Chandra Bose International Airport" })
+  // const [departureTo, setDepartureTo] = useState({ "city": "Delhi", "country": "India", "iata_code": "DEL", "name": "Indira Gandhi International Airport" })
+
+
+  useEffect(() => {
+    setcityfrom({ "name": "Kolkata" });
+    setcityto({ "name": "Delhi" })
+  }, [])
 
 
   function adultvaluechanger(item) {
@@ -147,26 +176,7 @@ export default function SearchFlights() {
   }
 
 
-  function airlineNamefinder(item) {
-    if ((item.flightID[0] + item.flightID[1]) == "6E") { return "IndiGo"; }
-    if ((item.flightID[0] + item.flightID[1]) == "SG") { return "SpiceJet"; }
-    if ((item.flightID[0] + item.flightID[1]) == "I5") { return "Air India Express"; }
-    if ((item.flightID[0] + item.flightID[1]) == "UK") { return "Vistara"; }
-    if ((item.flightID[0] + item.flightID[1]) == "AI") { return "Air India"; }
-    if ((item.flightID[0] + item.flightID[1]) == "QP") { return "Akasa Air"; }
-    if ((item.flightID[0] + item.flightID[1]) == "S5") { return "Star Air"; }
-    if ((item.flightID[0] + item.flightID[1]) == "G8") { return "Go Air"; }
-  }
-  function logofinder(item) {
-    if ((item.flightID[0] + item.flightID[1]) == "6E") { return logoflights[0]; }
-    if ((item.flightID[0] + item.flightID[1]) == "SG") { return logoflights[1]; }
-    if ((item.flightID[0] + item.flightID[1]) == "I5") { return logoflights[2]; }
-    if ((item.flightID[0] + item.flightID[1]) == "UK") { return logoflights[3]; }
-    if ((item.flightID[0] + item.flightID[1]) == "AI") { return logoflights[4]; }
-    if ((item.flightID[0] + item.flightID[1]) == "QP") { return logoflights[5]; }
-    if ((item.flightID[0] + item.flightID[1]) == "S5") { return logoflights[6]; }
-    if ((item.flightID[0] + item.flightID[1]) == "G8") { return logoflights[6]; }
-  }
+
 
   function sorting(value) {
     if (clickedSorted["cheapest"]) {
@@ -295,7 +305,7 @@ export default function SearchFlights() {
             </div>
           </div>
         </div>
-        <div className='flex'>
+        <div className='flex wrapFlightsBody'>
           <div className='filters flexc flexa'>
 
             <div className='priceSlider flexc'>
@@ -318,33 +328,33 @@ export default function SearchFlights() {
             </div>
             <div className='stops flexc'>
               <h4>Stops From {cityfrom.name}</h4>
-              <label for="searchFlightsStops" className='flexc'>
+              <label htmlFor="searchFlightsStops" className='flexc cp '>
                 <div onClick={() => { setstopFromm("0") }}><input type='radio' id='earchFlightsStops' name='earchFlightsStops' /> Non Stop</div>
                 <div onClick={() => { setstopFromm("1") }}><input type='radio' id='earchFlightsStops' name='earchFlightsStops' /> 1 Stop</div>
                 <div onClick={() => { setstopFromm("2") }}><input type='radio' id='earchFlightsStops' name='earchFlightsStops' /> 2 Stop</div>
               </label>
             </div>
-            <div className='airlines flexc flex g10 '>
+            <div className='airlines flexc flex g10'>
               <h4>Airlines</h4>
               <div className="filterstypeairline">
                 <label className='flexa' onClick={() => { airlineSelector("6E") }}>
-                  <div><input type='checkbox' checked={filter["6E"]} /> IndiGo</div>
+                  <div className='flex'><input type='checkbox' checked={filter["6E"]} /> <p className='airlineSpace'>IndiGo</p></div>
                   <div>₹ 11,197</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("AI") }}>
-                  <div><input type='checkbox' checked={filter["AI"]} /> Air India</div>
+                  <div className='flex'><input type='checkbox' checked={filter["AI"]} /> <p className='airlineSpace'>Air India</p></div>
                   <div>₹ 9,247</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("UK") }}>
-                  <div><input type='checkbox' checked={filter["UK"]} /> Vistara</div>
+                  <div className='flex'><input type='checkbox' checked={filter["UK"]} /> <p className='airlineSpace'>Vistara</p></div>
                   <div>₹ 23,745</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("SG") }}>
-                  <div><input type='checkbox' checked={filter["SG"]} /> SpiceJet</div>
+                  <div className='flex'><input type='checkbox' checked={filter["SG"]} /> <p className='airlineSpace'>SpiceJet</p></div>
                   <div>₹ 36,209</div>
                 </label>
                 <label className='flexa' onClick={() => { airlineSelector("I5") }}>
-                  <div><input type='checkbox' checked={filter["I5"]} /> Air India Express</div>
+                  <div className='flex'><input type='checkbox' checked={filter["I5"]} /> <p className='airlineSpace'>Air India Express</p></div>
                   <div>₹ 12,577</div>
                 </label>
               </div>
@@ -462,7 +472,7 @@ export default function SearchFlights() {
                   {viewMorePop["openpop"] && index === popUpIndex && (<div className='showPoppp'>
 
                   </div>)}
-                  <p className='showMoreText ' onClick={() => { openView(`listingcarddiv${index}`) }}> {sizeincreaser[`listingcarddiv${index}`] ? "hide flight details" : "view flight details"}</p>
+                  <p className='showMoreText ' onClick={() => { openView(`listingcarddiv${index}`) }}> {sizeincreaser[`listingcarddiv${index}`] ? "Hide Flight Details" : "View Flight Details"}</p>
 
                 </div>
               </div>

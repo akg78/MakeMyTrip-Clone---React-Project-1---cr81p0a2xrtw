@@ -27,6 +27,7 @@
 }
 .ticketType {
   display: flex;
+  justify-content: space-between;
   margin-top: 50px;
 }
 .book {
@@ -66,7 +67,7 @@
   width: 40px;
   height: 40px;
   flex-shrink: 0;
-  left: 315px;
+  left: 337px;
   margin-top: 45px;
   border-radius: 100%;
   background: #ffffff;
@@ -115,22 +116,6 @@
 }
 .calander p {
   text-wrap: nowrap;
-}
-.return {
-  width: 150px;
-  padding: 10px;
-  height: 105px;
-  border-right: 1px solid #e7e7e7;
-}
-.return:hover {
-  cursor: pointer;
-  background-color: #53b1fe2e;
-}
-.tap {
-  margin: 8px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #9b9b9b;
 }
 .travellers {
   height: 105px;

@@ -1,14 +1,50 @@
 import './flights.css'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import OffersCarousel from './OffersCarousel';
 import Bottom from '../Bottoms/Bottom';
 import { Search } from "./SearchPanel";
 import { IoIosArrowDown } from "react-icons/io";
 import Calendar from 'react-calendar';
 import { TbArrowsExchange } from "react-icons/tb";
+// import Navigation from '../HomePage/Navigation';
 
 export default function Flights() {
+
+
+  const [offerData, setOfferData] = useState([])
+  const [visibleOffer, setVisibleOffer] = useState("")
+  const [isClicked, setIsClicked] = useState({ "ALL": true })
+
+  function clickedOfferNav(key) {
+    setIsClicked({})
+    setIsClicked((prev) => ({ ...prev, [key]: true }))
+  }
+  const handleSubmit = async (data) => {
+    console.log(offerData)
+    try {
+      const response = await (await fetch(
+        `https://academics.newtonschool.co/api/v1/bookingportals/offers?filter={"type":"${data}"}&limit=50`,
+        {
+          method: "GET",
+          headers: {
+            projectID: "cr81p0a2xrtw",
+            "Content-Type": "application/json",
+          },
+        }
+      )).json();
+      setOfferData(response.data.offers)
+    } catch (error) {
+      alert(error);
+    }
+  };
+  useEffect(() => {
+    handleSubmit("ALL");
+  }, [])
+
+
+  // ----------------------------------------OfferCrousel Part Over---------------------------------------------------
+
+
   const [pop, setpop] = useState({});
   const [fares, setfares] = useState("");
   const [ways, setways] = useState("");
@@ -23,28 +59,28 @@ export default function Flights() {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const [isButtonClicked, setISButtonClicked] = useState(false);
-  const [adultselect,setadultselect]=useState("adultarget1")
-  const [childselect,setachildselect]=useState("childtarget0")
-  const [infantselect,setinfantselect]=useState("infanttarget0")
+  const [adultselect, setadultselect] = useState("adultarget1")
+  const [childselect, setachildselect] = useState("childtarget0")
+  const [infantselect, setinfantselect] = useState("infanttarget0")
 
 
-  function adultvaluechanger(item){
+  function adultvaluechanger(item) {
     setadultselect(`adultarget${item}`)
 
   }
-  function childvaluechanger(item){
+  function childvaluechanger(item) {
     setachildselect(`childtarget${item}`)
   }
-  function infantvaluechanger(item){
+  function infantvaluechanger(item) {
     setinfantselect(`infanttarget${item}`)
   }
 
-  const handleSwap =()=>{
+  const handleSwap = () => {
     const temp = boxdatasearchdeparture.city;
     const temp1 = boxdatasearchdeparture.name;
     const temp2 = boxdatasearchdeparture.iata_code;
-    setboxdatasearchdeparture({["city"] : departureTo.city, ["name"] : departureTo.name, ["iata_code"] : departureTo.iata_code});
-    setDepartureTo({["city"] : temp , ["name"] : temp1 , ["iata_code"] : temp2});
+    setboxdatasearchdeparture({ ["city"]: departureTo.city, ["name"]: departureTo.name, ["iata_code"]: departureTo.iata_code });
+    setDepartureTo({ ["city"]: temp, ["name"]: temp1, ["iata_code"]: temp2 });
   }
 
   const handleClick = () => {
@@ -62,17 +98,16 @@ export default function Flights() {
   const navigate = useNavigate();
 
   function clickToSearch() {
-    navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length-1]}&child=${childselect[childselect.length-1]}&infant=${infantselect[infantselect.length-1]}`)
+    navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`)
   }
   return (
+   
     <div className='flexa flexc'>
       <div className='flightsMainDiv flexa flexc'>
         <div className='tickets'>
           <div className='ticketType'>
             <label for="ways">
               <span className='oneWay'><input type='radio' name='ways' onClick={() => { setways("oneway") }} /> One Way</span>
-              <span className='roundTrip'><input type='radio' name='ways' onClick={() => { setways("roundTrip") }} /> Round Trip</span>
-              <span className='multiCity'><input type='radio' name='ways' onClick={() => { setways("multiCity") }} /> Multi City</span>
             </label>
             <p className='book'>Book International and Domestic Flights</p>
           </div>
@@ -94,9 +129,9 @@ export default function Flights() {
                 </div>))}
               </div>}
             </div>
-            
-            <span className='swap flexja' onClick={()=>{handleSwap()}}>
-              <TbArrowsExchange className='swapp'  />
+
+            <span className='swap flexja' onClick={() => { handleSwap() }}>
+              <TbArrowsExchange className='swapp' />
             </span>
 
             <div className='flight-to' onClick={() => { popp("to") }}>
@@ -124,25 +159,19 @@ export default function Flights() {
               <p className='datePP'>{daysOfWeek[date.getDay()]}</p>
             </div>
 
-
-            <div className='return'><IoIosArrowDown className='arow' />
-              <p>Return</p>
-              <p className='tap'>Tap to add a return date for bigger discounts</p>
-
-            </div>
             <div className='travellers' ><IoIosArrowDown className='arow' />
               <div onClick={() => { popp("traveller") }}>
                 <p className='travellerss'>Travellers& Class</p>
-                <div className='one  flex flexa'><h1>{(+adultselect[adultselect.length-1])+(+childselect[childselect.length-1])+(+infantselect[infantselect.length-1])}</h1><p className='tra'>Traveller</p></div>
+                <div className='one  flex flexa'><h1>{(+adultselect[adultselect.length - 1]) + (+childselect[childselect.length - 1]) + (+infantselect[infantselect.length - 1])}</h1><p className='tra'>Traveller</p></div>
                 <p className='econo'>Economy/Premium Economy</p>
               </div>
               {pop["traveller"] &&
-                <div className='popupdivtraveller flexc g10 cp'> 
+                <div className='popupdivtraveller flexc g10 cp'>
                   <div className='g10 flexc'>
                     <div className='textadult'>ADULTS (12y+)</div>
                     <div className='textadultdown'>on the day of travel</div>
                     <div className='flex mapbox mapboxone' onClick={handleClick}>
-                      {arr.map((item) => (<div className={`boxesAdult ${adultselect==`adultarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{adultvaluechanger(item);}}>{item}</div>))}
+                      {arr.map((item) => (<div className={`boxesAdult ${adultselect == `adultarget${item}` ? "activeboxesadult" : ""} flexja`} onClick={() => { adultvaluechanger(item); }}>{item}</div>))}
                     </div>
                   </div>
                   <div className='flex childInfant'>
@@ -150,18 +179,18 @@ export default function Flights() {
                       <div className='textchild'>CHILDREN (2y - 12y )</div>
                       <div className='textchilddown'>on the day of travel</div>
                       <div className='flex mapbox mapboxtwo'>
-                        {arrr.map((item) => (<div className={`boxesAdult ${childselect==`childtarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{childvaluechanger(item);}}>{item}</div>))}
+                        {arrr.map((item) => (<div className={`boxesAdult ${childselect == `childtarget${item}` ? "activeboxesadult" : ""} flexja`} onClick={() => { childvaluechanger(item); }}>{item}</div>))}
                       </div>
                     </div>
                     <div className='g10 flexc'>
                       <div className='textchild'>INFANTS (below 2y)</div>
                       <div className='textchilddown'>on the day of travel</div>
                       <div className='flex mapbox mapboxthree'>
-                        {arrr.map((item) => (<div className={`boxesAdult ${infantselect==`infanttarget${item}`?"activeboxesadult":""} flexja`} onClick={()=>{infantvaluechanger(item);}}>{item}</div>))}
+                        {arrr.map((item) => (<div className={`boxesAdult ${infantselect == `infanttarget${item}` ? "activeboxesadult" : ""} flexja`} onClick={() => { infantvaluechanger(item); }}>{item}</div>))}
                       </div>
                     </div>
                   </div>
-                  <button className='passengerbuttonsubmit' onClick={()=>{popp("traveller")}}>submit</button>
+                  <button className='passengerbuttonsubmit' onClick={() => { popp("traveller") }}>submit</button>
                 </div>}
             </div>
           </div>
@@ -212,7 +241,65 @@ export default function Flights() {
         </div>
       </div>
 
-       <OffersCarousel />
+
+      {                                        /* Offers Carousel Part */}
+
+
+      <div className='offer-container'>
+        <div className='offers-tittle'>
+          <h2>
+            <font color="393939">Offers</font>
+          </h2>
+          <ul className='offer-list cp'>
+            <li onClick={() => { setVisibleOffer("ALL"); clickedOfferNav("ALL"); handleSubmit("ALL") }}><a className={isClicked["ALL"] ? "colorOfferNav" : ""} >All Offers</a></li>
+            <li onClick={() => { setVisibleOffer("FLIGHTS"); clickedOfferNav("FLIGHTS"); handleSubmit("FLIGHTS") }}><a className={isClicked["FLIGHTS"] ? "colorOfferNav" : ""} >Flights</a></li>
+            <li onClick={() => { setVisibleOffer("RAILS"); clickedOfferNav("RAILS"); handleSubmit("RAILS") }}><a className={isClicked["RAILS"] ? "colorOfferNav" : ""} >Train</a></li>
+            <li onClick={() => { setVisibleOffer("HOTELS"); clickedOfferNav("HOTELS"); handleSubmit("HOTELS") }}><a className={isClicked["HOTELS"] ? "colorOfferNav" : ""} >Hotels</a></li>
+          </ul>
+        </div>
+
+        <div className='offers-card'>
+          {offerData ? (offerData.map((item, index) =>
+          (<div className='cards-container'>
+            <div className='card-img'>
+              <img src={item.newHeroUrl} alt="image" />
+              <p>T&C's Apply</p>
+            </div>
+            <div className='card-box'>
+              <h5>INTL FLIGHTS</h5>
+              <h4>Get up to 50% OFF* on<br />International Flights!</h4>
+              <p>Grab & make all your dream trips come true.</p>
+            </div>
+          </div>
+          ))) : "...Loading"}
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <Bottom />
     </div>
 

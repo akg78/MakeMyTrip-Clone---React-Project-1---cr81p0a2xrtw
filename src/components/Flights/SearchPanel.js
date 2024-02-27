@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import "./SearchPanel.css"
 
 
 export const Search = async (setdata, input) => {
