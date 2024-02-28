@@ -6,6 +6,7 @@ import Slider from '@mui/material/Slider';
 import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
 import { TbArrowsExchange } from "react-icons/tb";
+import { NavLink } from 'react-router-dom';
 
 
 export default function SearchFlights() {
@@ -224,9 +225,10 @@ export default function SearchFlights() {
       <div className='navheader flexa'>
         <div className='imggg flexa'><a href='/'><img src='/logo@2x.png' /></a></div>
         <div className='navList '>
-          <div className='flex imgSearchbar g10'>
-            <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
-            <span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
+          <div className='flex imgSearchbar'>
+            <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
+            <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
+            <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
           </div>
         </div>
       </div>
@@ -334,26 +336,26 @@ export default function SearchFlights() {
                 <div onClick={() => { setstopFromm("2") }}><input type='radio' id='earchFlightsStops' name='earchFlightsStops' /> 2 Stop</div>
               </label>
             </div>
-            <div className='airlines flexc flex g10'>
+            <div className='airlines flexc flex'>
               <h4>Airlines</h4>
               <div className="filterstypeairline">
-                <label className='flexa' onClick={() => { airlineSelector("6E") }}>
+                <label className='flexa labelFlights' onClick={() => { airlineSelector("6E") }}>
                   <div className='flex'><input type='checkbox' checked={filter["6E"]} /> <p className='airlineSpace'>IndiGo</p></div>
                   <div>₹ 11,197</div>
                 </label>
-                <label className='flexa' onClick={() => { airlineSelector("AI") }}>
+                <label className='flexa labelFlights' onClick={() => { airlineSelector("AI") }}>
                   <div className='flex'><input type='checkbox' checked={filter["AI"]} /> <p className='airlineSpace'>Air India</p></div>
                   <div>₹ 9,247</div>
                 </label>
-                <label className='flexa' onClick={() => { airlineSelector("UK") }}>
+                <label className='flexa labelFlights' onClick={() => { airlineSelector("UK") }}>
                   <div className='flex'><input type='checkbox' checked={filter["UK"]} /> <p className='airlineSpace'>Vistara</p></div>
                   <div>₹ 23,745</div>
                 </label>
-                <label className='flexa' onClick={() => { airlineSelector("SG") }}>
+                <label className='flexa labelFlights' onClick={() => { airlineSelector("SG") }}>
                   <div className='flex'><input type='checkbox' checked={filter["SG"]} /> <p className='airlineSpace'>SpiceJet</p></div>
                   <div>₹ 36,209</div>
                 </label>
-                <label className='flexa' onClick={() => { airlineSelector("I5") }}>
+                <label className='flexa labelFlights' onClick={() => { airlineSelector("I5") }}>
                   <div className='flex'><input type='checkbox' checked={filter["I5"]} /> <p className='airlineSpace'>Air India Express</p></div>
                   <div>₹ 12,577</div>
                 </label>
@@ -440,9 +442,6 @@ export default function SearchFlights() {
                       <p className='stopsss'>{item.stops} Stop</p>
                     </div>
 
-
-
-
                     <div className='flex flexc infoFlight'>
                       <h4>{item.departureTime}</h4>
                       <p>{days[dateObject.getDay()]},{dateObject.getDate()}{months[dateObject.getMonth()]},{dateObject.getFullYear()}</p>
@@ -464,7 +463,6 @@ export default function SearchFlights() {
                     </div>
                   </div>
                   <button className='bookNowbtn flexja cp' onClick={() => clickToBook(item._id, item)}>Book Now</button>
-
 
                 </div>
 

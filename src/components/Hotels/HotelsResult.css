@@ -31,6 +31,7 @@
 .hotelsresult .logoimg {
   height: 35px;
   margin-right: 60px;
+  margin-top: 15px;
 }
 .hotelsresult .bodyouter {
   width: 100%;
@@ -275,7 +276,7 @@
   margin-bottom: 10px;
   border-radius: 6px;
   margin-left: 11px;
-  padding: 5px;
+  padding: 6px;
   color: black;
   background-color: #dfe9f8;
 }

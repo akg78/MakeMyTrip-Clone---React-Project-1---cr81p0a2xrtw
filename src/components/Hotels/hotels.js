@@ -101,10 +101,6 @@ export default function () {
     <div className='hotelsMainDiv flexj'>
       <div className='hotelBookingPanel'>
         <div className='upto'>
-          <label for="wayss">
-            <span className='oneWays'><input type='radio' name='wayss' onClick={() => { setways("oneway") }} /> Upto 4 Rooms</span>
-            <span className='roundTripp'><input type='radio' name='wayss' onClick={() => { setways("roundTrip") }} /> Group Deals</span>
-          </label>
           <p className='bookk'>Book Domestic and International Property Online. To list your property <a href='https://www.makemytrip.com/hotels/hotelier-register.htm'>Click Here</a></p>
         </div>
 

@@ -8,6 +8,7 @@ import { TbArrowsExchange } from "react-icons/tb";
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { CiLocationOn } from "react-icons/ci";
+import { NavLink } from 'react-router-dom';
 
 
 export default function TrainSearch() {
@@ -63,9 +64,22 @@ export default function TrainSearch() {
 
 
 
-    function pushtonext(trainNamee, sourcee, destinationn, arrivalTimee, departureTimee, faree, coachTypee) {
-        navigate("/trains/results/booking")
-    }
+    function pushtonext(trainNamee, trainNumberr, sourcee, travelDurationn, destinationn, arrivalTimee, departureTimee, faree, coachTypee, numberOfSeatss) {
+        navigate("/trains/results/booking", {
+            state: {
+                trainNamee,
+                trainNumberr,
+                sourcee,
+                destinationn,
+                arrivalTimee,
+                departureTimee,
+                faree,
+                coachTypee,
+                numberOfSeatss,
+                travelDurationn
+            }
+        });
+    };
 
 
     function sortfun(data) {
@@ -105,14 +119,6 @@ export default function TrainSearch() {
     }, []);
 
 
-
-
-
-
-
-
-
-
     const handleSwap = () => {
         const temp = source.city;
         setSource({ ["city"]: destination.city });
@@ -136,8 +142,6 @@ export default function TrainSearch() {
         // navigate(`/hotels/results?location=${dplocations}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`);
     }
 
-
-
     return (
         <div className='hotelsresult'>
             <div className='navouter flexja'>
@@ -145,11 +149,13 @@ export default function TrainSearch() {
                     <div className='navinner flex'>
                         <a href='/'><img className='logoimg cp' src='/logo@2x.png' /></a>
                         <div className='navleftmenu flex g20 cp'>
-                            <span className={activenav["flights"] ? "activecolorHotel" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
-                            <span className={activenav["hotels"] ? "activecolorHotel" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
+                            <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
+                            <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
+                            <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
+
                         </div>
                     </div>
-                    {/* <div className='navrightmenu'>Login</div> */}
+                    <div className='navrightmenu'>Login</div>
                 </nav>
             </div>
             <div className='bodyouter flexa flexc'>
@@ -160,7 +166,7 @@ export default function TrainSearch() {
                                 <div className='childContainer trainheaderSearch' onClick={() => { TrainSearchPop("cityandtrain") }}>
                                     {searchpop["cityandtrain"] && <div className='cityTrainSearch'>
                                         <input type='text' placeholder='From' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
-                                        {isTrainSearch && isTrainSearch.map((item, index) => (<div key={index} className=' flexa g10 trainCity' onClick={() => { setTrainFrom(item.city) }} >
+                                        {isTrainSearch && isTrainSearch.map((item, index) => (<div key={index} className=' flex g10 trainCity' onClick={() => { setTrainFrom(item.city) }} >
                                             <div><CiLocationOn /></div>
                                             <p>{item.city} Junction</p>
                                         </div>))}
@@ -258,7 +264,7 @@ export default function TrainSearch() {
                         </div>
                     </div>
                     <div className='trainRightSide'>
-                        {searchTrain && searchTrain.map((item) =>  (
+                        {searchTrain && searchTrain.map((item) => (
                             <div className='trainReuseable flexc'>
                                 <div className='flex headertrainComp'>
                                     <div>
@@ -281,7 +287,7 @@ export default function TrainSearch() {
                                 </div>
                                 <div className='flex wraptrainOptions'>
                                     {item.coaches.map((itemm) => (filtercoach[`${itemm.coachType}`] && (
-                                        <div className='flex cp' onClick={(e) => { pushtonext(item.trainName, item.source, item.destination, item.arrivalTime, item.departureTime, item.fare, itemm.coachType) }}>
+                                        <div className='flex cp' onClick={(e) => { pushtonext(item.trainName, item.trainNumber, item.travelDuration,  item.source, item.destination, item.arrivalTime, item.departureTime, item.fare, itemm.coachType, itemm.numberOfSeats) }}>
                                             <div className='flexc trainOptions'>
                                                 <div className='flex jsb'>
                                                     <h4>{itemm.coachType}</h4>
@@ -294,7 +300,7 @@ export default function TrainSearch() {
                                     )))}
                                 </div>
                             </div>
-                            
+
                         ))}
                     </div>
                 </div>

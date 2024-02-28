@@ -7,7 +7,19 @@ export default function BookingPageTrain() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  // let flight_id = searchParams.get("flight_id");
+  const {
+    trainNamee,
+    trainNumberr,
+    sourcee, 
+    destinationn,
+    arrivalTimee,
+    departureTimee,
+    faree,
+    coachTypee,
+    numberOfSeatss,
+    travelDurationn
+  } = location.state || {};
+
   let dayOfWeek = searchParams.get("date");
   const dateObject = new Date(dayOfWeek);
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -73,44 +85,50 @@ export default function BookingPageTrain() {
                 <img src="//imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/header/logo@2x.png" alt="MMT's LOGO" />
               </Link>
             </div>
-            <div className='navleftmenu flexa g20 cp'>
+            <div className='navleftmenu flexa cp'>
               <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
               <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
+              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
             </div>
           </div>
           <div className='backgroundddd bgBooking flexja flexc'>
             <div className='bg-gradiantt flightBg'>
-              <h3 className='completeBooking'>Complete your booking</h3>
+              <h3 className='completeBooking'>Select Travellers</h3>
             </div>
-
             <div className='bookingCard flex'>
               <div className='bookingcardLeft'>
-                <div className='bookingcontainerL'>
-                  <div className='cardupper flex jsb '>
-                    <div className='cardupperleft flex flexc g10'>
-                      <h3 className='flexa g5'>
-                        {/* {objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))} */}
-                        {">"}
-                        {/* {objdropdowncity.map((item) => (<h3>{item.name == dataa.destination ? item.fname : ""}</h3>))} */}
-                      </h3>
-                      {/* <div className='bookingDt'><span>{days[dateObject.getDay()]}, {months[dateObject.getMonth()]} {dateObject.getDate()}</span> {dataa.stops == 0 ? "Non Stop" : `${dataa.stops} stops`} 0{dataa.duration}h 0m</div> */}
-                      {/* <div className='flexa g10 bookingFlightlogo'><img src={logofinder(dataa)} /> {airlineNamefinder(dataa)} {dataa.flightID[0] + dataa.flightID[1]} {dataa.flightID[dataa.flightID.length - 5] + dataa.flightID[dataa.flightID.length - 3] + dataa.flightID[dataa.flightID.length - 2] + dataa.flightID[dataa.flightID.length - 1]}</div> */}
+                <div className='bookingcontainerL fullWrapDetails'>
+                  {/* <div></div> */}
+                  <div className='flex wrapInfoTrain'>
+                    <div className='flexc'>
+                      <h3>{trainNamee}</h3>
+                      <p>#{trainNumberr}</p>
                     </div>
-                    <div className='cardupperright flex flexc g10'>
-                      <div className='flexja'>CANCELLATION FEES APPLY</div>
-                      <div>Economy&nbsp;&#62;&nbsp;<span>SAVER</span> <icon /></div>
+                    <div className='flexc g10'>
+                      <p>{departureTimee}</p>
+                      <h4>{travelDurationn}</h4>
+                    </div>
+                    <div className=''>{sourcee}</div>
+                    <div className='flexc g10'>
+                      <p>{arrivalTimee}</p>
+                      <h4>{destinationn}</h4>
                     </div>
                   </div>
-                  <div className='fromTo flexa '>
-                    <div className='flex flexc jsb bookingTime '>
-                      {/* <h3>{dataa.departureTime}</h3> */}
-                      {/* <h3>{dataa.arrivalTime}</h3> */}
+
+                  <div className='wrapInfoTrain flex'>
+                    <div className='flexc g10'>
+                      <h5>Availability Status</h5>
+                      <div className='constainerAvail flex g20 b1'>
+                        <h4>{coachTypee}</h4>
+                        <p>AVAILABLE - {numberOfSeatss}</p>
+                      </div>
                     </div>
-                    <div className='lineBooking'><svg width="9" height="97" viewBox="0 0 9 97"><g fill="none" fill-rule="evenodd"><circle fill="#999" cx="4.5" cy="4.5" r="4.5"></circle><circle fill="#999" cx="4.5" cy="92.5" r="4.5"></circle><path stroke="#999" stroke-linecap="square" stroke-dasharray="7" d="M4.5 7v84"></path></g></svg></div>
-                    <div className='flex flexc jsb bookingCity' >
-                      {/* <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))}</h3></div> */}
-                      {/* <div>0{dataa.duration}h 00m</div> */}
-                      {/* <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.destination ? item.fname : ""}</h3>))}</h3></div> */}
+
+                    <div className='flexc g10'>
+                      <h5>Your Boarding Station</h5>
+                      <div className='constainerAvail flex g20 b1'>
+                        <p>{travelDurationn} - {departureTimee}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -178,7 +196,7 @@ export default function BookingPageTrain() {
                     {/* <p>₹ {dataa.ticketPrice}</p> */}
                   </div>
                   <div className='flex taxSurcharge'>
-                    <h5>Tax and Surcharges</h5>
+                    <h5>Extra Charges</h5>
                     {/* <p>₹ {(dataa.ticketPrice * 12) / 100}</p> */}
                   </div>
                   <div className='flex totalA '>

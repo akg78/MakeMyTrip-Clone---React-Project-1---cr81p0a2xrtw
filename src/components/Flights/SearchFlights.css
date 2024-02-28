@@ -48,7 +48,11 @@
   height: 50px;
 }
 .imgSearchbar .activecolor{
-  flex-wrap: nowrap;
+  flex-wrap: nowrap; 
+}
+.imgSearchbar{
+  margin-left: 60px;
+  gap: 30px;
 }
 .backgrounddd {
   position: relative;
@@ -58,14 +62,17 @@
 .navheader {
   top: 0;
   width: 100%;
-  height: 80px;
+  height: 81.5px;
   position: fixed;
   background-color: #fff;
   z-index: 1;
 }
 .navheader img {
   height: 35px;
-  margin-left: 50px;
+}
+.imggg{
+  margin-left: 60px;
+  margin-top: 12px;
 }
 .navheader ul {
   width: 500px;
@@ -283,6 +290,7 @@
 .filterstypeairline label {
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
 }
 .airlinesPrice{
  display: flex;
@@ -535,3 +543,6 @@ input:hover {
 .divListCard img {
   height: 35px;
 }
+/* .labelFlights{
+  margin-top: 10px;
+} */

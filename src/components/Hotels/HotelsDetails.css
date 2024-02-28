@@ -212,7 +212,6 @@
   height: 390px;
   width: 690px;
   grid-template-columns: 1fr 1fr;
-  margin-top: 20px;
   row-gap: 25px;
   column-gap: 20%;
 }

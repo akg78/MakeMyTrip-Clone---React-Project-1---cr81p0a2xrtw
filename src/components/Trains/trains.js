@@ -153,6 +153,7 @@ export default function trains() {
               <span className='fw'>Travel Date</span><IoIosArrowDown className='arrow' />
             </div>
             <p className='flexa g20'><h1>{date.getDate()}</h1>{months[date.getMonth()]}'{date.getFullYear()}</p>
+            <p className='dayyy'>{daysOfWeek[date.getDay()]}</p>
           </div>
 
         </div>

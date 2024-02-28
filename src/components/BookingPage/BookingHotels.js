@@ -94,12 +94,6 @@ export default function BookingConfirmationPage() {
     fetchData();
   }, [])
 
-
-
-
-
-
-
   return (
     <>
       {dataa && <div className='bookingconfirmationpage'>
@@ -110,13 +104,14 @@ export default function BookingConfirmationPage() {
                 <img src="//imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/header/logo@2x.png" alt="MMT's LOGO" />
               </Link>
             </div>
-            <div className='navleftmenu flexa g20 cp'>
+            <div className='navleftmenu flexa cp'>
               <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
               <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
+              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
             </div>
           </div>
           <div className='backgroundddd flexja flexc'>
-            <div className='bg-gradiantt'></div>
+            <div className='bg-gradiantt flightBg'></div>
 
             <div className='bookingCard flex'>
               <div className='bookingcardLeft '>
@@ -124,80 +119,83 @@ export default function BookingConfirmationPage() {
                   <h3>{name} {">"} {locationn}</h3>
                   <div className='flex flexa bookingCheckIN'>
                     <div className='flexc flex chekinBooking g5'>
-                      <div>CHECK IN</div>
+                      <h4>CHECK IN</h4>
                       <div className='flex g5'>
                         <p>{date.getDate()},</p> <p>{months[date.getMonth()]}</p> <p>{[date.getFullYear()]}</p>
                       </div>
-                      <div>{dateObject.getHours()}h: {dateObject.getMinutes()}m</div>
+                      {/* <div>{date.getHours()}h: {date.getMinutes()}m</div> */}
                     </div>
                     <div className='flexc flex checkOutBooking g5'>
-                      <div>CHECK OUT</div>
-                      <div className='flex g5'>
+                      <h4>CHECK OUT</h4>
+                      <div className='flex g5 dateBook'>
                         <p>{dateReturn.getDate()},</p><p>{months[dateReturn.getMonth()]}</p><p>{[dateReturn.getFullYear()]}</p>
                       </div>
-                      <div>{Math.floor(dateObject.getHours() * 1.1)}h: {dateObject.getMinutes() * 5}m</div>
+                      {/* <div>{Math.floor(dateObject.getHours() * 1.1)}h: {dateObject.getMinutes() * 1}m</div> */}
                     </div>
                     <div className='flex flex adultBooking g10'>
                       <h4>Guest</h4>
-                    <p>{guests["room"]}</p>
-                    {guestspopcount["room"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("room", item)}>{item}</div>))}</div>}
-                    <h4>Rooms</h4>
-                    <p>{guests["adults"]}</p>
-                    {guestspopcount["adults"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("adults", item)}>{item}</div>))}</div>}
+                      <p>{guests["room"]}</p>
+                      {guestspopcount["room"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("room", item)}>{item}</div>))}</div>}
+                      <h4>Rooms</h4>
+                      <p>{guests["adults"]}</p>
+                      {guestspopcount["adults"] && <div className='flex flexc popguests'>{counting.map((item) => (<div className='flexja' onClick={() => guestsmanage("adults", item)}>{item}</div>))}</div>}
 
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <div className='travellerssDetails'>
-                    <h3>Guest Details</h3>
+                  <div className='travellerssDetails '>
+                    <h3>Traveller Details</h3>
                     <div className='idText'><strong>Important:</strong> Enter name as mentioned on your password or Government approved IDs.</div>
                     <button onClick={() => increasearrsize()}>Add Traveller</button>
-                    {arr.map(item => (<div>
-                      <div className='adult1'>Adult{item}</div>
-                      <div className='travellerssDetailsInput flexa flexc'>
-                        <div className='flexa g10'>
-                          <input onChange={(e) => { detailsChanger("fname", e.target.value) }} value={details["fname"]} type='text' placeholder='First & Middle Name' required />
-                          <input onChange={(e) => { detailsChanger("lname", e.target.value) }} value={details["lname"]} type='text' placeholder='Last Name' required />
+                    {arr.map(item => (<div className='mapForm'>
+                      <div className='adult1'>Adult {item}</div>
+                      <div className='travellerssDetailsInput flexc'>
+                        <div className='flex wrapNameDetails'>
+                          <div className='flexc'>
+                            <label htmlFor='text'>First Name </label>
+                            <input onChange={(e) => { detailsChanger("fname", e.target.value) }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
+                          </div>
+                          <div className='flexc'>
+                            <label htmlFor='text'>Last Name</label>
+                            <input onChange={(e) => { detailsChanger("lname", e.target.value) }} value={details["lname"]} type='text' placeholder='Enter Last Name*' required />
+                          </div>
                           <div className=' genderdiv flexa'>
                             <input onClick={() => { setgenderselector(true) }} type='text' placeholder='Male' className={`${genderselector ? 'colorinputactive' : ""}`} required readOnly />
                             <input onClick={() => { setgenderselector(false) }} type='text' placeholder='Female' className={`${genderselector ? '' : "colorinputactive"}`} required readOnly />
                           </div>
                         </div>
-                        <div className='flexa g20'>
-                          <label htmlFor='tel'>Mobile No
-                            <input type='tel' onChange={(e) => { detailsChanger("mobile", e.target.value) }} value={details["mobile"]} placeholder='Mobile No(Optional)' required />
-                          </label>
-                          <label htmlFor='email'>Email
-                            <input type='email' onChange={(e) => { detailsChanger("email", e.target.value) }} value={details["email"]} placeholder='Email(Optional)' required />
-                          </label>
+                        <div className='flex wrapNameDetails'>
+                          <div className='flexc'>
+                            <label htmlFor='mobile_number'>Mobile No</label>
+                            <input type='tel' id='mobile_number' onChange={(e) => { detailsChanger("mobile", e.target.value) }} value={details["mobile"]} placeholder='Enter 10 Digits*' required />
+                          </div>
+                          <div className='flexc'>
+                            <label htmlFor='email'>Email</label>
+                            <input type='email' id='email' onChange={(e) => { detailsChanger("email", e.target.value) }} value={details["email"]} placeholder='Enter Email*' required />
+                          </div>
                         </div>
                       </div>
                     </div>))}
                   </div>
                 </div>
-                <div className='sentTo'>
-                  <h5>Booking details will be sent to</h5>
-                  <div className='senToLabels flex'>
-                    <p>Mobile No</p>
-                    <p>Email</p>
-                  </div>
-                  <input type='phone' />
-                  <input type='email' />
-                </div>
+                
                 <div className='PinCodeAndState'>
-                  <h5>Your Pincode and State</h5>
+                  <h3>Your Pincode and State</h3>
                   <div className='pinCodeInput flex g20'>
-                    <label htmlFor=''>Pincode
-                      <input onChange={(e) => { detailsChanger("pincode", e.target.value); console.log(details) }} value={details["pincode"]} type='pincode' placeholder='Pincode' required />
-                    </label>
-                    <label htmlFor=''>State
-                      <input onChange={(e) => { detailsChanger("state", e.target.value) }} value={details["state"]} type='state' placeholder='State' required />
-                    </label>
-                    <label htmlFor=''>Address
-                      <input onChange={(e) => { detailsChanger("address", e.target.value) }} value={details["address"]} type='Address' placeholder='Address' required />
-                    </label>
+                    <div className='flexc'>
+                      <label htmlFor=''>Pincode</label>
+                      <input onChange={(e) => { detailsChanger("pincode", e.target.value); console.log(details) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' required />
+                    </div>
+                    <div className='flexc'>
+                      <label htmlFor=''>State</label>
+                      <input onChange={(e) => { detailsChanger("state", e.target.value) }} value={details["state"]} type='state' placeholder='Enter your State*' required />
+                    </div>
+                    <div className='flexc'>
+                      <label htmlFor=''>Address</label>
+                      <input onChange={(e) => { detailsChanger("address", e.target.value) }} value={details["address"]} type='Address' placeholder='Enter your Adress*' required />
+                    </div>
                   </div>
                 </div>
                 <button onClick={() => { target() }} className='submitform'>Submit</button>

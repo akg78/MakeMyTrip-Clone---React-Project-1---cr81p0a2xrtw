@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import "./HotelsResult.css";
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
+import { NavLink } from 'react-router-dom';
 
 export default function HotelsResult() {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -165,8 +166,9 @@ export default function HotelsResult() {
           <div className='navinner flex'>
             <a href='/'><img className='logoimg cp' src='/logo@2x.png' /></a>
             <div className='navleftmenu flex g20 cp'>
-              <span className={activenav["flights"] ? "activecolorHotel" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/flights'>Flights</a></p></span>
-              <span className={activenav["hotels"] ? "activecolorHotel" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
+              <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
+              <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
+              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
             </div>
           </div>
           {/* <div className='navrightmenu'>Login</div> */}
@@ -180,7 +182,7 @@ export default function HotelsResult() {
                 <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                   {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
                     <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
-                    {cities && cities.map((item, index) => (<div key={index} className='hotelCityProperty' onClick={() => { setdplocations(item.location.toString().split(",")[0]) }} >
+                    {cities && cities.map((item, index) => (<div key={index} className='hotelCityProperty flex g10' onClick={() => { setdplocations(item.location.toString().split(",")[0]) }} >
                       <div><CiLocationOn /></div>
                       <div >{item.location.toString().split(",")[0]}</div>
                     </div>))}

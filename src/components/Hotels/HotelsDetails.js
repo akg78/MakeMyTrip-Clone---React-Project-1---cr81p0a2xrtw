@@ -11,7 +11,9 @@ import { MdLocalBar } from "react-icons/md";
 import { FaSpa } from "react-icons/fa";
 import { PiSwimmingPoolBold } from "react-icons/pi";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import { NavLink } from 'react-router-dom';
 import Login from '../Auth/login';
+import Register from '../Auth/register';
 
 export default function HotelsDetails() {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -37,14 +39,40 @@ export default function HotelsDetails() {
     const [room, setroom] = useState(guests["room"]);
     const [hotels, setHotels] = useState([]);
 
+
+    const [showSignIn, setShowSignIn] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(true);
+    const [token, setToken] = useState(localStorage.getItem("authToken"));
+
+    // useEffect(() => {
+    //     if (token) {
+    //         setShowSignUp(false)
+    //     } else {
+    //         setShowSignUp(true)
+    //     }
+    // }, [])
+
+    function handleUser() {
+        if (token) {
+            setShowSignIn(!showSignIn);
+        } else {
+            setShowSignUp(true);
+        }
+    }
+
+
+
     const navigate = useNavigate();
     function navigatetoform(val) {
-
-        navigate(`/hotels/results/details/hotelBooking?hotel_id=${hotel_id}&number=${val}&date=${dateObject}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}&name=${dataa.name}`)
+        if(token){
+            navigate(`/hotels/results/details/hotelBooking?hotel_id=${hotel_id}&number=${val}&date=${dateObject}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}&name=${dataa.name}`)
+        }else{
+            setShowSignUp(true);
+        }   
     }
 
     function prevNavigation() {
-    navigate(`/hotels/results?location=${dplocate}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`);
+        navigate(`/hotels/results?location=${dplocate}&date=${date}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}`);
     }
 
 
@@ -128,6 +156,9 @@ export default function HotelsDetails() {
         <>
             {dataa &&
                 <div className='hotelsresult'>
+                    <div className='hello'>{showSignUp && <Login token={token} setToken={setToken} showSignUp={showSignUp} setShowSignUp={setShowSignUp} />}</div>
+                    <div>{showSignIn && <Register token={token} setToken={setToken} showSignIn={showSignIn} setShowSignIn={setShowSignIn} />}</div>
+                    {showSignUp && <div className='popLogin'></div>}
                     <div className='navouter flexja'>
                         <nav className='flexa flexjsb'>
                             <div className='navinner flex'>
@@ -137,8 +168,9 @@ export default function HotelsDetails() {
                                     </Link>
                                 </div>
                                 <div className='navleftmenu flex g20 cp'>
-                                    <span className={activenav["flights"] ? "activecolor" : ""} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a href='/'>Flights</a></p></span>
-                                    <span className={activenav["hotels"] ? "activecolor" : ""} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a href='/hotels'>Hotels</a></p></span>
+                                    <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
+                                    <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
+                                    <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
                                 </div>
                             </div>
                             <div className='navrightmenu'>Login</div>
@@ -152,7 +184,7 @@ export default function HotelsDetails() {
                                         <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                                             {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
                                                 <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
-                                                {hotels && hotels.map((item, index) => (<div key={index} className='hotelCityProperty' onClick={() => { setdplocate(item.location.toString().split(",")[0]) }} >
+                                                {hotels && hotels.map((item, index) => (<div key={index} className='hotelCityProperty flex g10' onClick={() => { setdplocate(item.location.toString().split(",")[0]) }} >
                                                     <div><CiLocationOn /></div>
                                                     <div >{item.location.toString().split(",")[0]}</div>
                                                 </div>))}
@@ -259,11 +291,6 @@ export default function HotelsDetails() {
                                                 <div className='flex g5'><h4>petsAllowed:</h4><p>{dataa.houseRules.restrictions.petsAllowed.toString().toUpperCase()}</p></div>
                                                 <div className='flex g5'><h4>smokingAllowed:</h4><p>{dataa.houseRules.restrictions.smokingAllowed.toString().toUpperCase()}</p></div>
                                             </div>
-                                            <div className='animationrotation2 flex flexc g5'>
-                                                <h3>GuestProfile</h3>
-                                                <div className='flex g5'><h4>unmarriedCouplesAllowed:</h4><p>{dataa.houseRules.guestProfile.unmarriedCouplesAllowed.toString().toUpperCase()}</p></div>
-
-                                            </div>
                                             <div className='animationrotation3 flex flexc g10'>
                                                 <h3>IdProofRelated</h3>
                                                 <div className='flex g20'><h4>IdProofsAccepted:</h4><ol>{dataa.houseRules.idProofRelated.idProofsAccepted.map((item, index) => (<li key={index}>{item}</li>))}</ol></div>
@@ -297,6 +324,7 @@ export default function HotelsDetails() {
                                                     <h3>Room Type:<br /> <span>{item.roomType}</span></h3>
                                                     <h3>Room Size:<br /> <span>{item.roomSize}</span></h3>
                                                     <button onClick={() => { navigatetoform(item.roomNumber) }}>SELECT ROOM</button>
+                                                    {/* {!showSignUp && <Login/>} */}
                                                 </div>
                                             </div>
                                         ))}

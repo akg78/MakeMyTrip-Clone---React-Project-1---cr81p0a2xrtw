@@ -54,9 +54,10 @@
   margin-bottom: 10px;
   border-radius: 6px;
   margin-left: 10px;
+  padding: 5px;
 }
 .trainSlide:hover {
-  background-color: rgba(173, 191, 230, 0.183);
+  background-color: rgba(173, 191, 230, 0.208);
 }
 .traincity {
   width: 250px;
@@ -95,9 +96,10 @@
   margin-bottom: 10px;
   border-radius: 6px;
   margin-left: 10px;
+  padding: 5px;
 }
 .traintoSlide:hover {
-  background-color: rgba(173, 191, 230, 0.183);
+  background-color: rgba(173, 191, 230, 0.208);
 }
 
 
