@@ -21,7 +21,7 @@ export default function trains() {
   }
 
   const handleSubmit = async (data) => {
-    console.log(offerData)
+    // console.log(offerData)
     try {
       const response = await (await fetch(
         `https://academics.newtonschool.co/api/v1/bookingportals/offers?filter={"type":"${data}"}&limit=50`,
@@ -35,7 +35,7 @@ export default function trains() {
       )).json();
       setOfferData(response.data.offers)
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
   useEffect(() => {
@@ -130,7 +130,7 @@ export default function trains() {
               </div>))}
             </div>}
           </div>
-
+            
           <span className='swapTrain flexja' onClick={() => { handleSwap() }}>
               <TbArrowsExchange className='swapp' />
             </span>
@@ -180,7 +180,7 @@ export default function trains() {
 
           <div className='offers-card'>
             {offerData ? (offerData.map((item, index) =>
-            (<div className='cards-container'>
+            (<div key={index} className='cards-container'>
               <div className='card-img'>
                 <img src={item.newHeroUrl} alt="image" />
                 <p>T&C's Apply</p>

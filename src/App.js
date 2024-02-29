@@ -19,7 +19,6 @@ import BookingHotels from "./components/BookingPage/BookingHotels";
 import TrainSearch from "./components/Trains/TrainSearch";
 import BookingPageTrain from "./components/BookingPage/BookingPageTrain";
 import OffersCarousel from "./components/Flights/OffersCarousel";
-import Login from "./components/Auth/login";
 
 function App() {
   return (
@@ -37,8 +36,9 @@ function App() {
             <Route path="/cabs" element={<Cabs />} />
             <Route path="/offers" element={<OffersCarousel/>}></Route>
           </Route>
-          <Route path="/login" element={<Login/>}></Route>
           <Route path="/flights/results/flightBooking/:PaymentDetails" element={<PaymentDetails />}></Route>
+          <Route path="/hotels/results/hotelBooking/:PaymentDetails" element={<PaymentDetails />}></Route>
+          <Route path="/trains/results/trainBooking/:PaymentDetails" element={<PaymentDetails />}></Route>
           <Route path="/flights/results/:flightBooking" element={<BookingConfirmationPage />} />
           <Route path="/hotels/results/details/:hotelBooking" element={<BookingHotels/>} />
           <Route path="/flights/:results" element={<SearchFlights />} />

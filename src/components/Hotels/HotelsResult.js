@@ -7,6 +7,8 @@ import Calendar from 'react-calendar';
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 import { NavLink } from 'react-router-dom';
+import Login from '../Auth/login';
+import Register from '../Auth/register';
 
 export default function HotelsResult() {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -20,20 +22,24 @@ export default function HotelsResult() {
   const [inputSearch, setInputSearch] = useState('');
   const [dplocations, setdplocations] = useState(dplocation)
   let guest = searchParams.get("guest")
+  const [hotelGuest, setHotelGuest] = useState(guest);
+  let guestCount = searchParams.get("")
   let dayOfWeek = searchParams.get("date");
   let returnDate = searchParams.get("returndate");
   const dateObject = new Date(dayOfWeek);
   const [date, setDate] = useState(dateObject);
   let dateObjReturnDate = new Date(returnDate);
   const [dateReturn, setDateReturn] = useState(dateObjReturnDate);
+
   const [ratingfilter, setratingfilter] = useState({ "excellent": true, "verygood": true, "average": true });
   const [pricefilter, setpricefilter] = useState({ "0-1000": true, "1000-2000": true, "2000-4500": true, "4500-8000": true, "8000-11500": true, "11500-15000": true, "15000-30000": true, "30000++": true });
   const [sortings, setsortings] = useState("");
   const [guests, setguests] = useState({ "room": 1, "adults": 1, "children": 0 });
   const [guestspopcount, setguestspopcount] = useState({ "room": false, "adults": false, "children": false });
-  const [guestss, setguestss] = useState(guests["adults"] + guests["children"])
+  const [guestss, setguestss] = useState(guests["adults"] + guests["children"]);
   const [room, setroom] = useState(guests["room"]);
   const [cities, setcities] = useState();
+
   function guestscoutntpop(key) {
     setguestspopcount({})
     setguestspopcount((prev) => ({ ...prev, [key]: !guestspopcount[key] }))
@@ -96,7 +102,6 @@ export default function HotelsResult() {
     else {
       return value
     }
-
   }
 
   const hotelSearch = async () => {
@@ -158,9 +163,31 @@ export default function HotelsResult() {
     setCurrentPage(value);
   };
 
+  const [showSignIn, setShowSignIn] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(true);
+    const [token, setToken] = useState(localStorage.getItem("authToken"));
+
+    useEffect(() => {
+        if (token) {
+            setShowSignUp(false)
+        } else {
+            setShowSignUp(false)
+        }
+    }, [])
+
+    function handleUser() {
+        if (token) {
+            setShowSignIn(!showSignIn);
+        } else {
+            setShowSignUp(true);
+        }
+    }
+
 
   return (
     <div className='hotelsresult'>
+       <div className='hello'>{showSignUp && <Login token={token} setToken={setToken} showSignUp={showSignUp} setShowSignUp={setShowSignUp} />}</div>
+            <div>{showSignIn && <Register token={token} setToken={setToken} showSignIn={showSignIn} setShowSignIn={setShowSignIn} />}</div>
       <div className='navouter flexja'>
         <nav className='flexa flexjsb'>
           <div className='navinner flex'>
@@ -171,7 +198,9 @@ export default function HotelsResult() {
               <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
             </div>
           </div>
-          {/* <div className='navrightmenu'>Login</div> */}
+          <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
+            <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown />
+          </div>
         </nav>
       </div>
       <div className='bodyouter flexa flexc'>
@@ -342,10 +371,10 @@ export default function HotelsResult() {
                   </div>
                 </div>)))}
 
-
+{/* 
               <Stack spacing={2} justifyContent="center" alignItems="center" mt={3} padding={2} position={""}>
                 <Pagination count={10} onChange={onPageChange} />
-              </Stack>
+              </Stack> */}
 
             </div>
           </div>

@@ -145,7 +145,8 @@ a {
   margin-top: -9px;
 }
 .my-login p {
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
   text-align: center;
 }
 .popLogin {

@@ -44,15 +44,12 @@
   width: 100%;
 }
 .navList{
-  width: 30%;
+  width: 100%;
   height: 50px;
 }
-.imgSearchbar .activecolor{
-  flex-wrap: nowrap; 
-}
-.imgSearchbar{
-  margin-left: 60px;
-  gap: 30px;
+
+.navWrap{
+  margin-left: 600px;
 }
 .backgrounddd {
   position: relative;
@@ -62,6 +59,7 @@
 .navheader {
   top: 0;
   width: 100%;
+  
   height: 81.5px;
   position: fixed;
   background-color: #fff;
@@ -69,15 +67,6 @@
 }
 .navheader img {
   height: 35px;
-}
-.imggg{
-  margin-left: 60px;
-  margin-top: 12px;
-}
-.navheader ul {
-  width: 500px;
-  justify-content: space-around;
-  list-style-type: none;
 }
 .bg-gradiant {
   position: relative;

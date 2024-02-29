@@ -7,6 +7,9 @@ import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
 import { TbArrowsExchange } from "react-icons/tb";
 import { NavLink } from 'react-router-dom';
+import Login from '../Auth/login';
+import Register from '../Auth/register';
+import { IoIosArrowDown } from "react-icons/io";
 
 
 export default function SearchFlights() {
@@ -84,6 +87,10 @@ export default function SearchFlights() {
   const [cityfrom, setcityfrom] = useState({ "name": "", "iata_code": source });
   const [cityto, setcityto] = useState({ "name": "", "iata_code": destination });
   const [isButtonClicked, setISButtonClicked] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(true);
+  const [token, setToken] = useState(localStorage.getItem("authToken"));
+
   // const [boxdatasearchdeparture, setboxdatasearchdeparture] = useState({ "city": "Kolkata", "country": "India", "iata_code": "CCU", "name": "Netaji Subhas Chandra Bose International Airport" })
   // const [departureTo, setDepartureTo] = useState({ "city": "Delhi", "country": "India", "iata_code": "DEL", "name": "Indira Gandhi International Airport" })
 
@@ -215,22 +222,59 @@ export default function SearchFlights() {
     Search();
   }, [rangeprice, stopFromm, clickedSorted])
 
+
+
+  useEffect(() => {
+    if (token) {
+      setShowSignUp(false)
+    } else {
+      setShowSignUp(false)
+    }
+  }, [])
+
+  function handleUser() {
+    if (token) {
+      setShowSignIn(!showSignIn);
+    } else {
+      setShowSignUp(true);
+    }
+  }
+
+
+
+
   const navigate = useNavigate();
   function clickToBook(flightID, item) {
-    navigate(`/flights/results/flightBooking?flight_id=${flightID}&date=${dateObject}`)
+    if (token) {
+      navigate(`/flights/results/flightBooking?flight_id=${flightID}&date=${dateObject}`)
+    } else {
+      setShowSignUp(true);
+    }
+
   }
 
   return (
     <div className='flexa searchhhhhhhhhhh'>
-      <div className='navheader flexa'>
-        <div className='imggg flexa'><a href='/'><img src='/logo@2x.png' /></a></div>
-        <div className='navList '>
-          <div className='flex imgSearchbar'>
-            <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
-            <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
-            <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
+      <div className='hello'>{showSignUp && <Login token={token} setToken={setToken} showSignUp={showSignUp} setShowSignUp={setShowSignUp} />}</div>
+      <div>{showSignIn && <Register token={token} setToken={setToken} showSignIn={showSignIn} setShowSignIn={setShowSignIn} />}</div>
+      {showSignUp && <div className='popLogin'></div>}
+      <div className='navheader flexja'>
+        <nav className='flexa flexjsb'>
+          <div className='navinner flexja'>
+            <a href='/'><img className='logoimg cp' src='/logo@2x.png' /></a>
+            <div className='navleftmenu flex g20 cp'>
+              <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
+              <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
+              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
+
+            </div>
           </div>
-        </div>
+          <div className='my-login cp g10 navWrap' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
+
+            <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown />
+          </div>
+        </nav>
+        
       </div>
       <div className='backgrounddd'>
 

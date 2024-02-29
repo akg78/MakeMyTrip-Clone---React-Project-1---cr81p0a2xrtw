@@ -52,9 +52,10 @@ export default function BookingConfirmationPage() {
       }
     }
   }
+
   function gotopayment() {
     if (details["fname"] && details["lname"] && details["mobile"] && details["email"] && details["pincode"] && details["state"] && details["address"]) {
-      navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa[0].price + ((dataa[0].price * 12) / 100))}`);
+      navigate(`/hotels/results/hotelBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa[0].price + ((dataa[0].price * 12) / 100))}`);
     }
     else {
       alert("fill the form first");
@@ -186,7 +187,7 @@ export default function BookingConfirmationPage() {
                   <div className='pinCodeInput flex g20'>
                     <div className='flexc'>
                       <label htmlFor=''>Pincode</label>
-                      <input onChange={(e) => { detailsChanger("pincode", e.target.value); console.log(details) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' required />
+                      <input onChange={(e) => { detailsChanger("pincode", e.target.value) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' required />
                     </div>
                     <div className='flexc'>
                       <label htmlFor=''>State</label>

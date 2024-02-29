@@ -44,13 +44,13 @@ export default function HotelsDetails() {
     const [showSignUp, setShowSignUp] = useState(true);
     const [token, setToken] = useState(localStorage.getItem("authToken"));
 
-    // useEffect(() => {
-    //     if (token) {
-    //         setShowSignUp(false)
-    //     } else {
-    //         setShowSignUp(true)
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (token) {
+            setShowSignUp(false)
+        } else {
+            setShowSignUp(false)
+        }
+    }, [])
 
     function handleUser() {
         if (token) {
@@ -64,11 +64,11 @@ export default function HotelsDetails() {
 
     const navigate = useNavigate();
     function navigatetoform(val) {
-        if(token){
+        if (token) {
             navigate(`/hotels/results/details/hotelBooking?hotel_id=${hotel_id}&number=${val}&date=${dateObject}&returndate=${dateReturn}&room=${guests["room"]}&guestss${guests["adults"] + guests["children"]}&name=${dataa.name}`)
-        }else{
+        } else {
             setShowSignUp(true);
-        }   
+        }
     }
 
     function prevNavigation() {
@@ -173,7 +173,9 @@ export default function HotelsDetails() {
                                     <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
                                 </div>
                             </div>
-                            <div className='navrightmenu'>Login</div>
+                            <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
+                                <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown />
+                            </div>
                         </nav>
                     </div>
                     <div className='bodyouter flexa flexc'>

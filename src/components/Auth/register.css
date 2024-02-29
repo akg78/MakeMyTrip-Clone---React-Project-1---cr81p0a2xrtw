@@ -13,6 +13,7 @@ button{
     top: 40px;
     border-radius: 6px;
     width: 80px;
+    z-index: 1000;
     height: 30px;
     padding: 28px;
     background-color: #fffffff5;

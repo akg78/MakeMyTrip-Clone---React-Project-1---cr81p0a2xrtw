@@ -10,16 +10,12 @@ export default function Navigation() {
     const [showSignUp, setShowSignUp] = useState(true);
     const [token, setToken] = useState(localStorage.getItem("authToken"));
     const [activenav, setactivenav] = useState({ "flights": true });
-    const [showBgImg, SetShowBgImg] = useState(true);
 
     function activenavmaker(key) {
         setactivenav({});
         setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
     }
 
-    const handleBgimg = () => {
-        SetShowBgImg(false);
-    };
 
 
     useEffect(() => {
@@ -27,6 +23,7 @@ export default function Navigation() {
             setShowSignUp(false)
         } else {
             setShowSignUp(true)
+
         }
     }, [])
 
@@ -57,9 +54,10 @@ export default function Navigation() {
                                 <br />
                                 <p className='p2'> Manage your bookings</p>
                             </div>
-                            <div className='my-login cp' onClick={() => { handleUser(), handleBgimg() }} style={{ backgroundImage: showBgImg ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none" }}>
+                            <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none" }}>
 
-                                <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown />
+                                <p>{token ? "Hi Traveller" : "Login or Create Account"} </p>
+                                 <p> <IoIosArrowDown /></p>
                             </div>
                         </div>
 

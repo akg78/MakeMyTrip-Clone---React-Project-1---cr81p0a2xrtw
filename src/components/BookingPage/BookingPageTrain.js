@@ -55,7 +55,7 @@ export default function BookingPageTrain() {
   }
   function gotopayment() {
     if (details["fname"] && details["lname"] && details["mobile"] && details["email"] && details["pincode"] && details["state"] && details["address"]) {
-      // navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
+      navigate(`/trains/results/trainBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(faree + ((faree * 12) / 100))}`);
     }
     else {
       alert("fill the form first");
@@ -98,7 +98,6 @@ export default function BookingPageTrain() {
             <div className='bookingCard flex'>
               <div className='bookingcardLeft'>
                 <div className='bookingcontainerL fullWrapDetails'>
-                  {/* <div></div> */}
                   <div className='flex wrapInfoTrain'>
                     <div className='flexc'>
                       <h3>{trainNamee}</h3>
@@ -106,7 +105,7 @@ export default function BookingPageTrain() {
                     </div>
                     <div className='flexc g10'>
                       <p>{departureTimee}</p>
-                      <h4>{travelDurationn}</h4>
+                      <h4>{travelDurationn} Junction</h4>
                     </div>
                     <div className=''>{sourcee}</div>
                     <div className='flexc g10'>
@@ -173,7 +172,7 @@ export default function BookingPageTrain() {
                   <div className='pinCodeInput flex g20'>
                     <div className='flexc'>
                       <label htmlFor=''>Pincode</label>
-                      <input onChange={(e) => { detailsChanger("pincode", e.target.value); console.log(details) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' required />
+                      <input onChange={(e) => { detailsChanger("pincode", e.target.value) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' required />
                     </div>
                     <div className='flexc'>
                       <label htmlFor=''>State</label>
@@ -193,15 +192,15 @@ export default function BookingPageTrain() {
                   <h3>Fare Summary</h3>
                   <div className='flex baseFare'>
                     <h5>Base Fare</h5>
-                    {/* <p>₹ {dataa.ticketPrice}</p> */}
+                    <p>₹ {faree}</p>
                   </div>
                   <div className='flex taxSurcharge'>
                     <h5>Extra Charges</h5>
-                    {/* <p>₹ {(dataa.ticketPrice * 12) / 100}</p> */}
+                    <p>₹ {(faree * 12) / 100}</p>
                   </div>
                   <div className='flex totalA '>
                     <h4>Total Amount</h4>
-                    {/* <h4>₹ {(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}</h4> */}
+                    <h4>₹ {(faree + ((faree * 12) / 100))}</h4>
                   </div>
                 </div>
                 <div className='clickToPay flexj'>
