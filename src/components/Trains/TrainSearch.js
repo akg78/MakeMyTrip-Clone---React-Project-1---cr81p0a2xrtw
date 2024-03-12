@@ -101,7 +101,7 @@ export default function TrainSearch() {
         }
     }
 
-    const trainMap = useMemo(async () => {
+    const trainMap = async () => {
         try {
             const response = await (await fetch(
                 `https://academics.newtonschool.co/api/v1/bookingportals/train?search={"source":"${trainName}","destination":"${trainNameTo}"}&day=Mon&filter={"fare":{"$lte":${rangeprice}}} `,
@@ -119,11 +119,11 @@ export default function TrainSearch() {
         } catch (error) {
             // alert(error)
         }
-    }, [sortcard, rangeprice])
+    }
 
     useEffect(() => {
-        trainMap;
-    }, []);
+        trainMap();
+    }, [sortcard, rangeprice]);
 
 
     const handleSwap = () => {
@@ -144,7 +144,7 @@ export default function TrainSearch() {
     }
 
     function selfNavigate() {
-        trainMap;
+        trainMap();
         navigate(`/trains/results?source=${trainFrom}&destination=${trainTo}&date=${date}}`);
     }
 
@@ -257,14 +257,14 @@ export default function TrainSearch() {
                                     size="large"
                                     value={rangeprice}
                                     aria-label="Small"
-                                    min={1000}
+                                    min={100}
                                     max={3000}
                                     valueLabelDisplay="auto"
                                     onChange={(e) => { setrangeprice(e.target.value) }}
                                 />
                             </Box>
                             <div className='flexr flex wayPrice '>
-                                <p>₹1,000</p>
+                                <p>₹100</p>
                                 <p>₹3,000</p>
                             </div>
                         </div>

@@ -297,3 +297,14 @@ outline: none;
   gap: 50px;
   padding: 10px;
 }
+
+#stateSelect{
+  width: 100%;
+  border: 1px solid rgba(155, 155, 155, 0.5);
+  height: 40px;
+  padding: 5px;
+  margin-top: 4px;
+  border-radius: 3px;
+  color: rgb(74, 74, 74);
+  outline: 0px;
+}

@@ -34,8 +34,65 @@ export default function BookingConfirmationPage() {
   const [guestss, setguestss] = useState(guests["adults"] + guests["children"]);
   const [room, setroom] = useState(guests["room"]);
   const [hotels, setHotels] = useState([]);
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [pincodeError, setPincodeError] = useState('');
 
 
+  const stateNames = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh",
+    "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha",
+    "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
+    "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Delhi",
+    "Puducherry", "Ladakh"
+  ];
+
+
+  const handleStateChanger = (e) => {
+    setdetails(e.target.value);
+  }
+
+  const handlePincodeChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 6 && /^\d+$/.test(value)) {
+      setdetails(value);
+      setPincodeError('');
+    } else {
+      setPincodeError('Please enter a valid 6-digit pincode.');
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
+      if (!/\d/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  };
+
+  const validateEmail = () => {
+    const re = /\S+@\S+\.\S+/;
+    if (!re.test(details["email"])) {
+      setEmailError('Invalid email address');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const validatePhone = (event) => {
+    // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
+    const { value } = event.target;
+    if (value.length != 10) {
+      setPhoneError('Invalid phone number');
+    } else {
+      setPhoneError('');
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '');
+    setdetails(value);
+  }
 
   function detailsChanger(key, value) {
     setdetails((prev) => ({ ...prev, [key]: value }))
@@ -54,18 +111,18 @@ export default function BookingConfirmationPage() {
   }
 
   function gotopayment() {
-    if (details["fname"] && details["lname"] && details["mobile"] && details["email"] && details["pincode"] && details["state"] && details["address"]) {
+    if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["pincode"] != "" && details["state"] != "" && details["address"] != "") {
       navigate(`/hotels/results/hotelBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa[0].price + ((dataa[0].price * 12) / 100))}`);
     }
     else {
       alert("fill the form first");
     }
   }
-  function increasearrsize() {
-    const variable = [...arr];
-    variable.push(variable[variable.length - 1] + 1)
-    setarr(variable)
-  }
+  // function increasearrsize() {
+  //   const variable = [...arr];
+  //   variable.push(variable[variable.length - 1] + 1)
+  //   setarr(variable)
+  // }
 
 
   function activenavmaker(key) {
@@ -149,7 +206,7 @@ export default function BookingConfirmationPage() {
                   <div className='travellerssDetails '>
                     <h3>Traveller Details</h3>
                     <div className='idText'><strong>Important:</strong> Enter name as mentioned on your password or Government approved IDs.</div>
-                    <button onClick={() => increasearrsize()}>Add Traveller</button>
+                    {/* <button onClick={() => increasearrsize()}>Add Traveller</button> */}
                     {arr.map(item => (<div className='mapForm'>
                       <div className='adult1'>Adult {item}</div>
                       <div className='travellerssDetailsInput flexc'>
@@ -170,28 +227,36 @@ export default function BookingConfirmationPage() {
                         <div className='flex wrapNameDetails'>
                           <div className='flexc'>
                             <label htmlFor='mobile_number'>Mobile No</label>
-                            <input type='tel' id='mobile_number' onChange={(e) => { detailsChanger("mobile", e.target.value) }} value={details["mobile"]} placeholder='Enter 10 Digits*' required />
+                            <input type='tel' id='mobile_number' onChange={(e) => { handlePhoneChange(e), validatePhone(e) }} value={details["mobile"]} onKeyDown={handleKeyDown} placeholder='Enter 10 Digits*' required />
+                            {phoneError && <span style={{ color: 'red' }}>{phoneError}</span>}
                           </div>
                           <div className='flexc'>
                             <label htmlFor='email'>Email</label>
-                            <input type='email' id='email' onChange={(e) => { detailsChanger("email", e.target.value) }} value={details["email"]} placeholder='Enter Email*' required />
+                            <input type='email' id='email' onChange={(e) => { detailsChanger("email", e.target.value), validateEmail() }} value={details["email"]} placeholder='Enter Email*' required />
+                            {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
                           </div>
                         </div>
                       </div>
                     </div>))}
                   </div>
                 </div>
-                
+
                 <div className='PinCodeAndState'>
                   <h3>Your Pincode and State</h3>
                   <div className='pinCodeInput flex g20'>
                     <div className='flexc'>
                       <label htmlFor=''>Pincode</label>
-                      <input onChange={(e) => { detailsChanger("pincode", e.target.value) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' required />
+                      <input onChange={handlePincodeChange} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
+                      {pincodeError && <div style={{ color: 'red' }}>{pincodeError}</div>}
                     </div>
                     <div className='flexc'>
-                      <label htmlFor=''>State</label>
-                      <input onChange={(e) => { detailsChanger("state", e.target.value) }} value={details["state"]} type='state' placeholder='Enter your State*' required />
+                      <label htmlFor="stateSelect">Select State</label>
+                      <select id="stateSelect" value={details["state"]} onChange={handleStateChanger}>
+                        <option value="">Select a state</option>
+                        {stateNames.map((state, index) => (
+                          <option key={index} value={state}>{state}</option>
+                        ))}
+                      </select>
                     </div>
                     <div className='flexc'>
                       <label htmlFor=''>Address</label>

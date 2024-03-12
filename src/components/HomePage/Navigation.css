@@ -151,15 +151,15 @@ a {
 }
 .popLogin {
   position: absolute;
+  top: 0;
   height: 100%;
   width: 100%;
   z-index: 10000 !important;
-  background-color: rgba(20, 16, 16, 0.484);
+  background-color: rgba(13, 12, 12, 0.484);
   color: black;
-  right: 0;
 }
 .hello {
-  position: absolute;
+  position: fixed;
   left: 200px;
   top: 90px;
   z-index: 100000;

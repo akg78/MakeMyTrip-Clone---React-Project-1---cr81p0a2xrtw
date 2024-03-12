@@ -16,14 +16,70 @@ export default function BookingConfirmationPage() {
   const [genderselector, setgenderselector] = useState(true);
   const [details, setdetails] = useState({ "fname": "", "lname": "", "mobile": "", "email": "", "state": "", "pincode": "", "address": "" });
   const [proceedcolor, setproceedcolor] = useState(false);
-  const [mobileNumber, setMobileNumber] = useState('');
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [pincodeError, setPincodeError] = useState('');
 
 
-  const handleChange = (e) => {
-    const { value } = e.target;
 
-    const removeChar = value.replace(/\D/g, '');
-    setMobileNumber(removeChar);
+  const validateEmail = () => {
+    const re = /\S+@\S+\.\S+/;
+    if (!re.test(details["email"])) {
+      setEmailError('Invalid email address');
+    } else {
+      setEmailError('');
+    }
+  };
+
+
+  const validatePhone = (event) => {
+    // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
+    const { value } = event.target;
+    if (value.length !=10) {
+      setPhoneError('Invalid phone number');
+    } else {
+      setPhoneError('');
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '');
+    setdetails(value);
+  }
+
+  const handleKeyDown = (e) => {
+    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
+      if (!/\d/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   validateEmail();
+  //   validatePhone();
+
+  //   if (!emailError && !phoneError) {
+  //     console.log('Form submitted successfully!');
+  //   }
+  // }
+
+
+
+  const handlePincodeChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 6 && /^\d+$/.test(value)) {
+      setdetails(value);
+      setPincodeError('');
+    } else {
+      setPincodeError('Please enter a valid 6-digit pincode.');
+    }
+  };
+
+
+  const handleStateChanger = (e) => {
+    setdetails(e.target.value);
   }
 
   function detailsChanger(key, value) {
@@ -31,36 +87,52 @@ export default function BookingConfirmationPage() {
 
   }
   function target() {
+    // validateEmail();
+    // validatePhone();
     if (submitbtnref.current) {
       if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
         window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
         setproceedcolor(true);
+
       }
       else {
         alert("fill all the required fields to proceed");
+
       }
     }
   }
   function gotopayment() {
-    if (details["fname"] && details["lname"] && details["mobile"] && details["email"] && details["pincode"] && details["state"] && details["address"]) {
-      navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
+    if (details["fname"] != "" || details["lname"] != "" || details["mobile"] != "" || details["email"] != "" || details["state"] != "" || details["pincode"] != "" || details["address"] != "") {
+      alert("fill the form first");
+      console.log(details["fname"]);
     }
     else {
-      alert("fill the form first");
+      navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
     }
   }
-  function increasearrsize() {
-    const variable = [...arr];
-    variable.push(variable[variable.length - 1] + 1)
-    setarr(variable)
-  }
+  // function increasearrsize() {
+  //   const variable = [...arr];
+  //   variable.push(variable[variable.length - 1] + 1)
+  //   setarr(variable)
+  // }
   const objdropdowncity = [{ name: "BLR", fname: "Bangalore", lname: "- Kempegowda International Airport (BLR)" },
   { name: "BOM", fname: "Mumbai", lname: "- Chatrapati Shivaji Airport (BOM)" },
-  { name: "DEL", fname: "New Delhi", lname: "- Indira Gandhi Airport (DEL)" },
+  { name: "DEL", fname: "Delhi", lname: "- Indira Gandhi Airport (DEL)" },
   { name: "CCU", fname: "Kolkata", lname: "- Netaji Subhas Chandra Bose Airport (CCU)" },
   { name: "GOI", fname: "Goa", lname: "- Dabolim Airport (GOI)" },
   { name: "HYD", fname: "Hyderabad", lname: "- Rajiv Gandhi International (HYD)" },
-  { name: "MAA", fname: "Chennai", lname: "- Chennai Airport (MAA)" },];
+  { name: "MAA", fname: "Chennai", lname: "- Chennai Airport (MAA)" },
+  { name: "AMD", fname: "Ahmedabad", lname: "- Sardar Vallabhbhai Patel International Airport" },
+  { name: "PNQ", fname: "Pune", lname: "- Pune Airport" },
+  { name: "GAU", fname: "Guwahati", lname: "- Lokpriya Gopinath Bordoloi International Airport" },
+  { name: "JAI", fname: "Jaipur", lname: "- Jaipur International Airport" },
+  { name: "NAG", fname: "Nagpur", lname: "- Dr. Babasaheb Ambedkar International Airport" },
+  { name: "COK", fname: "Kochi", lname: "- Cochin International Airport" },
+  { name: "IXC", fname: "Chandigarh", lname: "- Chandigarh International Airport" },
+  { name: "LKO", fname: "Lucknow", lname: "- Lucknow International Airport" },
+  { name: "ATQ", fname: "Amritsar", lname: "- Amritsar International Airport " }];
+
+
 
   function logofinder(item) {
     if ((item.flightID[0] + item.flightID[1]) == "6E") { return logoflights[0]; }
@@ -87,6 +159,45 @@ export default function BookingConfirmationPage() {
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/AI.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/QP.svg",
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/S5.svg"
   ])
+
+  const stateNames = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Lakshadweep",
+    "Delhi",
+    "Puducherry",
+    "Ladakh"
+  ];
+
 
   const [dataa, setdataa] = useState();
   const [activenav, setactivenav] = useState({ "flights": true });
@@ -174,7 +285,7 @@ export default function BookingConfirmationPage() {
                   <div className='travellerssDetails '>
                     <h3>Traveller Details</h3>
                     <div className='idText'><strong>Important:</strong> Enter name as mentioned on your password or Government approved IDs.</div>
-                    <button onClick={() => increasearrsize()}>Add Traveller</button>
+                    {/* <button onClick={() => increasearrsize()}>Add Traveller</button> */}
                     {arr.map(item => (<div className='mapForm'>
                       <div className='adult1'>Adult {item}</div>
                       <div className='travellerssDetailsInput flexc'>
@@ -195,11 +306,13 @@ export default function BookingConfirmationPage() {
                         <div className='flex wrapNameDetails'>
                           <div className='flexc'>
                             <label htmlFor='mobile_number'>Mobile No</label>
-                            <input type='tel' id='mobile_number' onChange={(e) => { detailsChanger("mobile", e.target.value) }} value={details["mobile"]} placeholder='Enter 10 Digits*' required />
+                            <input type='tel' id='mobile_number' onChange={(e) => {handlePhoneChange(e), validatePhone(e)}} value={details["mobile"]} onKeyDown={handleKeyDown} placeholder='Enter 10 Digits*' required />
+                            {phoneError && <span style={{ color: 'red' }}>{phoneError}</span>}
                           </div>
                           <div className='flexc'>
                             <label htmlFor='email'>Email</label>
-                            <input type='email' id='email' onChange={(e) => { detailsChanger("email", e.target.value) }} value={details["email"]} placeholder='Enter Email*' required />
+                            <input type='email' id='email' onChange={(e) => { detailsChanger("email", e.target.value), validateEmail() }} value={details["email"]} placeholder='Enter Email*' required />
+                            {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
                           </div>
                         </div>
                       </div>
@@ -211,12 +324,24 @@ export default function BookingConfirmationPage() {
                   <div className='pinCodeInput flex g20'>
                     <div className='flexc'>
                       <label htmlFor=''>Pincode</label>
-                      <input onChange={(e) => { detailsChanger("pincode", e.target.value); console.log(details) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' required />
+                      <input onChange={handlePincodeChange} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
+                      {pincodeError && <div style={{ color: 'red' }}>{pincodeError}</div>}
                     </div>
                     <div className='flexc'>
-                      <label htmlFor=''>State</label>
-                      <input onChange={(e) => { detailsChanger("state", e.target.value) }} value={details["state"]} type='state' placeholder='Enter your State*' required />
+                      <label htmlFor="stateSelect">Select State</label>
+                      <select id="stateSelect" value={details["state"]} onChange={handleStateChanger}>
+                        <option value="">Select a state</option>
+                        {stateNames.map((state, index) => (
+                          <option key={index} value={state}>{state}</option>
+                        ))}
+                      </select>
                     </div>
+                    {/* <p>Selected State: {details["state"]}</p> */}
+
+
+                    {/* <label htmlFor=''>State</label>
+                      <input onChange={(e) => { detailsChanger("state", e.target.value) }} value={details["state"]} type='state' placeholder='Enter your State*' required />
+                    */}
                     <div className='flexc'>
                       <label htmlFor=''>Address</label>
                       <input onChange={(e) => { detailsChanger("address", e.target.value) }} value={details["address"]} type='Address' placeholder='Enter your Adress*' required />

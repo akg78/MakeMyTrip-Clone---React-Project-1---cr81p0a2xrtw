@@ -17,11 +17,21 @@ export default function SearchFlights() {
   const objdropdowncity = [{ name: "AMD", fname: "Ahmedabad" },
   { name: "BLR", fname: "Bangalore" },
   { name: "BOM", fname: "Mumbai" },
-  { name: "DEL", fname: "New Delhi" },
+  { name: "DEL", fname: "Delhi" },
   { name: "CCU", fname: "Kolkata" },
   { name: "GOI", fname: "Goa" },
   { name: "HYD", fname: "Hyderabad" },
-  { name: "MAA", fname: "Chennai" }];
+  { name: "MAA", fname: "Chennai" },
+  {name: "AMD",  fname: "Ahmedabad"},
+  {name: "PNQ", fname: "Pune"},
+  {name: "GAU", fname: "Guwahati"},
+  {name: "JAI", fname: "Jaipur"},
+  {name: "NAG", fname: "Nagpur"},
+  {name: "COK", fname: "Kochi"},
+  {name: "IXC", fname: "Chandigarh"},
+  {name: "LKO", fname: "Lucknow"},
+  {name: "ATQ", fname: "Amritsar"}];
+  
 
   const [logoflights, setlogoflights] = useState([
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/6E.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/SG.svg",
@@ -84,8 +94,8 @@ export default function SearchFlights() {
   const [adultselect, setadultselect] = useState(`adultarget${adult}`)
   const [childselect, setachildselect] = useState(`childtarget${child}`)
   const [infantselect, setinfantselect] = useState(`infanttarget${infant}`)
-  const [cityfrom, setcityfrom] = useState({ "name": "", "iata_code": source });
-  const [cityto, setcityto] = useState({ "name": "", "iata_code": destination });
+  const [cityfrom, setcityfrom] = useState();
+  const [cityto, setcityto] = useState();
   const [isButtonClicked, setISButtonClicked] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(true);
@@ -94,166 +104,164 @@ export default function SearchFlights() {
   // const [boxdatasearchdeparture, setboxdatasearchdeparture] = useState({ "city": "Kolkata", "country": "India", "iata_code": "CCU", "name": "Netaji Subhas Chandra Bose International Airport" })
   // const [departureTo, setDepartureTo] = useState({ "city": "Delhi", "country": "India", "iata_code": "DEL", "name": "Indira Gandhi International Airport" })
 
-
   useEffect(() => {
-    setcityfrom({ "name": "Kolkata" });
-    setcityto({ "name": "Delhi" })
-  }, [])
+    const selectCityFrom = objdropdowncity.find(item => item.name === location.state.srcfrom);
+    const selectCityTo = objdropdowncity.find(item => item.name === location.state.srcto);
+    setcityfrom({ "name": selectCityFrom.fname, "iata_code": source });
+    setcityto({ "name": selectCityTo.fname, "iata_code": destination });
+    // console.log("abc",selectCityFrom,selectCityTo)
+  }, [])
 
 
-  function adultvaluechanger(item) {
-    setadultselect(`adultarget${item}`)
+function adultvaluechanger(item) {
+  setadultselect(`adultarget${item}`)
 
+}
+function childvaluechanger(item) {
+  setachildselect(`childtarget${item}`)
+}
+function infantvaluechanger(item) {
+  setinfantselect(`infanttarget${item}`)
+}
+
+
+const handleClick = () => {
+  setISButtonClicked(true);
+}
+
+function fromCityChanger(city, iata_code) {
+  setcityfrom((prev) => ({ ...prev, "name": city }))
+  setcityfrom((prev) => ({ ...prev, "iata_code": iata_code }))
+}
+function toCityChanger(city, iata_code) {
+  setcityto((prev) => ({ ...prev, "name": city }))
+  setcityto((prev) => ({ ...prev, "iata_code": iata_code }))
+}
+
+const cabinBaggage = "7 kg";
+const checkInBaggage = "20 kg";
+
+function openView(key) {
+  setsizeincreaser({})
+  setsizeincreaser((prev) => ({ ...prev, [key]: !sizeincreaser[key] }))
+}
+function handleSubmitSorted(key) {
+  setClickedSorted({});
+  setClickedSorted((prev) => ({ ...prev, [key]: true }))
+}
+
+
+function navigatetonextpage() {
+  if (cityfrom.name != cityto.name)
+    navigate(`/flights/results?source=${cityfrom.iata_code}&destination=${cityto.iata_code}&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`)
+}
+
+
+
+async function Search() {
+  const endpoint = `https://academics.newtonschool.co/api/v1/bookingportals/airport?search={"city": "${inputSearchh}"}`;
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        projectID: "cr81p0a2xrtw",
+      },
+    })
+    const res = await response.json();
+    setdataaa(res.data.airports)
+    console.log(res);
+  } catch (error) {
+    console.error('Error fetching flight', error);
   }
-  function childvaluechanger(item) {
-    setachildselect(`childtarget${item}`)
+}
+
+
+function airlineSelector(key) {
+  setTimeout(() => {
+    setfilter((prev) => ({ ...prev, [key]: !filter[key] }));
+  }, 10);
+}
+
+const [activenav, setactivenav] = useState({ "flights": true });
+function activenavmaker(key) {
+  setactivenav({});
+  setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
+}
+
+
+function popUp(key) {
+  setPopDetails({});
+  setPopDetails((prev) => ({ ...prev, [key]: !popDetails[key] }));
+}
+
+
+function sorting(value) {
+  if (clickedSorted["cheapest"]) {
+    return value.sort((a, b) => a.ticketPrice - b.ticketPrice);
   }
-  function infantvaluechanger(item) {
-    setinfantselect(`infanttarget${item}`)
+  else if (clickedSorted["nonStop"]) {
+    return value.sort((a, b) => a.stops - b.stops);
   }
-
-
-  const handleClick = () => {
-    setISButtonClicked(true);
+  else if (clickedSorted["prefer"]) {
+    return value;
   }
+}
 
-  function fromCityChanger(city, iata_code) {
-    setcityfrom((prev) => ({ ...prev, "name": city }))
-    setcityfrom((prev) => ({ ...prev, "iata_code": iata_code }))
-  }
-  function toCityChanger(city, iata_code) {
-    setcityto((prev) => ({ ...prev, "name": city }))
-    setcityto((prev) => ({ ...prev, "iata_code": iata_code }))
-  }
-
-  const cabinBaggage = "7 kg";
-  const checkInBaggage = "20 kg";
-
-  function openView(key) {
-    setsizeincreaser({})
-    setsizeincreaser((prev) => ({ ...prev, [key]: !sizeincreaser[key] }))
-  }
-  function handleSubmitSorted(key) {
-    setClickedSorted({});
-    setClickedSorted((prev) => ({ ...prev, [key]: true }))
-  }
-
-
-  function navigatetonextpage() {
-    if (cityfrom.name != cityto.name)
-      navigate(`/flights/results?source="${cityfrom["iata_code"]}"&destination="${cityto["iata_code"]}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`)
-  }
-
-
-
-  async function Search() {
-    const endpoint = `https://academics.newtonschool.co/api/v1/bookingportals/airport?search={"city": "${inputSearchh}"}`;
-
-    try {
-      const response = await fetch(endpoint, {
+async function fetchData() {
+  try {
+    const res = await (await fetch(`https://academics.newtonschool.co/api/v1/bookingportals/flight?search={"source":${source},"destination":${destination}}&day=${days[dateObject.getDay()]}&filter={"ticketPrice":{"$lte":${rangeprice}}${stopFromm != "" ? `,"stops":${stopFromm}` : ""}}`,
+      {
         method: 'GET',
         headers: {
           projectID: "cr81p0a2xrtw",
         },
-      })
-      const res = await response.json();
-      setdataaa(res.data.airports)
-      console.log(res);
-    } catch (error) {
-      console.error('Error fetching flight', error);
-    }
+      })).json();
+    setFlightData(sorting(res.data.flights))
+
+  } catch (error) {
+    console.error('Error fetching flight', error);
+  }
+}
+
+useEffect(() => {
+  fetchData();
+  Search();
+}, [rangeprice, stopFromm, clickedSorted])
+
+
+
+useEffect(() => {
+  if (token) {
+    setShowSignUp(false)
+  } else {
+    setShowSignUp(false)
+  }
+}, [])
+
+function handleUser() {
+  if (token) {
+    setShowSignIn(!showSignIn);
+  } else {
+    setShowSignUp(true);
+  }
+}
+
+
+
+
+const navigate = useNavigate();
+function clickToBook(flightID, item) {
+  if (token) {
+    navigate(`/flights/results/flightBooking?flight_id=${flightID}&date=${dateObject}`)
+  } else {
+    setShowSignUp(true);
   }
 
+}
 
-  function airlineSelector(key) {
-    setTimeout(() => {
-      setfilter((prev) => ({ ...prev, [key]: !filter[key] }));
-    }, 10);
-  }
-
-  const [activenav, setactivenav] = useState({ "flights": true });
-  function activenavmaker(key) {
-    setactivenav({});
-    setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))
-  }
-
-
-  function popUp(key) {
-    setPopDetails({});
-    setPopDetails((prev) => ({ ...prev, [key]: !popDetails[key] }));
-  }
-
-
-
-
-  function sorting(value) {
-    if (clickedSorted["cheapest"]) {
-      return value.sort((a, b) => a.ticketPrice - b.ticketPrice);
-    }
-    else if (clickedSorted["nonStop"]) {
-      return value.sort((a, b) => a.stops - b.stops);
-    }
-    else if (clickedSorted["prefer"]) {
-      return value;
-    }
-  }
-
-  async function fetchData() {
-    try {
-      const res = await (await fetch(`https://academics.newtonschool.co/api/v1/bookingportals/flight?search={"source":${source},"destination":${destination}}&day=${days[dateObject.getDay()]}&filter={"ticketPrice":{"$lte":${rangeprice}}${stopFromm != "" ? `,"stops":${stopFromm}` : ""}}`,
-        {
-          method: 'GET',
-          headers: {
-            projectID: "cr81p0a2xrtw",
-          },
-        })).json();
-      setFlightData(sorting(res.data.flights))
-
-    } catch (error) {
-      console.error('Error fetching flight', error);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, [])
-  useEffect(() => {
-    fetchData();
-    Search();
-  }, [rangeprice, stopFromm, clickedSorted])
-
-
-
-  useEffect(() => {
-    if (token) {
-      setShowSignUp(false)
-    } else {
-      setShowSignUp(false)
-    }
-  }, [])
-
-  function handleUser() {
-    if (token) {
-      setShowSignIn(!showSignIn);
-    } else {
-      setShowSignUp(true);
-    }
-  }
-
-
-
-
-  const navigate = useNavigate();
-  function clickToBook(flightID, item) {
-    if (token) {
-      navigate(`/flights/results/flightBooking?flight_id=${flightID}&date=${dateObject}`)
-    } else {
-      setShowSignUp(true);
-    }
-
-  }
-
-  return (
+return (
+  <>{cityfrom && cityto &&
     <div className='flexa searchhhhhhhhhhh'>
       <div className='hello'>{showSignUp && <Login token={token} setToken={setToken} showSignUp={showSignUp} setShowSignUp={setShowSignUp} />}</div>
       <div>{showSignIn && <Register token={token} setToken={setToken} showSignIn={showSignIn} setShowSignIn={setShowSignIn} />}</div>
@@ -274,7 +282,7 @@ export default function SearchFlights() {
             <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown />
           </div>
         </nav>
-        
+
       </div>
       <div className='backgrounddd'>
 
@@ -310,7 +318,7 @@ export default function SearchFlights() {
             <div className='flexc wrapChildContainer g5' onClick={() => { popUp("departSearch") }}>
               {popDetails["departSearch"] && <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
               <div>DEPART</div>
-              <div className='flexa flex g10 dateFlightsDetails'><h4 className='flex'>{date.getDate()}</h4>{months[date.getMonth()]}'{date.getDate()} <p className='flex'>{daysOfWeek[date.getDay()]}</p></div>
+              <div className='flexa flex g10 dateFlightsDetails'><h4 className='flex'>{date.getDate()}</h4>{months[date.getMonth()]}'{date.getFullYear()} <p className='flex'>{daysOfWeek[date.getDay()]}</p></div>
 
 
             </div>
@@ -385,24 +393,24 @@ export default function SearchFlights() {
               <div className="filterstypeairline">
                 <label className='flexa labelFlights' onClick={() => { airlineSelector("6E") }}>
                   <div className='flex'><input type='checkbox' checked={filter["6E"]} /> <p className='airlineSpace'>IndiGo</p></div>
-                  <div>₹ 11,197</div>
+                  <div>₹ 2,500</div>
                 </label>
                 <label className='flexa labelFlights' onClick={() => { airlineSelector("AI") }}>
                   <div className='flex'><input type='checkbox' checked={filter["AI"]} /> <p className='airlineSpace'>Air India</p></div>
-                  <div>₹ 9,247</div>
+                  <div>₹ 2,300</div>
                 </label>
                 <label className='flexa labelFlights' onClick={() => { airlineSelector("UK") }}>
                   <div className='flex'><input type='checkbox' checked={filter["UK"]} /> <p className='airlineSpace'>Vistara</p></div>
-                  <div>₹ 23,745</div>
+                  <div>₹ 2,250</div>
                 </label>
                 <label className='flexa labelFlights' onClick={() => { airlineSelector("SG") }}>
                   <div className='flex'><input type='checkbox' checked={filter["SG"]} /> <p className='airlineSpace'>SpiceJet</p></div>
-                  <div>₹ 36,209</div>
+                  <div>₹ 2,480</div>
                 </label>
-                <label className='flexa labelFlights' onClick={() => { airlineSelector("I5") }}>
+                {/* <label className='flexa labelFlights' onClick={() => { airlineSelector("I5") }}>
                   <div className='flex'><input type='checkbox' checked={filter["I5"]} /> <p className='airlineSpace'>Air India Express</p></div>
                   <div>₹ 12,577</div>
-                </label>
+                </label> */}
               </div>
             </div>
           </div>
@@ -507,15 +515,13 @@ export default function SearchFlights() {
                     </div>
                   </div>
                   <button className='bookNowbtn flexja cp' onClick={() => clickToBook(item._id, item)}>Book Now</button>
-
                 </div>
 
-                <div className='showMoreDiv' onClick={() => { }}>
+                <div className='showMoreDiv'>
                   {viewMorePop["openpop"] && index === popUpIndex && (<div className='showPoppp'>
 
                   </div>)}
                   <p className='showMoreText ' onClick={() => { openView(`listingcarddiv${index}`) }}> {sizeincreaser[`listingcarddiv${index}`] ? "Hide Flight Details" : "View Flight Details"}</p>
-
                 </div>
               </div>
             ))))}
@@ -523,7 +529,8 @@ export default function SearchFlights() {
         </div>
       </div>
     </div>
-  )
+  }</>
+)
 }
 
 

@@ -9,7 +9,7 @@ export default function Register({ setToken, setShowSignIn }) {
   }
   return (
     <div>
-      <div className='userPop '>
+      <div className='userPop'>
         <button className='btnSignout' onClick={() => { handleSignOut() }} >Sign Out</button>
       </div>
     </div>
