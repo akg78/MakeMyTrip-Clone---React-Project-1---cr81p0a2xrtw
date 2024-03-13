@@ -6,10 +6,11 @@
 .holidaysection{
     position: absolute;
     top: 200px;
-    left: 480px;
+    left: 320px;
     height: 500px;
-    width: 100%;
+    width: 60%;
+    border-radius: 10px;
     background-repeat: no-repeat;
-    background-size: 40% 500px;
-    background-image: url(../../../public/under-maintaince.jpg);
+    background-size: 100% 500px;
+    background-image: url(/public/newFeatures.jpg);
 }

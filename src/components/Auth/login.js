@@ -28,15 +28,23 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
-
 export default function Login({ setToken, showSignUp, setShowSignUp }) {
 
-  // const [tokenChange, setTokenChange] = useState(false);
-
   const [name, setName] = useState("");
+  const [signInUp, setSignInUp] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [error, setError] = useState('');
+
+
+  // const emailExists = localStorage.getItem(email);
+  // if (!emailExists) {
+  //   setError('Email is not registered. Please sign up.');
+  //   return;
+  // }
+
+
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -58,14 +66,17 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
         }
       );
       if (!response.ok) {
-        alert("Please Signup");
-        return;
+        alert("User already exists");
+        return
       }
+
       const newData = await response.json();
       console.log("newData", newData);
       const token = newData.token;
       localStorage.setItem("authToken", JSON.stringify(token));
       setShowSignUp(false);
+      // console.log("aaaaaaaaaaaaaa", handleSignup())
+
     } catch (error) {
       alert(error);
     }
@@ -74,9 +85,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
 
 
 
-  const [signInUp, setSignInUp] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -100,6 +109,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
       if (newData.status === 'success') {
         const token = newData.token;
         localStorage.setItem("authToken", JSON.stringify(token));
+        localStorage.setItem("name", JSON.stringify(newData.data.name));
         setShowSignUp(false)
         setToken(localStorage.getItem("authToken"))
       } else {
@@ -175,6 +185,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
               />
               <TextField onChange={handleUserPassword}
                 margin="normal"
@@ -196,8 +207,8 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 Sign In
               </Button>
               <Grid container className='cp'>
-                <Grid sx={{display: "flex", gap: "10px"}} item >
-                  Don't have an account? <Grid sx={{bgcolor : "primary.main", color : "white", p : "2px", borderRadius : "3px", fontSize : "16px", ":hover" : {transform : "scale(1.1)" }}} onClick={() => { setSignInUp(false) }}>Sign Up</Grid>
+                <Grid sx={{ display: "flex", gap: "10px" }} item >
+                  Don't have an account? <Grid sx={{ bgcolor: "primary.main", color: "white", p: "2px", borderRadius: "3px", fontSize: "16px", ":hover": { transform: "scale(1.1)" } }} onClick={() => { setSignInUp(false) }}>Sign Up</Grid>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
@@ -252,6 +263,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
               />
               <TextField onChange={handleName}
                 margin="normal"
@@ -284,7 +296,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
               <Grid container className='cp'>
                 <Grid item className='flex g10'>
 
-                  Aready have an account <Grid sx={{bgcolor : "primary.main", color : "white", p : "2px", borderRadius : "3px", fontSize : "16px", ":hover" : {transform : "scale(1.1)" }}} onClick={() => { setSignInUp(true) }} >Sign In</Grid>
+                  Aready have an account <Grid sx={{ bgcolor: "primary.main", color: "white", p: "2px", borderRadius: "3px", fontSize: "16px", ":hover": { transform: "scale(1.1)" } }} onClick={() => { setSignInUp(true) }} >Sign In</Grid>
 
                 </Grid>
               </Grid>

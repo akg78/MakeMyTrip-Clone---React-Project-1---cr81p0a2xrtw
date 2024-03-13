@@ -15,11 +15,77 @@ export default function PaymentDetails() {
   const [termserror, settermserror] = useState(false)
   const [upierror, setupierror] = useState(false)
   const [debiterror, setdebiterror] = useState(false);
-
-
-
+  const [upi, setupi] = useState("");
+  const [month, SetMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [cvv, setCvv] = useState("");
   const [donepayment, setdonepayment] = useState(false);
   const [pop, setpop] = useState({ "UPI": true });
+  const [expiryMonth, setExpiryMonth] = useState('');
+  const [expiryYear, setExpiryYear] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+
+
+  const handleCardno = (e) => {
+    const number = e.target.value;
+    if(cardNumber.length === 16){
+      setCardNumber(number);
+    }
+    setCardNumber(number);
+
+  };
+
+  const handleMonthChange = (e) => {
+    const month = e.target.value;
+    if (/[^\d]/.test(month) || month < 0 || month > 12)  {
+    } else {
+      setExpiryMonth(month);
+    }
+  };
+
+  const handleYearChange = (e) => {
+    const year = e.target.value;
+    // const currentYear = new Date().getFullYear();
+    if (/[^\d]/.test(year)  ) {
+    } else {
+      setExpiryYear(year);
+    }
+  };  
+
+
+
+  function handleUpiID(event) {
+    const { value } = event.target;
+
+    if (value.length == 10) {
+      setupi('Invalid upi number');
+    } else {
+      setupi('');
+      setupierror(false);
+      upiinput.current.style.outline = `none`
+    }
+  }
+
+  function validateUpi(e) {
+    const value = e.target.value.replace(/\D/g, '');
+    setupi(value);
+  }
+  
+  // function validateMonths(e){
+  //   const value = e.target.value.replace(/\D/g, '');
+  //   SetMonth(value);
+  // }
+
+  // function validateYear(e){
+  //   const value = e.target.value.replace(/\D/g, '');
+  //   setExpiryYear(value);
+  // }
+
+  function validateCvv(e){
+    const value = e.target.value.replace(/\D/g, '');
+    setCvv(value);
+  }
+
   function popp(key) {
     setpop({});
     setpop((prev) => ({ ...prev, [key]: true }))
@@ -88,9 +154,13 @@ export default function PaymentDetails() {
                 <div className='paymentcarddiv1result flex flexjsb'>
                   <div className='paymentcarddiv2 flex flexc g10'>
                     <h3>Enter UPI ID</h3>
-                    <input type='text' ref={upiinput} placeholder='Enter your UPI ID' onChange={() => { setupierror(false); upiinput.current.style.outline = `none` }}></input>
+                    <div className='flex' style={{  }}>
+                      <input type='text' ref={upiinput} placeholder='Enter your UPI ID' onChange={(e) => { handleUpiID(e) }}></input>
+                      {/* <p className='flex flexa flexjsb' style={{ width: "100%", border: "1px solid lightgrey", borderRadius: "0px 6px 6px 0px", fontSize: "14px", paddingLeft: "5px" }}> 
+                      @oksbi</p> */}
+                    </div>
                     {upierror && <span>Please enter a valid UPI ID</span>}
-                    <p>Payment request will be sent to the phone no. linked to your UPI ID</p>
+                    <p>Payment request will be sent to the phone no. linked to your UPI ID.</p>
                   </div>
                   <div className='paymentcarddiv3 flexja flexc g10'><div className='linevertical'></div><p>OR</p><div className='linevertical'></div></div>
                   <div className='paymentcarddiv4 flexa flexc g20'>
@@ -103,16 +173,23 @@ export default function PaymentDetails() {
                 <div className='paymentcarddiv5 flex flexc g10'>
                   <h3>Enter card details</h3>
                   <label>Card number</label>
-                  <input ref={(e) => { inputfill[0] = e }} type='number' placeholder='Enter card number' onChange={() => { outlineremoval(0) }}></input>
+                  {/* <input  type='number' placeholder='Enter card number' ></input> */}
+                  <input
+                    ref={(e) => { inputfill[0] = e }}
+                    onChange={(e) => { outlineremoval(0), validateUpi(e), handleCardno(e) }}
+                    type="text"
+                    maxlength="16"
+                    value={upi}
+                    placeholder="xxxx xxxx xxxx xxxx" />
                   <label>Expiry date</label>
                   <div className='flexa g20'>
-                    <input ref={(e) => { inputfill[1] = e }} className='expirydate' type='number' placeholder='Month' onChange={() => { outlineremoval(1) }}></input>
-                    <input ref={(e) => { inputfill[2] = e }} className='expirydate' type='number' placeholder='Year' onChange={() => { outlineremoval(2) }}></input>
+                    <input ref={(e) => { inputfill[1] = e }} className='expirydate' type='text' placeholder='Month' maxlength="2" value={expiryMonth} onChange={(e) => { outlineremoval(1), handleMonthChange(e)}}></input>
+                    <input ref={(e) => { inputfill[2] = e }} className='expirydate' type='text' placeholder='Year' maxlength="4" value={expiryYear} onChange={(e) => { outlineremoval(2), handleYearChange(e) }} ></input>
                   </div>
                   <label>Card holder name</label>
                   <input ref={(e) => { inputfill[3] = e }} type='text' placeholder='Name as on card' onChange={() => { outlineremoval(3) }}></input>
                   <label>CVV</label>
-                  <input ref={(e) => { inputfill[4] = e }} className='cvvinput' type='number' placeholder='CVV' onChange={() => { outlineremoval(4) }}></input>
+                  <input ref={(e) => { inputfill[4] = e }} className='cvvinput' type='text' placeholder='CVV' maxlength="3" value={cvv} onChange={(e) => { outlineremoval(4), validateCvv(e) }}></input>
                   {debiterror && <span>Please enter all details correctly</span>}
                 </div>
               }

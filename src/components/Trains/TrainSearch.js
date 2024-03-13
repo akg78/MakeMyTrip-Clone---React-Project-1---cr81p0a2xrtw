@@ -148,7 +148,6 @@ export default function TrainSearch() {
         navigate(`/trains/results?source=${trainFrom}&destination=${trainTo}&date=${date}}`);
     }
 
-
     const [showSignIn, setShowSignIn] = useState(false);
     const [showSignUp, setShowSignUp] = useState(true);
     const [token, setToken] = useState(localStorage.getItem("authToken"));

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, json } from 'react-router-dom'
 import './Navigation.css'
 import { IoIosArrowDown } from "react-icons/io";
 import Login from '../Auth/login';
@@ -46,14 +46,15 @@ export default function Navigation() {
 
                         <div className='trip-container flexa'>
                             <img src='./Assets/triplogo.png' height={"45px"} />
-                            <div className='my-trips cp' onClick={() => { handleUser() }}  >
+                            <div className='my-trips cp'>
+                                <Link to={"/"} className='linktrip'>
                                 <p className='p1'>My Trips</p>
                                 <br />
-                                <p className='p2'> Manage your bookings</p>
+                                <p className='p2'> Manage your bookings</p></Link>
                             </div>
                             <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none" }}>
 
-                                <p>{token ? `hi` : "Login or Create Account"} </p>
+                                <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p>
                                  <p> <IoIosArrowDown /></p>
                             </div>
                         </div>

@@ -3,118 +3,7 @@ import { useNavigate, NavLink, useLocation, Link } from 'react-router-dom';
 import "./BookingConfirmPage.css"
 
 export default function BookingConfirmationPage() {
-  const submitbtnref = useRef();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  let flight_id = searchParams.get("flight_id");
-  let dayOfWeek = searchParams.get("date");
-  const dateObject = new Date(dayOfWeek);
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const [arr, setarr] = useState([1]);
-  const [genderselector, setgenderselector] = useState(true);
-  const [details, setdetails] = useState({ "fname": "", "lname": "", "mobile": "", "email": "", "state": "", "pincode": "", "address": "" });
-  const [proceedcolor, setproceedcolor] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-  const [pincodeError, setPincodeError] = useState('');
 
-
-
-  const validateEmail = () => {
-    const re = /\S+@\S+\.\S+/;
-    if (!re.test(details["email"])) {
-      setEmailError('Invalid email address');
-    } else {
-      setEmailError('');
-    }
-  };
-
-
-  const validatePhone = (event) => {
-    // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
-    const { value } = event.target;
-    if (value.length !=10) {
-      setPhoneError('Invalid phone number');
-    } else {
-      setPhoneError('');
-    }
-  };
-
-  const handlePhoneChange = (e) => {
-    const value = e.target.value.replace(/\D/g, '');
-    setdetails(value);
-  }
-
-  const handleKeyDown = (e) => {
-    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
-      if (!/\d/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   validateEmail();
-  //   validatePhone();
-
-  //   if (!emailError && !phoneError) {
-  //     console.log('Form submitted successfully!');
-  //   }
-  // }
-
-
-
-  const handlePincodeChange = (event) => {
-    const { value } = event.target;
-    if (value.length <= 6 && /^\d+$/.test(value)) {
-      setdetails(value);
-      setPincodeError('');
-    } else {
-      setPincodeError('Please enter a valid 6-digit pincode.');
-    }
-  };
-
-
-  const handleStateChanger = (e) => {
-    setdetails(e.target.value);
-  }
-
-  function detailsChanger(key, value) {
-    setdetails((prev) => ({ ...prev, [key]: value }))
-
-  }
-  function target() {
-    // validateEmail();
-    // validatePhone();
-    if (submitbtnref.current) {
-      if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
-        window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
-        setproceedcolor(true);
-
-      }
-      else {
-        alert("fill all the required fields to proceed");
-
-      }
-    }
-  }
-  function gotopayment() {
-    if (details["fname"] != "" || details["lname"] != "" || details["mobile"] != "" || details["email"] != "" || details["state"] != "" || details["pincode"] != "" || details["address"] != "") {
-      alert("fill the form first");
-      console.log(details["fname"]);
-    }
-    else {
-      navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
-    }
-  }
-  // function increasearrsize() {
-  //   const variable = [...arr];
-  //   variable.push(variable[variable.length - 1] + 1)
-  //   setarr(variable)
-  // }
   const objdropdowncity = [{ name: "BLR", fname: "Bangalore", lname: "- Kempegowda International Airport (BLR)" },
   { name: "BOM", fname: "Mumbai", lname: "- Chatrapati Shivaji Airport (BOM)" },
   { name: "DEL", fname: "Delhi", lname: "- Indira Gandhi Airport (DEL)" },
@@ -132,27 +21,6 @@ export default function BookingConfirmationPage() {
   { name: "LKO", fname: "Lucknow", lname: "- Lucknow International Airport" },
   { name: "ATQ", fname: "Amritsar", lname: "- Amritsar International Airport " }];
 
-
-
-  function logofinder(item) {
-    if ((item.flightID[0] + item.flightID[1]) == "6E") { return logoflights[0]; }
-    if ((item.flightID[0] + item.flightID[1]) == "SG") { return logoflights[1]; }
-    if ((item.flightID[0] + item.flightID[1]) == "I5") { return logoflights[2]; }
-    if ((item.flightID[0] + item.flightID[1]) == "UK") { return logoflights[3]; }
-    if ((item.flightID[0] + item.flightID[1]) == "AI") { return logoflights[4]; }
-    if ((item.flightID[0] + item.flightID[1]) == "QP") { return logoflights[5]; }
-    if ((item.flightID[0] + item.flightID[1]) == "S5") { return logoflights[6]; }
-  }
-
-  function airlineNamefinder(item) {
-    if ((item.flightID[0] + item.flightID[1]) == "6E") { return "IndiGo"; }
-    if ((item.flightID[0] + item.flightID[1]) == "SG") { return "SpiceJet"; }
-    if ((item.flightID[0] + item.flightID[1]) == "I5") { return "Air India Express"; }
-    if ((item.flightID[0] + item.flightID[1]) == "UK") { return "Vistara"; }
-    if ((item.flightID[0] + item.flightID[1]) == "AI") { return "Air India"; }
-    if ((item.flightID[0] + item.flightID[1]) == "QP") { return "Akasa Air"; }
-    if ((item.flightID[0] + item.flightID[1]) == "S5") { return "Star Air"; }
-  }
   const [logoflights, setlogoflights] = useState([
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/6E.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/SG.svg",
     "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/I5.svg", "//fastui.cltpstatic.com/image/upload/resources/images/logos/air-logos/svg_logos/UK.svg",
@@ -198,9 +66,148 @@ export default function BookingConfirmationPage() {
     "Ladakh"
   ];
 
-
+  const submitbtnref = useRef();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  let flight_id = searchParams.get("flight_id");
+  let dayOfWeek = searchParams.get("date");
+  const dateObject = new Date(dayOfWeek);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const [arr, setarr] = useState([1]);
+  const [genderselector, setgenderselector] = useState(true);
+  const [details, setdetails] = useState({ "fname": "", "lname": "", "mobile": "", "email": "", "state": "", "pincode": "", "address": "" });
+  const [proceedcolor, setproceedcolor] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [pincodeError, setPincodeError] = useState('');
   const [dataa, setdataa] = useState();
   const [activenav, setactivenav] = useState({ "flights": true });
+
+
+  function detailsChanger(key, value) {
+    setdetails((prev) => ({ ...prev, [key]: value }))
+
+  }
+
+  const validateEmail = () => {
+    const re = /\S+@\S+\.\S+/;
+    if (!re.test(details["email"])) {
+      setEmailError('Invalid email address');
+    } else {
+      setEmailError('');
+    }
+  };
+
+
+  const validatePhone = (event) => {
+    // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
+    const { value } = event.target;
+
+    if (value.length != 10) {
+      setPhoneError('Invalid phone number');
+    } else {
+      setPhoneError('');
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '');
+    setdetails((prev) => ({ ...prev, "mobile": value }))
+  }
+
+  const handleKeyDown = (e) => {
+    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
+      if (!/\d/.test(e.key)) {
+        e.preventDefault();
+
+      }
+    }
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   validateEmail();
+  //   validatePhone();
+
+  //   if (!emailError && !phoneError) {
+  //     console.log('Form submitted successfully!');
+  //   }
+  // }
+
+
+
+  const handlePincodeChange = (event) => {
+    const val = event.target.value;
+    if (val.length <= 6) {
+      setdetails((prev) => ({ ...prev, "pincode": val }));
+      setPincodeError('');
+    }
+    if (val.length <= 5) {
+      setPincodeError('Please enter a valid 6-digit pincode.');
+    }
+
+  };
+
+
+  const handleStateChanger = (e) => {
+    setdetails((prev) => ({ ...prev, "state": e.target.value }));
+
+  }
+
+
+  function target() {
+    // validateEmail();
+    // validatePhone();
+    if (submitbtnref.current) {
+      if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
+        window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
+        setproceedcolor(true);
+
+      }
+      else {
+        alert("fill all the required fields to proceed");
+
+      }
+    }
+  }
+  function gotopayment() {
+    if (details["fname"] == "" || details["lname"] == "" || details["mobile"] == "" || details["email"] == "" || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
+      alert("fill the form first");
+    }
+    else {
+      navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
+    }
+  }
+  // function increasearrsize() {
+  //   const variable = [...arr];
+  //   variable.push(variable[variable.length - 1] + 1)
+  //   setarr(variable)
+  // }
+
+
+  function logofinder(item) {
+    if ((item.flightID[0] + item.flightID[1]) == "6E") { return logoflights[0]; }
+    if ((item.flightID[0] + item.flightID[1]) == "SG") { return logoflights[1]; }
+    if ((item.flightID[0] + item.flightID[1]) == "I5") { return logoflights[2]; }
+    if ((item.flightID[0] + item.flightID[1]) == "UK") { return logoflights[3]; }
+    if ((item.flightID[0] + item.flightID[1]) == "AI") { return logoflights[4]; }
+    if ((item.flightID[0] + item.flightID[1]) == "QP") { return logoflights[5]; }
+    if ((item.flightID[0] + item.flightID[1]) == "S5") { return logoflights[6]; }
+  }
+
+  function airlineNamefinder(item) {
+    if ((item.flightID[0] + item.flightID[1]) == "6E") { return "IndiGo"; }
+    if ((item.flightID[0] + item.flightID[1]) == "SG") { return "SpiceJet"; }
+    if ((item.flightID[0] + item.flightID[1]) == "I5") { return "Air India Express"; }
+    if ((item.flightID[0] + item.flightID[1]) == "UK") { return "Vistara"; }
+    if ((item.flightID[0] + item.flightID[1]) == "AI") { return "Air India"; }
+    if ((item.flightID[0] + item.flightID[1]) == "QP") { return "Akasa Air"; }
+    if ((item.flightID[0] + item.flightID[1]) == "S5") { return "Star Air"; }
+  }
+
+
 
 
   function activenavmaker(key) {
@@ -306,7 +313,7 @@ export default function BookingConfirmationPage() {
                         <div className='flex wrapNameDetails'>
                           <div className='flexc'>
                             <label htmlFor='mobile_number'>Mobile No</label>
-                            <input type='tel' id='mobile_number' onChange={(e) => {handlePhoneChange(e), validatePhone(e)}} value={details["mobile"]} onKeyDown={handleKeyDown} placeholder='Enter 10 Digits*' required />
+                            <input type='tel' id='mobile_number' onChange={(e) => { handlePhoneChange(e), validatePhone(e) }} value={details["mobile"]} onKeyDown={handleKeyDown} placeholder='Enter 10 Digits*' required />
                             {phoneError && <span style={{ color: 'red' }}>{phoneError}</span>}
                           </div>
                           <div className='flexc'>
@@ -324,7 +331,7 @@ export default function BookingConfirmationPage() {
                   <div className='pinCodeInput flex g20'>
                     <div className='flexc'>
                       <label htmlFor=''>Pincode</label>
-                      <input onChange={handlePincodeChange} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
+                      <input onChange={(e) => { handlePincodeChange(e) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
                       {pincodeError && <div style={{ color: 'red' }}>{pincodeError}</div>}
                     </div>
                     <div className='flexc'>

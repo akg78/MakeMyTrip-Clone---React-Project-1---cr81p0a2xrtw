@@ -6,6 +6,7 @@ export default function Register({ setToken, setShowSignIn }) {
     setShowSignIn(false);
     setToken("");
     localStorage.removeItem("authToken");
+    localStorage.removeItem("name");
   }
   return (
     <div>
