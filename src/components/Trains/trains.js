@@ -7,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { TbArrowsExchange } from "react-icons/tb";
 
 
-
-
 export default function trains() {
   const navigate = useNavigate();
   const [offerData, setOfferData] = useState([])
@@ -53,7 +51,7 @@ export default function trains() {
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const [ways, setways] = useState("");
   const [inputvalue, setInputValue] = useState("");
-  const [inputvalueTwo, setInputValueTwo] = useState("");
+  // const [inputvalueTwo, setInputValueTwo] = useState("");
   const [trainData, setTrainData] = useState([]);
   const [source, setSource] = useState({ "city": "Delhi", "country": "India", "trainName": "Duronto Express" });
   const [destination, setDestination] = useState({ "city": "Kanpur", "country": "India", "name": "" });
@@ -99,9 +97,9 @@ export default function trains() {
 
   useEffect(() => {
     trainSubmit(setTrainData, inputvalue)
-    trainSubmit(setTrainData, inputvalueTwo)
+    // trainSubmit(setTrainData, inputvalueTwo)
     
-  }, [inputvalue, inputvalueTwo])
+  }, [inputvalue])
 
 
   return (
@@ -121,7 +119,7 @@ export default function trains() {
           <div className='search-city trainCityFrom' onClick={() => { trainPop("trainpop") }}>
             <span>From</span>
             <h1>{source.city} Junction</h1>
-            <span></span>
+            {/* <span></span> */}
             {searchCityPop["trainpop"] && <div className='trainpopup'>
               <input type='text' placeholder='from' onClick={(e) => { e.stopPropagation(); }} value={inputvalue} onChange={(e) => { setInputValue(e.target.value) }} />
               {trainData && trainData.map((item, index) => (<div className='flexa trainSlide g10' onClick={() => { setSource({ "city": item.city }) }}>
@@ -138,9 +136,9 @@ export default function trains() {
           <div className=' search-city searchCityTrain' onClick={() => { trainPop("trainpopp") }}>
             <span>To</span>
             <h1>{destination.city} Junction</h1>
-            <span></span>
+            {/* <span></span> */}
             {searchCityPop["trainpopp"] && <div className='toTrainPop cp'>
-              <input type='text' placeholder='to' onClick={(e) => { e.stopPropagation(); }} value={inputvalueTwo} onChange={(e) => { setInputValueTwo(e.target.value) }} />
+              <input type='text' placeholder='to' onClick={(e) => { e.stopPropagation(); }} value={inputvalue} onChange={(e) => { setInputValue(e.target.value) }} />
               {trainData && trainData.map((item, index) => (<div className='flexa traintoSlide g10 ' onClick={() => { setDestination({ "city": item.city }) }}>
                 <div><CiLocationOn /></div>
                 <div className='traincity'>{item.city} Junction</div>

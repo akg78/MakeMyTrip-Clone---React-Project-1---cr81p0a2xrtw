@@ -40,27 +40,10 @@ export default function BookingPageTrain() {
     "Puducherry", "Ladakh"
   ];
 
-  const handleStateChanger = (e) => {
-    setdetails(e.target.value);
+  function detailsChanger(key, value) {
+    setdetails((prev) => ({ ...prev, [key]: value }))
+
   }
-
-  const handlePincodeChange = (event) => {
-    const { value } = event.target;
-    if (value.length <= 6 && /^\d+$/.test(value)) {
-      setdetails(value);
-      setPincodeError('');
-    } else {
-      setPincodeError('Please enter a valid 6-digit pincode.');
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
-      if (!/\d/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  };
 
   const validateEmail = () => {
     const re = /\S+@\S+\.\S+/;
@@ -71,10 +54,12 @@ export default function BookingPageTrain() {
     }
   };
 
+
   const validatePhone = (event) => {
     // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
     const { value } = event.target;
-    if (value.length !=10) {
+
+    if (value.length != 10) {
       setPhoneError('Invalid phone number');
     } else {
       setPhoneError('');
@@ -83,11 +68,34 @@ export default function BookingPageTrain() {
 
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');
-    setdetails(value);
+    setdetails((prev) => ({ ...prev, "mobile": value }))
   }
 
-  function detailsChanger(key, value) {
-    setdetails((prev) => ({ ...prev, [key]: value }))
+  const handleKeyDown = (e) => {
+    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
+      if (!/\d/.test(e.key)) {
+        e.preventDefault();
+
+      }
+    }
+  };
+
+
+  const handlePincodeChange = (event) => {
+    const val = event.target.value;
+    if (val.length <= 6) {
+      setdetails((prev) => ({ ...prev, "pincode": val }));
+      setPincodeError('');
+    }
+    if (val.length <= 5) {
+      setPincodeError('Please enter a valid 6-digit pincode.');
+    }
+
+  };
+
+
+  const handleStateChanger = (e) => {
+    setdetails((prev) => ({ ...prev, "state": e.target.value }));
 
   }
 
@@ -223,7 +231,7 @@ export default function BookingPageTrain() {
                   <div className='pinCodeInput flex g20'>
                   <div className='flexc'>
                       <label htmlFor=''>Pincode</label>
-                      <input onChange={handlePincodeChange} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
+                      <input onChange={(e) => { handlePincodeChange(e) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
                       {pincodeError && <div style={{ color: 'red' }}>{pincodeError}</div>}
                     </div>
                     <div className='flexc'>

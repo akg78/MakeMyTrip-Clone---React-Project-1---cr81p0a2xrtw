@@ -28,7 +28,7 @@ export default function BookingConfirmationPage() {
   const [details, setdetails] = useState({ "fname": "", "lname": "", "mobile": "", "email": "", "state": "", "pincode": "", "address": "" });
   const [proceedcolor, setproceedcolor] = useState(false);
   const [dataa, setdataa] = useState();
-  const [activenav, setactivenav] = useState({ "flights": true });
+  const [activenav, setactivenav] = useState({ "hotels": true });
   const [guests, setguests] = useState({ "room": 1, "adults": 1, "children": 0 });
   const [guestspopcount, setguestspopcount] = useState({ "room": false, "adults": false, "children": false });
   const [guestss, setguestss] = useState(guests["adults"] + guests["children"]);
@@ -48,27 +48,10 @@ export default function BookingConfirmationPage() {
   ];
 
 
-  const handleStateChanger = (e) => {
-    setdetails(e.target.value);
+  function detailsChanger(key, value) {
+    setdetails((prev) => ({ ...prev, [key]: value }))
+
   }
-
-  const handlePincodeChange = (event) => {
-    const { value } = event.target;
-    if (value.length <= 6 && /^\d+$/.test(value)) {
-      setdetails(value);
-      setPincodeError('');
-    } else {
-      setPincodeError('Please enter a valid 6-digit pincode.');
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
-      if (!/\d/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  };
 
   const validateEmail = () => {
     const re = /\S+@\S+\.\S+/;
@@ -79,9 +62,11 @@ export default function BookingConfirmationPage() {
     }
   };
 
+
   const validatePhone = (event) => {
     // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
     const { value } = event.target;
+
     if (value.length != 10) {
       setPhoneError('Invalid phone number');
     } else {
@@ -91,13 +76,49 @@ export default function BookingConfirmationPage() {
 
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');
-    setdetails(value);
+    setdetails((prev) => ({ ...prev, "mobile": value }))
   }
 
-  function detailsChanger(key, value) {
-    setdetails((prev) => ({ ...prev, [key]: value }))
+  const handleKeyDown = (e) => {
+    if (!(e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab')) {
+      if (!/\d/.test(e.key)) {
+        e.preventDefault();
+
+      }
+    }
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   validateEmail();
+  //   validatePhone();
+
+  //   if (!emailError && !phoneError) {
+  //     console.log('Form submitted successfully!');
+  //   }
+  // }
+
+
+
+  const handlePincodeChange = (event) => {
+    const val = event.target.value;
+    if (val.length <= 6) {
+      setdetails((prev) => ({ ...prev, "pincode": val }));
+      setPincodeError('');
+    }
+    if (val.length <= 5) {
+      setPincodeError('Please enter a valid 6-digit pincode.');
+    }
+
+  };
+
+
+  const handleStateChanger = (e) => {
+    setdetails((prev) => ({ ...prev, "state": e.target.value }));
 
   }
+
+
   function target() {
     if (submitbtnref.current) {
       if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
@@ -246,7 +267,7 @@ export default function BookingConfirmationPage() {
                   <div className='pinCodeInput flex g20'>
                     <div className='flexc'>
                       <label htmlFor=''>Pincode</label>
-                      <input onChange={handlePincodeChange} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
+                      <input onChange={(e) => { handlePincodeChange(e) }} value={details["pincode"]} type='pincode' placeholder='Enter 6 Digits*' onKeyDown={handleKeyDown} required />
                       {pincodeError && <div style={{ color: 'red' }}>{pincodeError}</div>}
                     </div>
                     <div className='flexc'>

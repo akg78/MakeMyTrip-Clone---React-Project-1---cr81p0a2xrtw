@@ -164,30 +164,30 @@ export default function HotelsResult() {
   };
 
   const [showSignIn, setShowSignIn] = useState(false);
-    const [showSignUp, setShowSignUp] = useState(true);
-    const [token, setToken] = useState(localStorage.getItem("authToken"));
+  const [showSignUp, setShowSignUp] = useState(true);
+  const [token, setToken] = useState(localStorage.getItem("authToken"));
 
-    useEffect(() => {
-        if (token) {
-            setShowSignUp(false)
-        } else {
-            setShowSignUp(false)
-        }
-    }, [])
-
-    function handleUser() {
-        if (token) {
-            setShowSignIn(!showSignIn);
-        } else {
-            setShowSignUp(true);
-        }
+  useEffect(() => {
+    if (token) {
+      setShowSignUp(false)
+    } else {
+      setShowSignUp(false)
     }
+  }, [])
+
+  function handleUser() {
+    if (token) {
+      setShowSignIn(!showSignIn);
+    } else {
+      setShowSignUp(true);
+    }
+  }
 
 
   return (
     <div className='hotelsresult'>
-       <div className='hello'>{showSignUp && <Login token={token} setToken={setToken} showSignUp={showSignUp} setShowSignUp={setShowSignUp} />}</div>
-            <div>{showSignIn && <Register token={token} setToken={setToken} showSignIn={showSignIn} setShowSignIn={setShowSignIn} />}</div>
+      <div className='hello'>{showSignUp && <Login token={token} setToken={setToken} showSignUp={showSignUp} setShowSignUp={setShowSignUp} />}</div>
+      <div>{showSignIn && <Register token={token} setToken={setToken} showSignIn={showSignIn} setShowSignIn={setShowSignIn} />}</div>
       <div className='navouter flexja'>
         <nav className='flexa flexjsb'>
           <div className='navinner flex'>
@@ -199,7 +199,7 @@ export default function HotelsResult() {
             </div>
           </div>
           <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
-            <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown />
+            <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown />
           </div>
         </nav>
       </div>
@@ -208,7 +208,7 @@ export default function HotelsResult() {
           <div className='bodyheaderupper flexja '>
             <div className=''>
               <div className='headContainer flex flexr'>
-                <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
+                {/* <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                   {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
                     <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
                     {cities && cities.map((item, index) => (<div key={index} className='hotelCityProperty flex g10' onClick={() => { setdplocations(item.location.toString().split(",")[0]) }} >
@@ -218,7 +218,24 @@ export default function HotelsResult() {
                   </div>}
                   <span>CITY, AREA OR PROPERTY <IoIosArrowDown /></span>
                   <p>{dplocations}</p>
+                </div> */}
+
+                <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
+                  {searchpop["cityandproperty"] && (<div className='cityAreaSearch'>
+                    <input type='text' placeholder='Where do you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
+                    {cities && [...new Set(cities.map(item => item.location.split(',')[0]))].map((location, index) => (
+                      <div key={index} className='hotelCityProperty flex g10' onClick={() => { setdplocations(location) }}>
+                        <div><CiLocationOn /></div>
+                        <div>{location}</div>
+                      </div>
+                    ))}
+                  </div>
+                  )}
+                  <span>CITY, AREA OR PROPERTY <IoIosArrowDown /></span>
+                  <p>{dplocations}</p>
                 </div>
+
+
                 <div className='childContainer cp' onClick={() => { hotelSearchPop("checkin") }}>
                   {searchpop["checkin"] && <Calendar className="calendarForGoing" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
                   <span>CHECK-IN <IoIosArrowDown /></span>
@@ -371,7 +388,7 @@ export default function HotelsResult() {
                   </div>
                 </div>)))}
 
-{/* 
+              {/* 
               <Stack spacing={2} justifyContent="center" alignItems="center" mt={3} padding={2} position={""}>
                 <Pagination count={10} onChange={onPageChange} />
               </Stack> */}

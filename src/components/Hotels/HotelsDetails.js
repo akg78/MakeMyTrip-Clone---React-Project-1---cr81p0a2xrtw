@@ -174,7 +174,7 @@ export default function HotelsDetails() {
                                 </div>
                             </div>
                             <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
-                                <p>{token ? "Hi Traveller" : "Login or Create Account"} </p> <IoIosArrowDown />
+                                <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown />
                             </div>
                         </nav>
                     </div>
@@ -183,7 +183,7 @@ export default function HotelsDetails() {
                             <div className='bodyheaderupper flexja '>
                                 <div className=''>
                                     <div className='headContainer flex flexr'>
-                                        <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
+                                        {/* <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                                             {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
                                                 <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
                                                 {hotels && hotels.map((item, index) => (<div key={index} className='hotelCityProperty flex g10' onClick={() => { setdplocate(item.location.toString().split(",")[0]) }} >
@@ -193,6 +193,21 @@ export default function HotelsDetails() {
                                             </div>}
                                             <span>CITY, AREA OR PROPERTY <IoIosArrowDown /></span>
                                             {dplocate}
+                                        </div> */}
+
+                                        <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
+                                            {searchpop["cityandproperty"] && (<div className='cityAreaSearch'>
+                                                <input type='text' placeholder='Where do you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
+                                                {hotels && [...new Set(hotels.map(item => item.location.split(',')[0]))].map((location, index) => (
+                                                    <div key={index} className='hotelCityProperty flex g10' onClick={() => { setdplocate(location) }}>
+                                                        <div><CiLocationOn /></div>
+                                                        <div>{location}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            )}
+                                            <span>CITY, AREA OR PROPERTY <IoIosArrowDown /></span>
+                                            <p>{dplocate}</p>
                                         </div>
 
                                         <div className='childContainer cp' onClick={() => { hotelSearchPop("checkin") }}>

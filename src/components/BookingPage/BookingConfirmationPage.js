@@ -343,12 +343,6 @@ export default function BookingConfirmationPage() {
                         ))}
                       </select>
                     </div>
-                    {/* <p>Selected State: {details["state"]}</p> */}
-
-
-                    {/* <label htmlFor=''>State</label>
-                      <input onChange={(e) => { detailsChanger("state", e.target.value) }} value={details["state"]} type='state' placeholder='Enter your State*' required />
-                    */}
                     <div className='flexc'>
                       <label htmlFor=''>Address</label>
                       <input onChange={(e) => { detailsChanger("address", e.target.value) }} value={details["address"]} type='Address' placeholder='Enter your Adress*' required />

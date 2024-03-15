@@ -44,6 +44,8 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
   //   return;
   // }
 
+// ..................................................SignUp API......................................................
+
 
 
   const handleSignup = async (e) => {
@@ -65,17 +67,21 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
           }),
         }
       );
-      if (!response.ok) {
-        alert("User already exists");
-        return
-      }
 
       const newData = await response.json();
       console.log("newData", newData);
-      const token = newData.token;
-      localStorage.setItem("authToken", JSON.stringify(token));
-      setShowSignUp(false);
-      // console.log("aaaaaaaaaaaaaa", handleSignup())
+      if (newData.status === 'success') {
+        const token = newData.token;
+        localStorage.setItem("authToken", JSON.stringify(token));
+        localStorage.setItem("name", JSON.stringify(newData.data.name));
+        setShowSignUp(false)
+        setToken(localStorage.getItem("authToken"))
+
+      } else if (newData.message === ("User already exists")) {
+        alert("User already exists")
+      } else if (name === "" || email === "" || password === "") {
+        alert("please fill all the details!")
+      }
 
     } catch (error) {
       alert(error);
@@ -84,6 +90,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
 
 
 
+// ..................................................LogIn API......................................................
 
 
   const handleSubmit = async (e) => {
@@ -105,7 +112,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
         }
       );
       const newData = await response.json();
-      console.log("newData", newData);
+      // console.log("newData", newData);
       if (newData.status === 'success') {
         const token = newData.token;
         localStorage.setItem("authToken", JSON.stringify(token));
@@ -113,7 +120,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
         setShowSignUp(false)
         setToken(localStorage.getItem("authToken"))
       } else {
-        alert("Login or Password incorrect!")
+        // alert("Login or Password incorrect!")
       }
     } catch (error) {
       alert(error);
@@ -175,7 +182,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField onChange={handleUserEmail}
                 margin="normal"
                 required
@@ -247,13 +254,19 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
               alignItems: 'center',
             }}
           >
+
+            <CloseIcon onClick={() => { setShowSignUp(false) }}
+              sx={{ position: "relative", top: "-75px", left: "240px", bgcolor: "white", borderRadius: "50px", color: "black", cursor: "pointer" }}
+            />
+
+
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign Up
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField onChange={handleUserEmail}
                 margin="normal"
                 required

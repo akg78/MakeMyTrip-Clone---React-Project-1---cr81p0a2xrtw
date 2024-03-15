@@ -105,7 +105,7 @@ export default function () {
         </div>
 
         <div className='hotels-panel'>
-          <div className='search-city' onClick={() => { hotelPop("hotelpop") }}>
+          {/* <div className='search-city' onClick={() => { hotelPop("hotelpop") }}>
             <span>City,Property Name Or Location</span>
             <h1>{dplocation}</h1>
             <span>India</span>
@@ -116,8 +116,32 @@ export default function () {
                 <div className={`hotelcity${index}`} onClick={() => { setdplocation(item.location.toString().match(/^([^,]+)/)[1]) }}>{item.location}</div>
               </div>))}
             </div>}
-          </div>
+          </div> */}
 
+          <div className='search-city' onClick={() => { hotelPop("hotelpop") }}>
+            <span>City, Property Name, or Location</span>
+            <h1>{dplocation}</h1>
+            <span>India</span>
+            {searchCityPop["hotelpop"] && (
+              <div className='hotelpopup'>
+                <input
+                  type='text'
+                  placeholder='Where do you want to stay?'
+                  onClick={(e) => { e.stopPropagation(); }}
+                  value={inputvall}
+                  onChange={(e) => { setInputVall(e.target.value) }}
+                />
+                {/* Filter out duplicate search names */}
+                {hotelData && [...new Set(hotelData.map(item => item.location.split(',')[0]))].map((location, index) => (
+                  <div key={index} className='flexa hotelSlide g10' onClick={() => { setCitySearch({ "city": location }) }}>
+                    <div><CiLocationOn /></div>
+                    <div className={`hotelcity${index}`} onClick={() => { setdplocation(location) }}>{location}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          
           <div className='check-In' onClick={() => { hotelPop("check-Inn") }}>
             {searchCityPop["check-Inn"] && <Calendar className="calendarForCheckIn" minDate={new Date()} onChange={(date) => { setDate(date) }} value={date} />}
             <span className='fw'>Check-In</span><IoIosArrowDown className='arrow' />

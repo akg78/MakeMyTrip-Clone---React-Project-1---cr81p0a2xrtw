@@ -26,9 +26,12 @@ export default function PaymentDetails() {
   const [cardNumber, setCardNumber] = useState('');
 
 
+
+
+
   const handleCardno = (e) => {
     const number = e.target.value;
-    if(cardNumber.length === 16){
+    if (cardNumber.length === 16) {
       setCardNumber(number);
     }
     setCardNumber(number);
@@ -37,7 +40,7 @@ export default function PaymentDetails() {
 
   const handleMonthChange = (e) => {
     const month = e.target.value;
-    if (/[^\d]/.test(month) || month < 0 || month > 12)  {
+    if (/[^\d]/.test(month) || month < 0 || month > 12) {
     } else {
       setExpiryMonth(month);
     }
@@ -46,11 +49,11 @@ export default function PaymentDetails() {
   const handleYearChange = (e) => {
     const year = e.target.value;
     // const currentYear = new Date().getFullYear();
-    if (/[^\d]/.test(year)  ) {
+    if (/[^\d]/.test(year)) {
     } else {
       setExpiryYear(year);
     }
-  };  
+  };
 
 
 
@@ -70,7 +73,7 @@ export default function PaymentDetails() {
     const value = e.target.value.replace(/\D/g, '');
     setupi(value);
   }
-  
+
   // function validateMonths(e){
   //   const value = e.target.value.replace(/\D/g, '');
   //   SetMonth(value);
@@ -81,7 +84,7 @@ export default function PaymentDetails() {
   //   setExpiryYear(value);
   // }
 
-  function validateCvv(e){
+  function validateCvv(e) {
     const value = e.target.value.replace(/\D/g, '');
     setCvv(value);
   }
@@ -154,7 +157,7 @@ export default function PaymentDetails() {
                 <div className='paymentcarddiv1result flex flexjsb'>
                   <div className='paymentcarddiv2 flex flexc g10'>
                     <h3>Enter UPI ID</h3>
-                    <div className='flex' style={{  }}>
+                    <div className='flex' style={{}}>
                       <input type='text' ref={upiinput} placeholder='Enter your UPI ID' onChange={(e) => { handleUpiID(e) }}></input>
                       {/* <p className='flex flexa flexjsb' style={{ width: "100%", border: "1px solid lightgrey", borderRadius: "0px 6px 6px 0px", fontSize: "14px", paddingLeft: "5px" }}> 
                       @oksbi</p> */}
@@ -182,9 +185,16 @@ export default function PaymentDetails() {
                     value={upi}
                     placeholder="xxxx xxxx xxxx xxxx" />
                   <label>Expiry date</label>
-                  <div className='flexa g20'>
-                    <input ref={(e) => { inputfill[1] = e }} className='expirydate' type='text' placeholder='Month' maxlength="2" value={expiryMonth} onChange={(e) => { outlineremoval(1), handleMonthChange(e)}}></input>
+                  <div className='flexa flex g20'>
+                    <input ref={(e) => { inputfill[1] = e }} className='expirydate' type='text' placeholder='Month' maxlength="2" value={expiryMonth} onChange={(e) => { outlineremoval(1), handleMonthChange(e) }}></input>
                     <input ref={(e) => { inputfill[2] = e }} className='expirydate' type='text' placeholder='Year' maxlength="4" value={expiryYear} onChange={(e) => { outlineremoval(2), handleYearChange(e) }} ></input>
+                    {/* <select className='expiryyear' ref={(e) => { inputfill[2] = e }} onChange={(e) => { outlineremoval(2), handleYearChange(e) }}>
+                      <option value={expiryYear} >2024</option>
+                      <option value={expiryYear}>2025</option>
+                      <option value={expiryYear}>2026</option>
+                      <option value={expiryYear}>2027</option>
+                      <option value={expiryYear}>2028</option>
+                    </select> */}
                   </div>
                   <label>Card holder name</label>
                   <input ref={(e) => { inputfill[3] = e }} type='text' placeholder='Name as on card' onChange={() => { outlineremoval(3) }}></input>
