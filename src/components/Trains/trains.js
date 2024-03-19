@@ -89,7 +89,7 @@ export default function trains() {
         }
       )).json();
       setTrainData(response.data.airports)
-      console.log(setTrainData)
+      // console.log(setTrainData)
     } catch (error) {
       alert(error);
     }

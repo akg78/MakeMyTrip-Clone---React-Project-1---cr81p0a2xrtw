@@ -115,7 +115,7 @@ export default function TrainSearch() {
             )).json();
             const result = sortfun(response.data.trains);
             setSearchTrain(result);
-            console.log(response.data.trains);
+            // console.log(response.data.trains);
         } catch (error) {
             // alert(error)
         }

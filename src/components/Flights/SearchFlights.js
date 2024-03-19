@@ -170,7 +170,7 @@ export default function SearchFlights() {
       })
       const res = await response.json();
       setdataaa(res.data.airports)
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       console.error('Error fetching flight', error);
     }

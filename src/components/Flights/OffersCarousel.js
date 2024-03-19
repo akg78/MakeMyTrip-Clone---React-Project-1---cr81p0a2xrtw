@@ -13,7 +13,7 @@ export default function OffersCarousel() {
     setIsClicked((prev) => ({ ...prev, [key]: true }))
   }
   const handleSubmit = async (data) => {
-    console.log(offerData)
+    // console.log(offerData)
     try {
       const response = await (await fetch(
         `https://academics.newtonschool.co/api/v1/bookingportals/offers?filter={"type":"${data}"}&limit=50`,

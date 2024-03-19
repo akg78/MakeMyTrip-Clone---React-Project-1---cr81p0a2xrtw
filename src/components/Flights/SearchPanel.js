@@ -13,7 +13,7 @@ export const Search = async (setdata, input) => {
         })
         const res = await response.json();
         setdata(res.data.airports)
-        console.log(res.data.airports);
+        // console.log(res.data.airports);
     } catch (error) {
         console.error('Error fetching flight', error);
     }
