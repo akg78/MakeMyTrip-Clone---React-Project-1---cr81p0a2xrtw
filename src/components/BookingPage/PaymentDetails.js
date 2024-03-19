@@ -26,9 +26,6 @@ export default function PaymentDetails() {
   const [cardNumber, setCardNumber] = useState('');
 
 
-
-
-
   const handleCardno = (e) => {
     const number = e.target.value;
     if (cardNumber.length === 16) {
@@ -134,7 +131,7 @@ export default function PaymentDetails() {
   function navigatelast() {
     setTimeout(() => {
       navigate("/");
-    }, 7000)
+    }, 4000)
   }
 
   return (

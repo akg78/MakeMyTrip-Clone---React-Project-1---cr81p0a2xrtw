@@ -54,7 +54,7 @@ export default function Navigation() {
                             </div>
                             <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none" }}>
 
-                                <p>{token ? "hi" : "Login or Create Account"} </p>
+                                <p>{localStorage.getItem("name") ? `${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p>
                                  <p> <IoIosArrowDown /></p>
                             </div>
                         </div>

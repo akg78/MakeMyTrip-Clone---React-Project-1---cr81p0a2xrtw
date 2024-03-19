@@ -73,7 +73,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
       if (newData.status === 'success') {
         const token = newData.token;
         localStorage.setItem("authToken", JSON.stringify(token));
-        // localStorage.setItem("name", JSON.stringify(newData.data.user.name));
+        localStorage.setItem("name", JSON.stringify(newData.data.user.name));
         setShowSignUp(false)
         setToken(localStorage.getItem("authToken"))
 
@@ -116,7 +116,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
       if (newData.status === 'success') {
         const token = newData.token;
         localStorage.setItem("authToken", JSON.stringify(token));
-        // localStorage.setItem("name", JSON.stringify(newData.data.name));
+        localStorage.setItem("name", JSON.stringify(newData.data.name));
         setShowSignUp(false)
         setToken(localStorage.getItem("authToken"))
       } else {

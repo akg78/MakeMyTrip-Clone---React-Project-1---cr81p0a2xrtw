@@ -91,6 +91,20 @@ export default function BookingConfirmationPage() {
 
   }
 
+  const validateName = (e) => {
+    const value = e.target.value;
+    if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
+      setdetails((prev) =>({...prev, "fname" : value}));
+    }
+  };
+
+  const validatelName = (e)=>{
+    const value = e.target.value;
+    if(/^[a-zA-Z\s]*$/.test(value) || value === ''){
+      setdetails((prev) =>({...prev, "lname" : value}))
+    }
+  }
+
   const validateEmail = () => {
     const re = /\S+@\S+\.\S+/;
     if (!re.test(details["email"])) {
@@ -99,7 +113,6 @@ export default function BookingConfirmationPage() {
       setEmailError('');
     }
   };
-
 
   const validatePhone = (event) => {
     // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
@@ -299,11 +312,11 @@ export default function BookingConfirmationPage() {
                         <div className='flex wrapNameDetails'>
                           <div className='flexc'>
                             <label htmlFor='text'>First Name </label>
-                            <input onChange={(e) => { detailsChanger("fname", e.target.value) }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
+                            <input onChange={(e) => { detailsChanger("fname", e.target.value), validateName(e)  }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
                           </div>
                           <div className='flexc'>
                             <label htmlFor='text'>Last Name</label>
-                            <input onChange={(e) => { detailsChanger("lname", e.target.value) }} value={details["lname"]} type='text' placeholder='Enter Last Name*' required />
+                            <input onChange={(e) => { detailsChanger("lname", e.target.value), validatelName(e) }} value={details["lname"]} type='text' placeholder='Enter Last Name*' required />
                           </div>
                           <div className=' genderdiv flexa'>
                             <input onClick={() => { setgenderselector(true) }} type='text' placeholder='Male' className={`${genderselector ? 'colorinputactive' : ""}`} required readOnly />
