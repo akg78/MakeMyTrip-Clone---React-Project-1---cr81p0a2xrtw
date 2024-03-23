@@ -86,6 +86,73 @@ export default function BookingConfirmationPage() {
   const [activenav, setactivenav] = useState({ "flights": true });
 
 
+  //-----------------------------StartDate and EndDate maker for Post data-----------------------------------
+
+  const dateformat = new Date()
+  const dateformatter = () => {
+    dateformat.setDate(+(dayOfWeek.slice(8)))
+    dateformat.setMonth(+(dayOfWeek.slice(5, 7)) - 1)
+    dateformat.setFullYear(+(dayOfWeek.slice(0, 4)))
+  }
+
+  function startdate() {
+    const departureDate = new Date(dateformat);
+    const [hours, minutes] = dataa.departureTime.split(":");
+    departureDate.setHours(hours, minutes);
+    return departureDate;
+  }
+  // startdate();
+  function enddate() {
+    const [departureHours, departureMinutes] = dataa.departureTime.split(":");
+    const [arrivalHours, arrivalMinutes] = dataa.arrivalTime.split(":");
+    const arrivalDate = new Date(dateformat);
+    if (departureHours > arrivalHours) {
+      arrivalDate.setHours(arrivalHours, arrivalMinutes);
+    }
+    else if (departureHours == arrivalHours) {
+      arrivalDate.setHours(arrivalHours, departureMinutes + arrivalMinutes)
+    }
+    else {
+      arrivalDate.setHours(departureHours + arrivalHours, departureMinutes + arrivalMinutes)
+    }
+    return arrivalDate;
+  }
+
+
+  //-----------------------------StartDate and EndDate maker for Post data-----------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   function detailsChanger(key, value) {
     setdetails((prev) => ({ ...prev, [key]: value }))
 
@@ -94,14 +161,14 @@ export default function BookingConfirmationPage() {
   const validateName = (e) => {
     const value = e.target.value;
     if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
-      setdetails((prev) =>({...prev, "fname" : value}));
+      setdetails((prev) => ({ ...prev, "fname": value }));
     }
   };
 
-  const validatelName = (e)=>{
+  const validatelName = (e) => {
     const value = e.target.value;
-    if(/^[a-zA-Z\s]*$/.test(value) || value === ''){
-      setdetails((prev) =>({...prev, "lname" : value}))
+    if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
+      setdetails((prev) => ({ ...prev, "lname": value }))
     }
   }
 
@@ -171,10 +238,8 @@ export default function BookingConfirmationPage() {
 
 
   function target() {
-    // validateEmail();
-    // validatePhone();
     if (submitbtnref.current) {
-      if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
+      if (details["fname"] != "" && details["lname"] != "" && details["mobile"].length == 10  && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
         window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
         setproceedcolor(true);
 
@@ -186,11 +251,13 @@ export default function BookingConfirmationPage() {
     }
   }
   function gotopayment() {
-    if (details["fname"] == "" || details["lname"] == "" || details["mobile"] == "" || details["email"] == "" || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
+    if (details["fname"] == "" || details["lname"] == "" || details["mobile"].length != 10  || details["email"] == "" || !details["email"].includes("@") || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
       alert("fill the form first");
     }
     else {
+      localStorage.setItem("paynowflag", false)
       navigate(`/flights/results/flightBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa.ticketPrice + ((dataa.ticketPrice * 12) / 100))}`);
+      senddata();
     }
   }
   // function increasearrsize() {
@@ -247,6 +314,50 @@ export default function BookingConfirmationPage() {
   useEffect(() => {
     fetchData();
   }, [])
+
+
+
+
+
+
+
+  const senddata = async () => {
+    try {
+      // if (details.dnumber && details.demail && details.dfname && details.dlname && details.dgender && details.dcountry && details.dstate && details.dbillingAddress) {
+      const response = await (await fetch(`https://academics.newtonschool.co/api/v1/bookingportals/booking`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem('authToken'))}`,
+            projectID: "cr81p0a2xrtw",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            bookingType: "flight",
+            bookingDetails: {
+              flightId: `${flight_id}`,
+              startDate: `${startdate()}`,
+              endDate: `${enddate()}`
+            }
+          })
+        }
+      )).json();
+
+      console.log("hhhhhhhhhhhhhhhhhhhhh", response)
+      // }
+    }
+    catch (error) {
+      alert(error);
+    }
+  }
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -312,7 +423,7 @@ export default function BookingConfirmationPage() {
                         <div className='flex wrapNameDetails'>
                           <div className='flexc'>
                             <label htmlFor='text'>First Name </label>
-                            <input onChange={(e) => { detailsChanger("fname", e.target.value), validateName(e)  }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
+                            <input onChange={(e) => { detailsChanger("fname", e.target.value), validateName(e) }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
                           </div>
                           <div className='flexc'>
                             <label htmlFor='text'>Last Name</label>

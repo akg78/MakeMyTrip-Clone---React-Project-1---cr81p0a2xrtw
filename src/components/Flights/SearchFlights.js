@@ -286,7 +286,7 @@ export default function SearchFlights() {
         </div>
         <div className='backgrounddd'>
 
-          <div className='bg-gradiant'>
+          <div className='bg-gradiant flex'>
             <div className='flex flexa g10 wrapDetails'>
               <div className='flexc wrapChildContainer g5' onClick={() => { popUp("detailsWrap") }}>
                 <div>From</div>

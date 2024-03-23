@@ -31,15 +31,13 @@ export default function HotelsDetails() {
     const [dateReturn, setDateReturn] = useState(dateObjReturnDate);
     const counting = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
     const [searchpop, setSearchPop] = useState({ hotelSearchPop: false });
-    const [activenav, setactivenav] = useState({ "flights": true });
+    const [activenav, setactivenav] = useState({ "hotels": true });
     const [dataa, setdataa] = useState();
     const [guests, setguests] = useState({ "room": 1, "adults": 1, "children": 0 });
     const [guestspopcount, setguestspopcount] = useState({ "room": false, "adults": false, "children": false });
     const [guestss, setguestss] = useState(guests["adults"] + guests["children"])
     const [room, setroom] = useState(guests["room"]);
     const [hotels, setHotels] = useState([]);
-
-
     const [showSignIn, setShowSignIn] = useState(false);
     const [showSignUp, setShowSignUp] = useState(true);
     const [token, setToken] = useState(localStorage.getItem("authToken"));
@@ -77,7 +75,7 @@ export default function HotelsDetails() {
 
 
 
-    const hotelSearch = async (hotels) => {
+    const hotelSearch = async () => {
         try {
             const response = await (await fetch(
                 `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${inputSearch}"}`,
@@ -152,7 +150,6 @@ export default function HotelsDetails() {
         setguests((prev) => ({ ...prev, [key]: value }));
     }
     return (
-
         <>
             {dataa &&
                 <div className='hotelsresult'>
@@ -183,18 +180,6 @@ export default function HotelsDetails() {
                             <div className='bodyheaderupper flexja '>
                                 <div className=''>
                                     <div className='headContainer flex flexr'>
-                                        {/* <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
-                                            {searchpop["cityandproperty"] && <div className='cityAreaSearch'>
-                                                <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
-                                                {hotels && hotels.map((item, index) => (<div key={index} className='hotelCityProperty flex g10' onClick={() => { setdplocate(item.location.toString().split(",")[0]) }} >
-                                                    <div><CiLocationOn /></div>
-                                                    <div >{item.location.toString().split(",")[0]}</div>
-                                                </div>))}
-                                            </div>}
-                                            <span>CITY, AREA OR PROPERTY <IoIosArrowDown /></span>
-                                            {dplocate}
-                                        </div> */}
-
                                         <div className='childContainer' onClick={() => { hotelSearchPop("cityandproperty") }}>
                                             {searchpop["cityandproperty"] && (<div className='cityAreaSearch'>
                                                 <input type='text' placeholder='Where do you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputSearch} onChange={(e) => { setInputSearch(e.target.value) }} />
@@ -341,13 +326,11 @@ export default function HotelsDetails() {
                                                     <h3>Room Type:<br /> <span>{item.roomType}</span></h3>
                                                     <h3>Room Size:<br /> <span>{item.roomSize}</span></h3>
                                                     <button onClick={() => { navigatetoform(item.roomNumber) }}>SELECT ROOM</button>
-                                                    {/* {!showSignUp && <Login/>} */}
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                     <hr className='hrLine'></hr>
-                                    {/* <Login/> */}
                                 </div>
                             </div>
                         </div>

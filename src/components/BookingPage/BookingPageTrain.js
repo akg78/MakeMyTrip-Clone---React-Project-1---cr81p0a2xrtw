@@ -101,7 +101,7 @@ export default function BookingPageTrain() {
 
   function target() {
     if (submitbtnref.current) {
-      if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
+      if (details["fname"] != "" && details["lname"] != "" && details["mobile"].length == 10 && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
         window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
         setproceedcolor(true);
       }
@@ -111,11 +111,12 @@ export default function BookingPageTrain() {
     }
   }
   function gotopayment() {
-    if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
-      navigate(`/trains/results/trainBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(faree + ((faree * 12) / 100))}`);
+    if (details["fname"] == "" || details["lname"] == "" || details["mobile"].length != 10  || details["email"] == "" || !details["email"].includes("@") || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
+      alert("fill the form first");
     }
     else {
-      alert("fill the form first");
+      localStorage.setItem("paynowflag", false)
+      navigate(`/trains/results/trainBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(faree + ((faree * 12) / 100))}`);
     }
   }
   // function increasearrsize() {
@@ -124,7 +125,7 @@ export default function BookingPageTrain() {
   //   setarr(variable)
   // }
 
-  const [activenav, setactivenav] = useState({ "flights": true });
+  const [activenav, setactivenav] = useState({ "trains": true });
 
 
   function activenavmaker(key) {
@@ -145,7 +146,7 @@ export default function BookingPageTrain() {
             <div className='navleftmenu flexa cp'>
               <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
               <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
-              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
+              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainsblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
             </div>
           </div>
           <div className='backgroundddd bgBooking flexja flexc'>

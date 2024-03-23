@@ -6,7 +6,6 @@ import { Search } from "./SearchPanel";
 import { IoIosArrowDown } from "react-icons/io";
 import Calendar from 'react-calendar';
 import { TbArrowsExchange } from "react-icons/tb";
-// import Navigation from '../HomePage/Navigation';
 
 export default function Flights() {
 

@@ -121,7 +121,7 @@ export default function BookingConfirmationPage() {
 
   function target() {
     if (submitbtnref.current) {
-      if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
+      if (details["fname"] != "" && details["lname"] != "" && details["mobile"].length == 10 && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
         window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
         setproceedcolor(true);
       }
@@ -132,11 +132,12 @@ export default function BookingConfirmationPage() {
   }
 
   function gotopayment() {
-    if (details["fname"] != "" && details["lname"] != "" && details["mobile"] != "" && details["email"] != "" && details["pincode"] != "" && details["state"] != "" && details["address"] != "") {
-      navigate(`/hotels/results/hotelBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa[0].price + ((dataa[0].price * 12) / 100))}`);
+    if (details["fname"] == "" || details["lname"] == "" || details["mobile"].length != 10  || details["email"] == "" || !details["email"].includes("@") || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
+      alert("fill the form first");
     }
     else {
-      alert("fill the form first");
+      localStorage.setItem("paynowflag", false)
+      navigate(`/hotels/results/hotelBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa[0].price + ((dataa[0].price * 12) / 100))}`);
     }
   }
   // function increasearrsize() {

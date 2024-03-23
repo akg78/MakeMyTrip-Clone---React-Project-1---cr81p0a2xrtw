@@ -70,15 +70,15 @@
 }
 .bg-gradiant {
   position: relative;
+  justify-content: center;
   background-image: linear-gradient(0deg, #15457b, #051423);
   width: 100%;
-  height: 290px;
-  margin-top: 80px;
+  height: 350px;
+  /* margin-top: 80px; */
 }
 .wrapDetails{
-  top: 20px;
-  left: 30px;
-  position: absolute;
+  margin-right: 20px;
+  /* position: absolute; */
   width: 75%;
   color: white;
 }

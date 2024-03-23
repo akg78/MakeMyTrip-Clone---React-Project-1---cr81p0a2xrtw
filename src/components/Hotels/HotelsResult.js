@@ -4,13 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
-import Stack from '@mui/material/Stack';
-import Pagination from '@mui/material/Pagination';
 import { NavLink } from 'react-router-dom';
 import Login from '../Auth/login';
 import Register from '../Auth/register';
 
 export default function HotelsResult() {
+
+  //-----------------------------------------------------------States Start---------------------------------------------------------------------------------
+
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const counting = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
@@ -39,6 +40,12 @@ export default function HotelsResult() {
   const [guestss, setguestss] = useState(guests["adults"] + guests["children"]);
   const [room, setroom] = useState(guests["room"]);
   const [cities, setcities] = useState();
+
+
+  //--------------------------------------------------------------States end---------------------------------------------------------------------------------
+
+  //----------------------------------------------Functions Start---------------------------------------------------------------------------------
+
 
   function guestscoutntpop(key) {
     setguestspopcount({})
@@ -104,6 +111,11 @@ export default function HotelsResult() {
     }
   }
 
+  //--------------------------------------------------------Functions end---------------------------------------------------------------------------------
+
+
+
+
   const hotelSearch = async () => {
     try {
       const response = await (await fetch(
@@ -151,7 +163,7 @@ export default function HotelsResult() {
   }, [currentPage, sortings])
 
 
-  const [activenav, setactivenav] = useState({ "flights": true });
+  const [activenav, setactivenav] = useState({ "hotels": true });
   function activenavmaker(key) {
     setactivenav({});
     setactivenav((prev) => ({ ...prev, [key]: !activenav[key] }))

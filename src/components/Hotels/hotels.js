@@ -10,7 +10,7 @@ export default function () {
 
   const [offerData, setOfferData] = useState([])
   const [visibleOffer, setVisibleOffer] = useState("")
-  const [isClicked, setIsClicked] = useState({ "HOTELS": true })
+  const [isClicked, setIsClicked] = useState({ "hotels": true })
 
   function clickedOfferNav(key) {
     setIsClicked({})
@@ -105,19 +105,6 @@ export default function () {
         </div>
 
         <div className='hotels-panel'>
-          {/* <div className='search-city' onClick={() => { hotelPop("hotelpop") }}>
-            <span>City,Property Name Or Location</span>
-            <h1>{dplocation}</h1>
-            <span>India</span>
-            {searchCityPop["hotelpop"] && <div className='hotelpopup'>
-              <input type='text' placeholder='Where you want to stay?' onClick={(e) => { e.stopPropagation(); }} value={inputvall} onChange={(e) => { setInputVall(e.target.value) }} />
-              {hotelData && hotelData.map((item, index) => (<div key={index} className='flexa hotelSlide g10' onClick={() => { setCitySearch({ "city": item.city }) }}>
-                <div><CiLocationOn /></div>
-                <div className={`hotelcity${index}`} onClick={() => { setdplocation(item.location.toString().match(/^([^,]+)/)[1]) }}>{item.location}</div>
-              </div>))}
-            </div>}
-          </div> */}
-
           <div className='search-city' onClick={() => { hotelPop("hotelpop") }}>
             <span>City, Property Name, or Location</span>
             <h1>{dplocation}</h1>

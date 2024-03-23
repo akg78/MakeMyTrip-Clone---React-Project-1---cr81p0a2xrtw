@@ -72,8 +72,8 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
       console.log("newData", newData);
       if (newData.status === 'success') {
         const token = newData.token;
-        localStorage.setItem("authToken", JSON.stringify(token));
         localStorage.setItem("name", JSON.stringify(newData.data.user.name));
+        localStorage.setItem("authToken", JSON.stringify(token));
         setShowSignUp(false)
         setToken(localStorage.getItem("authToken"))
 
@@ -293,7 +293,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 required
                 fullWidth
                 name="password"
-                label="Confirm Password"
+                label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"

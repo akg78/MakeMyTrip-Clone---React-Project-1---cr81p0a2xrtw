@@ -16,7 +16,7 @@ import Register from '../Auth/register';
 export default function TrainSearch() {
     const navigate = useNavigate();
 
-    const [activenav, setactivenav] = useState({ "flights": true });
+    const [activenav, setactivenav] = useState({ "trains": true });
     const [searchpop, setSearchPop] = useState({});
     const [inputSearch, setInputSearch] = useState('');
     const [searchTrain, setSearchTrain] = useState([]);
@@ -180,7 +180,7 @@ export default function TrainSearch() {
                         <div className='navleftmenu flex g20 cp'>
                             <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
                             <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
-                            <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
+                            <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainsblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
 
                         </div>
                     </div>

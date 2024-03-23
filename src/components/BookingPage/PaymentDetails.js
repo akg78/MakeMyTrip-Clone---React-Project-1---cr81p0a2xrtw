@@ -98,41 +98,52 @@ export default function PaymentDetails() {
     setdebiterror(false);
   }
   function paymentdone() {
-    if (checkboxRef.current.checked) {
-      if (pop["UPI"]) {
-        if (upiinput.current.value == "") {
-          upiinput.current.style.outline = `0.5px solid red`
-          setupierror(true);
+    if (localStorage.getItem("paynowflag")=== "false") {
+
+      if (checkboxRef.current.checked) {
+        if (pop["UPI"]) {
+          if (upiinput.current.value == "" || !upiinput.current.value.includes("@")) {
+            upiinput.current.style.outline = `0.5px solid red`
+            setupierror(true);
+          }
+          else {
+            setdonepayment(true);
+            navigatelast();
+          }
         }
         else {
-          setdonepayment(true);
-          navigatelast();
+          let bool = true
+          Object.keys(inputfill).forEach(item => {
+            if (inputfill[item].value == "") {
+              inputfill[item].style.outline = `0.5px solid red`;
+              setdebiterror(true);
+              bool = false
+            }
+          })
+          if (bool) {
+            setdonepayment(true);
+            navigatelast();
+          }
         }
       }
+
       else {
-        let bool = true
-        Object.keys(inputfill).forEach(item => {
-          if (inputfill[item].value == "") {
-            inputfill[item].style.outline = `0.5px solid red`;
-            setdebiterror(true);
-            bool = false
-          }
-        })
-        if (bool) {
-          setdonepayment(true);
-          navigatelast();
-        }
+        settermserror(true);
       }
     }
-    else {
-      settermserror(true);
+    else{
+      alert("please go to flights/hotels/trains section for booking")
     }
   }
+
+
   function navigatelast() {
+    localStorage.setItem("paynowflag", true)
     setTimeout(() => {
       navigate("/");
     }, 4000)
   }
+
 
   return (
     <div className='paymentbooking'>
@@ -142,7 +153,7 @@ export default function PaymentDetails() {
         </Link>
       </nav>
       <div className={`paymentbookingMaindiv flexja ${donepayment ? "colordiv" : ""}`}>
-        {!donepayment &&
+        {!donepayment && localStorage.getItem("paynowflag") &&
           <div className='paymentCardouter flex flexc g10'>
             <h2>Pay to complete your booking</h2>
             <div className='paymentbookingcard flexa'>
@@ -185,13 +196,6 @@ export default function PaymentDetails() {
                   <div className='flexa flex g20'>
                     <input ref={(e) => { inputfill[1] = e }} className='expirydate' type='text' placeholder='Month' maxlength="2" value={expiryMonth} onChange={(e) => { outlineremoval(1), handleMonthChange(e) }}></input>
                     <input ref={(e) => { inputfill[2] = e }} className='expirydate' type='text' placeholder='Year' maxlength="4" value={expiryYear} onChange={(e) => { outlineremoval(2), handleYearChange(e) }} ></input>
-                    {/* <select className='expiryyear' ref={(e) => { inputfill[2] = e }} onChange={(e) => { outlineremoval(2), handleYearChange(e) }}>
-                      <option value={expiryYear} >2024</option>
-                      <option value={expiryYear}>2025</option>
-                      <option value={expiryYear}>2026</option>
-                      <option value={expiryYear}>2027</option>
-                      <option value={expiryYear}>2028</option>
-                    </select> */}
                   </div>
                   <label>Card holder name</label>
                   <input ref={(e) => { inputfill[3] = e }} type='text' placeholder='Name as on card' onChange={() => { outlineremoval(3) }}></input>
@@ -216,12 +220,19 @@ export default function PaymentDetails() {
           </div>
         }
         {donepayment &&
-          <div className='backgroundwhite flexja g20 flexc'>
-            <p>{FirstName} ({Email})</p>
-            <p>Your Payment is Done</p>
+          <div className='backgroundwhite flexja g30 flexc'>
+            <div className='flex'>
+              <p>{FirstName} </p>
+              {/* <p> ({Email})</p> */}
+            </div>
+            <p>Your Payment is Done!</p>
           </div>
         }
       </div>
     </div>
+
+
+
+
   )
 }
