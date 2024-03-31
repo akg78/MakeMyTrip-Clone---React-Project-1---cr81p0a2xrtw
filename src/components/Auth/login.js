@@ -119,7 +119,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
         setShowSignUp(false)
         setToken(localStorage.getItem("authToken"))
       } else {
-        alert("Login or Password incorrect!")
+        alert("Email or Password incorrect!")
       }
     } catch (error) {
       alert(error);
