@@ -57,7 +57,14 @@ export default function BookingPageTrain() {
   const validatelName = () => {
     const firstName = details["fname"];
     if (!/^[a-zA-Z]+$/.test(firstName)) {
-      // alert("Please enter only alphabetic characters for the first name.");
+      alert("Please enter only alphabetic characters for the first name.");
+    }
+  };
+
+  const validatelNames = () => {
+    const firstName = details["lname"];
+    if (!/^[a-zA-Z]+$/.test(firstName)) {
+      alert("Please enter only alphabetic characters for the first name.");
     }
   };
   
@@ -208,11 +215,11 @@ export default function BookingPageTrain() {
                         <div className='flex wrapNameDetails'>
                           <div className='flexc'>
                             <label htmlFor='text'>First Name </label>
-                            <input onChange={(e) => { detailsChanger("fname", e.target.value) }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
+                            <input onChange={(e) => { detailsChanger("fname", e.target.value), validatelName() }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
                           </div>
                           <div className='flexc'>
                             <label htmlFor='text'>Last Name</label>
-                            <input onChange={(e) => { detailsChanger("lname", e.target.value) }} value={details["lname"]} type='text' placeholder='Enter Last Name*' required />
+                            <input onChange={(e) => { detailsChanger("lname", e.target.value), validatelNames() }} value={details["lname"]} type='text' placeholder='Enter Last Name*' required />
                           </div>
                           <div className=' genderdiv flexa'>
                             <input onClick={() => { setgenderselector(true) }} type='text' placeholder='Male' className={`${genderselector ? 'colorinputactive' : ""}`} required readOnly />

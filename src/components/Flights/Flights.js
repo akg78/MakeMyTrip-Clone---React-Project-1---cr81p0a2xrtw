@@ -107,15 +107,16 @@ export default function Flights() {
   const navigate = useNavigate();
 
   function clickToSearch() {
-    navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, {state: {srcfrom:boxdatasearchdeparture.iata_code, srcto:departureTo.iata_code}})
+    navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, { state: { srcfrom: boxdatasearchdeparture.iata_code, srcto: departureTo.iata_code } })
   }
 
 
+  // ----------------------------------- function to make not access to back button ----------------------------------------
 
   useEffect(() => {
     const disableBackButton = () => {
       window.history.pushState(null, document.title, window.location.href);
-      window.onpopstate = function() {
+      window.onpopstate = function () {
         window.history.pushState(null, document.title, window.location.href);
       };
     };
@@ -128,9 +129,12 @@ export default function Flights() {
   }, []);
 
 
+  // ----------------------------------- function to make not access to back button ----------------------------------------
+
+
 
   return (
-   
+
     <div className='flexa flexc'>
       <div className='flightsMainDiv flexa flexc'>
         <div className='tickets'>
