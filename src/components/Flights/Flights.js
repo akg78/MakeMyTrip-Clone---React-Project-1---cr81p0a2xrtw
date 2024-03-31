@@ -109,6 +109,26 @@ export default function Flights() {
   function clickToSearch() {
     navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, {state: {srcfrom:boxdatasearchdeparture.iata_code, srcto:departureTo.iata_code}})
   }
+
+
+
+  useEffect(() => {
+    const disableBackButton = () => {
+      window.history.pushState(null, document.title, window.location.href);
+      window.onpopstate = function() {
+        window.history.pushState(null, document.title, window.location.href);
+      };
+    };
+
+    disableBackButton();
+
+    return () => {
+      window.onpopstate = null;
+    };
+  }, []);
+
+
+
   return (
    
     <div className='flexa flexc'>

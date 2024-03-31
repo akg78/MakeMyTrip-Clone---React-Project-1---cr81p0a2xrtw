@@ -47,7 +47,6 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
 // ..................................................SignUp API......................................................
 
 
-
   const handleSignup = async (e) => {
     e.preventDefault();
     try {

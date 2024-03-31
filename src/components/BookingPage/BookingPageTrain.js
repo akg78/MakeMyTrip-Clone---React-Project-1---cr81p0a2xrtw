@@ -54,6 +54,14 @@ export default function BookingPageTrain() {
     }
   };
 
+  const validatelName = () => {
+    const firstName = details["fname"];
+    if (!/^[a-zA-Z]+$/.test(firstName)) {
+      // alert("Please enter only alphabetic characters for the first name.");
+    }
+  };
+  
+
 
   const validatePhone = (event) => {
     // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
