@@ -107,7 +107,12 @@ export default function Flights() {
   const navigate = useNavigate();
 
   function clickToSearch() {
-    navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, { state: { srcfrom: boxdatasearchdeparture.iata_code, srcto: departureTo.iata_code } })
+    if(boxdatasearchdeparture.iata_code == departureTo.iata_code){
+      alert("change city")
+    }
+    else{
+      navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, { state: { srcfrom: boxdatasearchdeparture.iata_code, srcto: departureTo.iata_code } })
+    }
   }
 
 

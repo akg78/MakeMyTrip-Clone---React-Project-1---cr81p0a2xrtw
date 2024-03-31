@@ -158,19 +158,7 @@ export default function BookingConfirmationPage() {
 
   }
 
-  // const validateName = (e) => {
-  //   const value = e.target.value;
-  //   if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
-  //     setdetails((prev) => ({ ...prev, "fname": value }));
-  //   }
-  // };
 
-  // const validatelName = (e) => {
-  //   const value = e.target.value;
-  //   if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
-  //     setdetails((prev) => ({ ...prev, "lname": value }))
-  //   }
-  // }
 
   const validateEmail = () => {
     const re = /\S+@\S+\.\S+/;
@@ -182,19 +170,7 @@ export default function BookingConfirmationPage() {
   };
 
 
-  const validatelNamee = () => {
-    const firstName = details["fname"];
-    if (!/^[a-zA-Z]+$/.test(firstName)) {
-      alert("Please enter only alphabetic characters for the first name.");
-    }
-  };
 
-  const validatelNames = () => {
-    const firstName = details["lname"];
-    if (!/^[a-zA-Z]+$/.test(firstName)) {
-      alert("Please enter only alphabetic characters for the first name.");
-    }
-  };
 
   const validatePhone = (event) => {
     // const re = /^\+?[0-9]{1,3}-?[0-9]{3,}$/; && /^\d+$/.test(value)
@@ -253,21 +229,36 @@ export default function BookingConfirmationPage() {
 
 
   function target() {
+    const firstName = details["fname"];
+    const lastName = details["lname"];
+
     if (submitbtnref.current) {
-      if (details["fname"] != "" && details["lname"] != "" && details["mobile"].length == 10  && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
+      if (details["fname"] != "" && details["lname"] != "" && details["mobile"].length == 10 && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
         window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
         setproceedcolor(true);
-
+      }
+      else if (details["fname"] != "" && !/^[a-zA-Z]+$/.test(firstName)) {
+        alert("Name should contain only alphabets.");
+      } else if (details["lname"] != "" && !/^[a-zA-Z]+$/.test(lastName)) {
+        alert("Name should contain only alphabets.");
       }
       else {
         alert("fill all the required fields to proceed");
-
       }
     }
   }
+
+
   function gotopayment() {
-    if (details["fname"] == "" || details["lname"] == "" || details["mobile"].length != 10  || details["email"] == "" || !details["email"].includes("@") || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
+    const firstName = details["fname"];
+    const lastName = details["lname"];
+    if (details["fname"] == "" || details["lname"] == "" || details["mobile"].length != 10 || details["email"] == "" || !details["email"].includes("@") || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
       alert("fill the form first");
+    }
+    else if (details["fname"] != "" && !/^[a-zA-Z]+$/.test(firstName)) {
+      alert("Name should contain only alphabets.");
+    } else if (details["lname"] != "" && !/^[a-zA-Z]+$/.test(lastName)) {
+      alert("Name should contain only alphabets.");
     }
     else {
       localStorage.setItem("paynowflag", false)
@@ -358,7 +349,7 @@ export default function BookingConfirmationPage() {
         }
       )).json();
 
-      console.log("hhhhhhhhhhhhhhhhhhhhh", response)
+      // console.log("hhhhhhhhhhhhhhhhhhhhh", response)
       // }
     }
     catch (error) {
@@ -438,11 +429,11 @@ export default function BookingConfirmationPage() {
                         <div className='flex wrapNameDetails'>
                           <div className='flexc'>
                             <label htmlFor='text'>First Name </label>
-                            <input onChange={(e) => { detailsChanger("fname", e.target.value), validatelNamee() }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
+                            <input onChange={(e) => { detailsChanger("fname", e.target.value) }} value={details["fname"]} type='text' placeholder='Enter Name*' required />
                           </div>
                           <div className='flexc'>
                             <label htmlFor='text'>Last Name</label>
-                            <input onChange={(e) => { detailsChanger("lname", e.target.value), validatelNames() }} value={details["lname"]} type='text' placeholder='Enter Last Name*' required />
+                            <input onChange={(e) => { detailsChanger("lname", e.target.value) }} value={details["lname"]} type='text' placeholder='Enter Last Name*' required />
                           </div>
                           <div className=' genderdiv flexa'>
                             <input onClick={() => { setgenderselector(true) }} type='text' placeholder='Male' className={`${genderselector ? 'colorinputactive' : ""}`} required readOnly />

@@ -120,10 +120,18 @@ export default function BookingConfirmationPage() {
 
 
   function target() {
+    const firstName = details["fname"];
+    const lastName = details["lname"];
+
     if (submitbtnref.current) {
       if (details["fname"] != "" && details["lname"] != "" && details["mobile"].length == 10 && details["email"] != "" && details["state"] != "" && details["pincode"] != "" && details["address"] != "") {
         window.scrollTo({ top: submitbtnref.current.offsetTop - 400, behavior: 'smooth' });
         setproceedcolor(true);
+      }
+      else if (details["fname"] != "" && !/^[a-zA-Z]+$/.test(firstName)) {
+        alert("Name should contain only alphabets.");
+      } else if (details["lname"] != "" && !/^[a-zA-Z]+$/.test(lastName)) {
+        alert("Name should contain only alphabets.");
       }
       else {
         alert("fill all the required fields to proceed");
@@ -132,8 +140,16 @@ export default function BookingConfirmationPage() {
   }
 
   function gotopayment() {
-    if (details["fname"] == "" || details["lname"] == "" || details["mobile"].length != 10  || details["email"] == "" || !details["email"].includes("@") || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
+    const firstName = details["fname"];
+    const lastName = details["lname"];
+
+    if (details["fname"] == "" || details["lname"] == "" || details["mobile"].length != 10 || details["email"] == "" || !details["email"].includes("@") || details["state"] == "" || details["pincode"] == "" || details["address"] == "") {
       alert("fill the form first");
+    }
+    else if (details["fname"] != "" && !/^[a-zA-Z]+$/.test(firstName)) {
+      alert("Name should contain only alphabets.");
+    } else if (details["lname"] != "" && !/^[a-zA-Z]+$/.test(lastName)) {
+      alert("Name should contain only alphabets.");
     }
     else {
       localStorage.setItem("paynowflag", false)

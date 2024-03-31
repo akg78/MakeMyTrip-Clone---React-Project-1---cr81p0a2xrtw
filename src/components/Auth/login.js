@@ -44,6 +44,13 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
   //   return;
   // }
 
+  const validateEmail = () => {
+    const re = /\S+@\S+\.\S+/;
+    if (!re.test(email)) {
+      alert('Invalid email address');
+    }
+  };
+
 // ..................................................SignUp API......................................................
 
 
@@ -69,21 +76,27 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
       
       const newData = await response.json();
       console.log("newData", newData);
+      validateEmail()
+      
       if (newData.status === 'success') {
         const token = newData.token;
         localStorage.setItem("name", JSON.stringify(newData.data.user.name));
         localStorage.setItem("authToken", JSON.stringify(token));
         setShowSignUp(false)
         setToken(localStorage.getItem("authToken"))
-
+        
       } else if (newData.message === ("User already exists")) {
         alert("User already exists")
       } else if (name === "" || email === "" || password === "") {
         alert("please fill all the details!")
       }
+      
+      // else if(!/\S+@\S+\.\S+/.test(email)){
+      //   alert('Invalid email address');
+      // }
 
     } catch (error) {
-      alert(error);
+      alert(error, "error");
     }
   };
 
@@ -276,6 +289,7 @@ export default function Login({ setToken, showSignUp, setShowSignUp }) {
                 autoComplete="email"
                 autoFocus
                 value={email}
+
               />
               <TextField onChange={handleName}
                 margin="normal"

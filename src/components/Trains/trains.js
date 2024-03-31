@@ -71,8 +71,11 @@ export default function trains() {
   }
 
   function navigatetonextpage() {
-    navigate(`/trains/results?source=${source.city }&destination=${destination.city}&date=${date} }`);
-    // `/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}
+    if(source.city == destination.city){
+      alert("From & To trains cannot be the same")
+    }else{
+      navigate(`/trains/results?source=${source.city }&destination=${destination.city}&date=${date} }`);
+    }
   }
 
 

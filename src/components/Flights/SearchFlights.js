@@ -218,9 +218,10 @@ export default function SearchFlights() {
           },
         })).json();
       setFlightData(sorting(res.data.flights))
+      // console.log(data.flights)
 
     } catch (error) {
-      console.error('Error fetching flight', error);
+      // console.error('Error fetching flight', error);
     }
   }
 
@@ -448,6 +449,7 @@ export default function SearchFlights() {
                 </div>
               </div>
 
+              {/* {flightData.length == 0 && <div className='flex flexja'>Flights are not available for this route!</div>} */}
               {flightData && (flightData.map((item, index) => (filter[`${item.flightID[0]}${item.flightID[1]}`] && (
                 <div className={`listingCard ${sizeincreaser[`listingcarddiv${index}`] ? "sizeincreaser" : ""}`} >
                   <div className='listingCardupper flexa'>
