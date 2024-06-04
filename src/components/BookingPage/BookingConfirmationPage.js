@@ -375,12 +375,33 @@ export default function BookingConfirmationPage() {
                 <img src="//imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/header/logo@2x.png" alt="MMT's LOGO" />
               </Link>
             </div>
-            <div className='navleftmenu flexa g20 cp'>
-              <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><a>Flights</a></p></span></NavLink>
-              <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><a>Hotels</a></p></span></NavLink>
-              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><a>Trains</a></p></span></NavLink>
+            {/* <div className='navleftmenu flexa g20 cp'>
+              <NavLink to="/"><span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("flights") }}>{!activenav["flights"] ? <img src='/flights.png' /> : <img src='/flightsblue.png' />}<p className='flexja'><p>Flights</p></p></span></NavLink>
+              <NavLink to="/hotels"><span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("hotels") }}>{!activenav["hotels"] ? <img src='/hotels.png' className='icons' /> : <img src='/hotelblue.png' />}<p className='flexja'><p>Hotels</p></p></span></NavLink>
+              <NavLink to="/trains"><span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`} onClick={() => { activenavmaker("trains") }}>{!activenav["trains"] ? <img src='/trains.png' className='icons' /> : <img src='/trainblue.png' />}<p className='flexja'><p>Trains</p></p></span></NavLink>
+            </div> */}
 
+            <div className='navleftmenu flexa g20 cp'>
+              <NavLink to="/" onClick={() => { activenavmaker("flights") }}>
+                <span className={`${activenav["flights"] ? "activecolor" : ""} flexja flexc`}>
+                  {!activenav["flights"] ? <img src='/flights.png' alt='Flights' /> : <img src='/flightsblue.png' alt='Flights Active' />}
+                  <p className='flexja'>Flights</p>
+                </span>
+              </NavLink>
+              <NavLink to="/hotels" onClick={() => { activenavmaker("hotels") }}>
+                <span className={`${activenav["hotels"] ? "activecolor" : ""} flexja flexc`}>
+                  {!activenav["hotels"] ? <img src='/hotels.png' className='icons' alt='Hotels' /> : <img src='/hotelblue.png' alt='Hotels Active' />}
+                  <p className='flexja'>Hotels</p>
+                </span>
+              </NavLink>
+              <NavLink to="/trains" onClick={() => { activenavmaker("trains") }}>
+                <span className={`${activenav["trains"] ? "activecolor" : ""} flexja flexc`}>
+                  {!activenav["trains"] ? <img src='/trains.png' className='icons' alt='Trains' /> : <img src='/trainblue.png' alt='Trains Active' />}
+                  <p className='flexja'>Trains</p>
+                </span>
+              </NavLink>
             </div>
+
           </div>
           <div className='backgroundddd bgBooking flexja flexc'>
             <div className='bg-gradiantt flightBg'>
@@ -391,7 +412,7 @@ export default function BookingConfirmationPage() {
               <div className='bookingcardLeft'>
                 <div className='bookingcontainerL'>
                   <div className='cardupper flex jsb '>
-                    <div className='cardupperleft flex flexc g10'>
+                    {/* <div className='cardupperleft flex flexc g10'>
                       <h3 className='flexa g5'>
                         {objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))}
                         {">"}
@@ -399,10 +420,30 @@ export default function BookingConfirmationPage() {
                       </h3>
                       <div className='bookingDt'><span>{days[dateObject.getDay()]}, {months[dateObject.getMonth()]} {dateObject.getDate()}</span> {dataa.stops == 0 ? "Non Stop" : `${dataa.stops} stops`} 0{dataa.duration}h 0m</div>
                       <div className='flexa g10 bookingFlightlogo'><img src={logofinder(dataa)} /> {airlineNamefinder(dataa)} {dataa.flightID[0] + dataa.flightID[1]} {dataa.flightID[dataa.flightID.length - 5] + dataa.flightID[dataa.flightID.length - 3] + dataa.flightID[dataa.flightID.length - 2] + dataa.flightID[dataa.flightID.length - 1]}</div>
+                    </div> */}
+                    <div className='cardupperleft flex flexc g10'>
+                      <div className='flexa g5'>
+                        {objdropdowncity.filter(item => item.name === dataa.source).map((item, index) => (
+                          <h3 key={`source-${index}`}>{item.fname}</h3>
+                        ))}
+                        {">"}
+                        {objdropdowncity.filter(item => item.name === dataa.destination).map((item, index) => (
+                          <h3 key={`destination-${index}`}>{item.fname}</h3>
+                        ))}
+                      </div>
+                      <div className='bookingDt'>
+                        <span>{days[dateObject.getDay()]}, {months[dateObject.getMonth()]} {dateObject.getDate()}</span>
+                        {dataa.stops === 0 ? "Non Stop" : `${dataa.stops} stops`} 0{dataa.duration}h 0m
+                      </div>
+                      <div className='flexa g10 bookingFlightlogo'>
+                        <img src={logofinder(dataa)} alt='Flight Logo' />
+                        {airlineNamefinder(dataa)} {`${dataa.flightID[0]}${dataa.flightID[1]} ${dataa.flightID.slice(-5, -4)}${dataa.flightID.slice(-3, -2)}${dataa.flightID.slice(-2)}`}
+                      </div>
                     </div>
+
                     <div className='cardupperright flex flexc g10'>
                       <div className='flexja'>CANCELLATION FEES APPLY</div>
-                      <div>Economy&nbsp;&#62;&nbsp;<span>SAVER</span> <icon /></div>
+                      <div>Economy&nbsp;&#62;&nbsp;<span>SAVER</span></div>
                     </div>
                   </div>
                   <div className='fromTo flexa '>
@@ -410,12 +451,26 @@ export default function BookingConfirmationPage() {
                       <h3>{dataa.departureTime}</h3>
                       <h3>{dataa.arrivalTime}</h3>
                     </div>
-                    <div className='lineBooking'><svg width="9" height="97" viewBox="0 0 9 97"><g fill="none" fill-rule="evenodd"><circle fill="#999" cx="4.5" cy="4.5" r="4.5"></circle><circle fill="#999" cx="4.5" cy="92.5" r="4.5"></circle><path stroke="#999" stroke-linecap="square" stroke-dasharray="7" d="M4.5 7v84"></path></g></svg></div>
-                    <div className='flex flexc jsb bookingCity' >
+                    <div className='lineBooking'><svg width="9" height="97" viewBox="0 0 9 97"><g fill="none" fillRule="evenodd"><circle fill="#999" cx="4.5" cy="4.5" r="4.5"></circle><circle fill="#999" cx="4.5" cy="92.5" r="4.5"></circle><path stroke="#999" strokeLinecap="square" strokeDasharray="7" d="M4.5 7v84"></path></g></svg></div>
+                    {/* <div className='flex flexc jsb bookingCity' >
                       <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.source ? item.fname : ""} </h3>))}</h3></div>
                       <div>0{dataa.duration}h 00m</div>
                       <div><h3>{objdropdowncity.map((item) => (<h3>{item.name == dataa.destination ? item.fname : ""}</h3>))}</h3></div>
+                    </div> */}
+                    <div className='flex flexc jsb bookingCity'>
+                      <div>
+                        {objdropdowncity.map((item, index) => (
+                          item.name === dataa.source && <h3 key={`source-${index}`}>{item.fname}</h3>
+                        ))}
+                      </div>
+                      <div>0{dataa.duration}h 00m</div>
+                      <div>
+                        {objdropdowncity.map((item, index) => (
+                          item.name === dataa.destination && <h3 key={`destination-${index}`}>{item.fname}</h3>
+                        ))}
+                      </div>
                     </div>
+
                   </div>
                 </div>
                 <div>
@@ -423,7 +478,7 @@ export default function BookingConfirmationPage() {
                     <h3>Traveller Details</h3>
                     <div className='idText'><strong>Important:</strong> Enter name as mentioned on your password or Government approved IDs.</div>
                     {/* <button onClick={() => increasearrsize()}>Add Traveller</button> */}
-                    {arr.map(item => (<div className='mapForm'>
+                    {arr.map(item  => (<div className='mapForm'>
                       <div className='adult1'>Adult {item}</div>
                       <div className='travellerssDetailsInput flexc'>
                         <div className='flex wrapNameDetails'>

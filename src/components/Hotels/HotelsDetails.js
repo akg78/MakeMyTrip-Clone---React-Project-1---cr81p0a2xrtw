@@ -171,7 +171,7 @@ export default function HotelsDetails() {
                                 </div>
                             </div>
                             <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
-                                <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown />
+                                {/* <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown /> */}
                             </div>
                         </nav>
                     </div>
@@ -311,7 +311,7 @@ export default function HotelsDetails() {
                                     <div className='roomsdiv flex flexc g20'>
                                         <h1 className='cp'>Rooms</h1>
                                         {dataa.rooms.map((item, index) => (
-                                            <div className='roomcard flexa'>
+                                            <div key={index} className='roomcard flexa'>
                                                 <div className=''><img src={dataa.images[index % dataa.images.length]} /></div>
                                                 <div className='cardroomcenterdiv flex flexc g10'>
                                                     <h3>{item.cancellationPolicy}</h3>

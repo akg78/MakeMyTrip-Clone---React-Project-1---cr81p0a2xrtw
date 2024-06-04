@@ -211,7 +211,7 @@ export default function HotelsResult() {
             </div>
           </div>
           <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
-            <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown />
+            {/* <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown /> */}
           </div>
         </nav>
       </div>
@@ -365,7 +365,7 @@ export default function HotelsResult() {
             </div>
             <div className='MainBodyRender flex flexc' onClick={() => { }}>
               {hotels && hotels.map((item, index) => (((item.rating < 2 ? ratingfilter["average"] : true) && (item.rating >= 2 && item.rating < 4 ? ratingfilter["verygood"] : true) && (item.rating >= 4 ? ratingfilter["excellent"] : true)) && ((item.avgCostPerNight < 4500 && item.avgCostPerNight >= 4000 ? pricefilter["0-1000"] : true) && (item.avgCostPerNight < 5000 && item.avgCostPerNight >= 4500 ? pricefilter["1000-2000"] : true) && (item.avgCostPerNight < 5500 && item.avgCostPerNight >= 5000 ? pricefilter["2000-4500"] : true) && (item.avgCostPerNight < 6000 && item.avgCostPerNight >= 5500 ? pricefilter["4500-8000"] : true) && (item.avgCostPerNight < 6500 && item.avgCostPerNight >= 6000 ? pricefilter["8000-11500"] : true) && (item.avgCostPerNight < 7000 && item.avgCostPerNight >= 6500 ? pricefilter["11500-15000"] : true) && (item.avgCostPerNight < 75000 && item.avgCostPerNight >= 7000 ? pricefilter["15000-30000"] : true) && (item.avgCostPerNight > 75000 ? pricefilter["30000++"] : true)) &&
-                (<div className='mainbodytwo flex' onClick={() => clickToSearch(item._id)}>
+                (<div key={index} className='mainbodytwo flex' onClick={() => clickToSearch(item._id)}>
 
                   <div className='mainbodytwoLeft '>
                     <div className='flex'>
@@ -373,7 +373,19 @@ export default function HotelsResult() {
                       <div className='cardTextBox flex flexc g20'>
                         <div className='flex jsb'><h3>{item.name}</h3><h3 className='txtnw'>{item.amenities.length}-star hotel</h3></div>
                         <p>10% available discount</p>
-                        <div className='flex jsb'><p>Free Cancellation till Check-in</p><div className='popamenitiesrelative'><span>i</span> <div className='popamenities flex flexc g5'>{item.amenities.map(item => <div>{item}</div>)}</div></div></div>
+                        {/* <div className='flex jsb'><p>Free Cancellation till Check-in</p><div className='popamenitiesrelative'><span>i</span> <div className='popamenities flex flexc g5'>{item.amenities.map(item => <div>{item}</div>)}</div></div></div> */}
+                        <div className='flex jsb'>
+                          <p>Free Cancellation till Check-in</p>
+                          <div className='popamenitiesrelative'>
+                            <span>i</span>
+                            <div className='popamenities flex flexc g5'>
+                              {item.amenities.map((amenity, index) => (
+                                <div key={index}>{amenity}</div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
 

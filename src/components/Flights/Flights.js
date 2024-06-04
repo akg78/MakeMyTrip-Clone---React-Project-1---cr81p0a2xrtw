@@ -298,7 +298,7 @@ export default function Flights() {
 
         <div className='offers-card'>
           {offerData ? (offerData.map((item, index) =>
-          (<div className='cards-container'>
+          (<div key={index} className='cards-container'>
             <div className='card-img'>
               <img src={item.newHeroUrl} alt="image" />
               <p>T&C's Apply</p>
