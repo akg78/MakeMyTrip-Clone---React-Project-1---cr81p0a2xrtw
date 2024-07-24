@@ -119,6 +119,37 @@ export default function BookingConfirmationPage() {
   }
 
 
+
+  const senddata = async () => {
+    try {
+      // if (details.dnumber && details.demail && details.dfname && details.dlname && details.dgender && details.dcountry && details.dstate && details.dbillingAddress) {
+      const response = await (await fetch(`https://academics.newtonschool.co/api/v1/bookingportals/booking`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem('authToken'))}`,
+            projectID: "cr81p0a2xrtw",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            bookingType: "hotel",
+            bookingDetails: {
+              hotelId: `${hotel_id}`,
+              // startDate: `${startdate()}`,
+              // endDate: `${enddate()}`
+              }
+              })
+        }
+      )).json();
+
+      console.log("hhhhhhhhhhhhhhhhhhhhh", response)
+      // }
+    }
+    catch (error) {
+      alert(error);
+    }
+  }
+
   function target() {
     const firstName = details["fname"];
     const lastName = details["lname"];
@@ -154,6 +185,7 @@ export default function BookingConfirmationPage() {
     else {
       localStorage.setItem("paynowflag", false)
       navigate(`/hotels/results/hotelBooking/Payment?FirstName="${details["fname"]}"&Email="${details["email"]}"&amount=${(dataa[0].price + ((dataa[0].price * 12) / 100))}`);
+      senddata();
     }
   }
   // function increasearrsize() {

@@ -4,6 +4,7 @@ import "./hotels.css"
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
+import Bottom from '../Bottoms/Bottom';
 
 export default function () {
   const navigate = useNavigate();
@@ -218,6 +219,7 @@ export default function () {
           </div>
         </div>
       </div>
+      {/* <Bottom/> */}
     </div>
   )
 }

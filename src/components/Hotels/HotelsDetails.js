@@ -171,7 +171,7 @@ export default function HotelsDetails() {
                                 </div>
                             </div>
                             <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none", color: "black" }}>
-                                {/* <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown /> */}
+                                <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> <IoIosArrowDown />
                             </div>
                         </nav>
                     </div>

@@ -72,6 +72,21 @@ export default function OffersCarousel() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {/* {visibleOffer=="ALL"&& <div>{offerData?offerData.map(item=>(<div>{item}</div>)):"...Loading"}</div>} */ }
 
 {/* <div className='createCarousel flex flexja'>

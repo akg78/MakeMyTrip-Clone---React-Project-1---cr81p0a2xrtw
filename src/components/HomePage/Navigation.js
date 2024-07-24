@@ -4,6 +4,7 @@ import './Navigation.css'
 import { IoIosArrowDown } from "react-icons/io";
 import Login from '../Auth/login';
 import Register from '../Auth/register';
+// import MyTrips from '../MyTrips/MyTrips';
 
 export default function Navigation() {
     const [showSignIn, setShowSignIn] = useState(false);
@@ -46,15 +47,17 @@ export default function Navigation() {
 
                         <div className='trip-container flexa'>
                             <img src='./Assets/triplogo.png' height={"45px"} />
-                            <div className='my-trips cp'>
-                                <Link to={"/"} className='linktrip'>
-                                <p className='p1'>My Trips</p>
+                            <Link to={'/history'}>
+                            <div className='my-trips cp' >
+                                <p className='p1'>My Trips </p>
                                 <br />
-                                <p className='p2'> Manage your bookings</p></Link>
+                                <p className='p2'> Manage your bookings</p>
                             </div>
+                            </Link>
+                            
                             <div className='my-login cp g10' onClick={() => { handleUser() }} style={{ backgroundImage: !token ? "linear-gradient(93deg, #53b2fe, #065af3)" : "none" }}>
 
-                                {/* <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p> */}
+                                <p>{localStorage.getItem("name") ? `Hi ${JSON.parse(localStorage.getItem("name"))}` : "Login or Create Account"} </p>
                                  <p> <IoIosArrowDown /></p>
                             </div>
                         </div>
