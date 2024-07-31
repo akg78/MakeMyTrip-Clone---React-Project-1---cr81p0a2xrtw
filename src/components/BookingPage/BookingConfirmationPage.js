@@ -555,7 +555,6 @@ export default function BookingConfirmationPage() {
                 </div>
                 <div className='clickToPay flexj'>
                   <button ref={submitbtnref} onClick={() => { gotopayment() }} >Proceed</button>
-
                 </div>
                 {proceedcolor && <p>Click proceed to furture process</p>}
               </div>

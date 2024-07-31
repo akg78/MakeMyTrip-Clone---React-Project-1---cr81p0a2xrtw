@@ -20,6 +20,7 @@ import TrainSearch from "./components/Trains/TrainSearch";
 import BookingPageTrain from "./components/BookingPage/BookingPageTrain";
 import OffersCarousel from "./components/Flights/OffersCarousel";
 import MyTrips from "./components/MyTrips/MyTrips";
+import Maintenance from "./components/Maintenance/Maintenance";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/trains/:results" element={<TrainSearch/>}></Route>
           <Route path="/trains/results/:trainBooking" element={<BookingPageTrain/>}></Route>
           <Route path="/history" element={<MyTrips/>}></Route>
+          <Route path="/maintenance" element={<Maintenance/>}></Route>
         </Routes>
       </Router>
 

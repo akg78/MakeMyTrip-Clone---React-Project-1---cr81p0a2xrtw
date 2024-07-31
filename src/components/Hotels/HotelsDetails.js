@@ -290,20 +290,20 @@ export default function HotelsDetails() {
                                         <div className='houserulesgriddiv'>
                                             <div className='animationrotation1 flex flexc g5'>
                                                 <h3>Restrictions</h3>
-                                                <div className='flex g5'><h4>petsAllowed:</h4><p>{dataa.houseRules.restrictions.petsAllowed.toString().toUpperCase()}</p></div>
-                                                <div className='flex g5'><h4>smokingAllowed:</h4><p>{dataa.houseRules.restrictions.smokingAllowed.toString().toUpperCase()}</p></div>
+                                                <div className='flex g5'><h4>Pets Allowed:</h4><p>{dataa.houseRules.restrictions.petsAllowed.toString().toUpperCase()}</p></div>
+                                                <div className='flex g5'><h4>Smoking Allowed:</h4><p>{dataa.houseRules.restrictions.smokingAllowed.toString().toUpperCase()}</p></div>
                                             </div>
                                             <div className='animationrotation3 flex flexc g10'>
                                                 <h3>IdProofRelated</h3>
-                                                <div className='flex g20'><h4>IdProofsAccepted:</h4><ol>{dataa.houseRules.idProofRelated.idProofsAccepted.map((item, index) => (<li key={index}>{item}</li>))}</ol></div>
-                                                <div className='flex g5'><h4>LocalIdsAllowed:</h4><p>{dataa.houseRules.idProofRelated.localIdsAllowed.toString().toUpperCase()}</p></div>
+                                                <div className='flex g20'><h4>Id Proofs Accepted:</h4><ol>{dataa.houseRules.idProofRelated.idProofsAccepted.map((item, index) => (<li key={index}>{item}</li>))}</ol></div>
+                                                <div className='flex g5'><h4>Local Id's Allowed:</h4><p>{dataa.houseRules.idProofRelated.localIdsAllowed.toString().toUpperCase()}</p></div>
                                             </div>
                                             <div className='animationrotation4 flex flexc g5'>
                                                 <h3>childAndExtraBedPolicy</h3>
-                                                <div className='flex g5'><h4>extraBedProvidedForChild:</h4><p>{dataa.childAndExtraBedPolicy.extraBedProvidedForChild.toString().toUpperCase()}</p></div>
-                                                <div className='flex g5'><h4>extraBedForAdditionalGuest:</h4><p>{dataa.childAndExtraBedPolicy.extraBedForAdditionalGuest.toString().toUpperCase()}</p></div>
-                                                <div className='flex g5'><h4>extraBedCharge:</h4><p>{dataa.childAndExtraBedPolicy.extraBedCharge}</p></div>
-                                                <div className='flex g5'><h4>additionalInfo:</h4><p>{dataa.childAndExtraBedPolicy.additionalInfo}</p></div>
+                                                <div className='flex g5'><h4>Extra Bed For Child:</h4><p>{dataa.childAndExtraBedPolicy.extraBedProvidedForChild.toString().toUpperCase()}</p></div>
+                                                <div className='flex g5'><h4>Extra Bed For Guest:</h4><p>{dataa.childAndExtraBedPolicy.extraBedForAdditionalGuest.toString().toUpperCase()}</p></div>
+                                                <div className='flex g5'><h4>Extra Bed Charges:</h4><p>{dataa.childAndExtraBedPolicy.extraBedCharge}</p></div>
+                                                <div className='flex g5'><h4>Additional Info:</h4><p>{dataa.childAndExtraBedPolicy.additionalInfo}</p></div>
                                             </div>
                                         </div>
                                     </div>

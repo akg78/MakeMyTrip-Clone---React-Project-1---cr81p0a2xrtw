@@ -6,19 +6,11 @@ import { Search } from "./SearchPanel";
 import { IoIosArrowDown } from "react-icons/io";
 import Calendar from 'react-calendar';
 import { TbArrowsExchange } from "react-icons/tb";
+import OffersCarousel from './OffersCarousel';
+import { Snackbar } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
 
 export default function Flights() {
-
-
-
-
-
-
-
-
-
-
-
 
   const [offerData, setOfferData] = useState([])
   const [visibleOffer, setVisibleOffer] = useState("")
@@ -71,6 +63,8 @@ export default function Flights() {
   const [adultselect, setadultselect] = useState("adultarget1")
   const [childselect, setachildselect] = useState("childtarget0")
   const [infantselect, setinfantselect] = useState("infanttarget0")
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
 
 
   function adultvaluechanger(item) {
@@ -106,14 +100,37 @@ export default function Flights() {
 
   const navigate = useNavigate();
 
-  function clickToSearch() {
-    if(boxdatasearchdeparture.iata_code == departureTo.iata_code){
-      alert("change city")
+  // function clickToSearch() {
+  //   if (boxdatasearchdeparture.iata_code == departureTo.iata_code) {
+  //     alert("change city")
+  //   }
+  //   else {
+  //     navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, { state: { srcfrom: boxdatasearchdeparture.iata_code, srcto: departureTo.iata_code } })
+  //   }
+  // }
+
+
+
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
     }
-    else{
-      navigate(`/flights/results?source="${boxdatasearchdeparture.iata_code}"&destination="${departureTo.iata_code}"&date="${date}"&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, { state: { srcfrom: boxdatasearchdeparture.iata_code, srcto: departureTo.iata_code } })
+    setOpenSnackbar(false);
+  };
+
+  const clickToSearch = () => {
+    if (boxdatasearchdeparture.iata_code === departureTo.iata_code) {
+      setOpenSnackbar(true);
+    } else {
+      navigate(`/flights/results?source=${boxdatasearchdeparture.iata_code}&destination=${departureTo.iata_code}&date=${date}&adult=${adultselect[adultselect.length - 1]}&child=${childselect[childselect.length - 1]}&infant=${infantselect[infantselect.length - 1]}`, { state: { srcfrom: boxdatasearchdeparture.iata_code, srcto: departureTo.iata_code } });
     }
-  }
+  };
+
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 
   // ----------------------------------- function to make not access to back button ----------------------------------------
@@ -134,6 +151,10 @@ export default function Flights() {
   }, []);
 
 
+  const NavigateToMaintence = () =>{
+    navigate('/maintenance')
+  }
+
   // ----------------------------------- function to make not access to back button ----------------------------------------
 
 
@@ -142,6 +163,11 @@ export default function Flights() {
 
     <div className='flexa flexc'>
       <div className='flightsMainDiv flexa flexc'>
+      <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity="warning">
+          Change city
+        </Alert>
+      </Snackbar>
         <div className='tickets'>
           <div className='ticketType'>
             <label for="ways">
@@ -251,19 +277,28 @@ export default function Flights() {
             <div className='flexr bannerr'>
               <div className='bannerrr flex flexa g10'>
                 <img src='https://promos.makemytrip.com/appfest/2x/icon-wheretogo-23062022.png' />
-                <p className='where'>Where2Go</p>
+                <p>Where 2 Go</p>
               </div>
-              <div className='bannerrr flex flexa g10'>
+              <div className='bannerrr flex flexja g10'>
                 <img src='https://promos.makemytrip.com/appfest/2x/trip-money-1.png' />
-                <p className='where'>Explore International Flights <br /> Cheapest Flights to Paris, Bali, Tokoyo&more</p>
+                <div className='flex flexja flexc'>
+                  <p >Explore International Flights</p>
+                  <p >Cheapest Flights to Paris, Bali, Tokoyo & more</p>
+                </div>
               </div>
               <div className='bannerrr flex flexa g10'>
                 <img src='https://promos.makemytrip.com/Growth/Images/B2C/2x/dt_tert_flights.png' />
-                <p className='where'>Insurance <br />For International Trips</p>
+                <div className='flex flexja flexc'>
+                  <p >Insurance</p>
+                  <p >For International Trips</p>
+                </div>
               </div>
               <div className='bannerrr flex flexa g10'>
                 <img src='https://promos.makemytrip.com/images/myBiz/MICE/mice%20icon%20-%20square.png' />
-                <p className='where'>MICE <br /> Offsites, Events&Meetings</p>
+                <div className='flex flexja flexc'>
+                  <p>MICE</p>
+                  <p>Offsites, Events & Meetings</p>
+                </div>
               </div>
               <div className='bannerrr flex flexa g10'>
                 <img src='https://promos.makemytrip.com/appfest/2x/gift%20card%201.png' />
@@ -271,7 +306,7 @@ export default function Flights() {
               </div>
             </div>
 
-            <div className='sponsored'>
+            <div className='sponsored' onClick={()=>{NavigateToMaintence()}}>
               <img src='https://platforms.makemytrip.com/contents/894b250d-94cd-4c5f-bb72-da4711d36708' alt='img' className='thai'></img>
               <p><img src='https://platforms.makemytrip.com/contents/8db292f3-fd5a-448c-9f2a-58c78e10f56c' className='s'></img></p>
             </div>
@@ -282,65 +317,9 @@ export default function Flights() {
 
       {                                        /* Offers Carousel Part */}
 
-
-      <div className='offer-container'>
-        <div className='offers-tittle'>
-          <h2>
-            <font color="393939">Offers</font>
-          </h2>
-          <ul className='offer-list cp'>
-            <li onClick={() => { setVisibleOffer("ALL"); clickedOfferNav("ALL"); handleSubmit("ALL") }}><a className={isClicked["ALL"] ? "colorOfferNav" : ""} >All Offers</a></li>
-            <li onClick={() => { setVisibleOffer("FLIGHTS"); clickedOfferNav("FLIGHTS"); handleSubmit("FLIGHTS") }}><a className={isClicked["FLIGHTS"] ? "colorOfferNav" : ""} >Flights</a></li>
-            <li onClick={() => { setVisibleOffer("RAILS"); clickedOfferNav("RAILS"); handleSubmit("RAILS") }}><a className={isClicked["RAILS"] ? "colorOfferNav" : ""} >Train</a></li>
-            <li onClick={() => { setVisibleOffer("HOTELS"); clickedOfferNav("HOTELS"); handleSubmit("HOTELS") }}><a className={isClicked["HOTELS"] ? "colorOfferNav" : ""} >Hotels</a></li>
-          </ul>
-        </div>
-
-        <div className='offers-card'>
-          {offerData ? (offerData.map((item, index) =>
-          (<div key={index} className='cards-container'>
-            <div className='card-img'>
-              <img src={item.newHeroUrl} alt="image" />
-              <p>T&C's Apply</p>
-            </div>
-            <div className='card-box'>
-              <h5>INTL FLIGHTS</h5>
-              <h4>Get up to 50% OFF* on<br />International Flights!</h4>
-              <p>Grab & make all your dream trips come true.</p>
-            </div>
-          </div>
-          ))) : "...Loading"}
-        </div>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <OffersCarousel/>
       <Bottom />
     </div>
-
   )
 }
 

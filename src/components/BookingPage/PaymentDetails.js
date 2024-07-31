@@ -24,16 +24,20 @@ export default function PaymentDetails() {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
   const [cardNumber, setCardNumber] = useState('');
+  const [cardNumberColor, setCardNumberColor] = useState(false);
 
 
   const handleCardno = (e) => {
     const number = e.target.value;
-    if (cardNumber.length === 16) {
-      setCardNumber(number);
-    }
     setCardNumber(number);
-
+    if (number.length === 16) {
+      setCardNumberColor(true);
+    }
+    else {
+      setCardNumberColor(false);
+    }
   };
+
 
   const handleMonthChange = (e) => {
     const month = e.target.value;
@@ -98,43 +102,43 @@ export default function PaymentDetails() {
     setdebiterror(false);
   }
   function paymentdone() {
-    if (localStorage.getItem("paynowflag")=== "false") {
-
+    if (localStorage.getItem("paynowflag") === "false") {
       if (checkboxRef.current.checked) {
         if (pop["UPI"]) {
-          if (upiinput.current.value == "" || !upiinput.current.value.includes("@")) {
-            upiinput.current.style.outline = `0.5px solid red`
+          if (upiinput.current.value === "" || !upiinput.current.value.includes("@")) {
+            upiinput.current.style.outline = `0.5px solid red`;
             setupierror(true);
-          }
-          else {
+            return;
+          } else {
             setdonepayment(true);
             navigatelast();
+            return;
           }
-        }
-        else {
-          let bool = true
+        } else {
+          let bool = true;
           Object.keys(inputfill).forEach(item => {
-            if (inputfill[item].value == "") {
+            if (inputfill[item].value === "") {
               inputfill[item].style.outline = `0.5px solid red`;
               setdebiterror(true);
-              bool = false
+              bool = false;
             }
-          })
+          });
           if (bool) {
             setdonepayment(true);
             navigatelast();
+            return;
           }
         }
-      }
-
-      else {
+      } else {
         settermserror(true);
+        return;
       }
-    }
-    else{
-      alert("please go to flights/hotels/trains section for booking")
+    } else {
+      alert("Please go to flights/hotels/trains section for booking");
+      return;
     }
   }
+
 
 
   function navigatelast() {
@@ -191,6 +195,7 @@ export default function PaymentDetails() {
                     type="text"
                     maxlength="16"
                     value={upi}
+                    style={{ border: `2px solid ${!cardNumberColor ? 'red' : 'green'}` }}
                     placeholder="xxxx xxxx xxxx xxxx" />
                   <label>Expiry date</label>
                   <div className='flexa flex g20'>
@@ -216,7 +221,7 @@ export default function PaymentDetails() {
                 <p>Total, inclusive of all taxes</p>
               </div>
             </div>
-            <button className='paybuttonpayment' onClick={() => { paymentdone() }}>Pay now</button>
+            <button className='paybuttonpayment' disabled={!Boolean(cardNumberColor)} onClick={() => { paymentdone() }}>Pay now</button>
           </div>
         }
         {donepayment &&

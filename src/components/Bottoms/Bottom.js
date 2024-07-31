@@ -1,7 +1,7 @@
 import React from 'react'
 import './BottomCss.css'
-// import FacebookIcon from '@mui/icons-material/Facebook';
-// import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
 export default function Bottom() {
     return (
         <>
@@ -51,10 +51,10 @@ export default function Bottom() {
             </div>
             <div className="div4">
                 <div className="fb flex">
-                    {/* <div className="onee">
+                    <div className="onee">
                         <div><FacebookIcon /></div>
                         <div><TwitterIcon /></div>
-                    </div> */}
+                    </div>
                     <div className="copy">
                         <p>© 2024 MAKEMYTRIP PVT. LTD.</p>
                         <p className='usa'>Country India USA UAE</p>

@@ -5,6 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import Calendar from 'react-calendar';
 import { useNavigate } from 'react-router-dom';
 import { TbArrowsExchange } from "react-icons/tb";
+import OffersCarousel from '../Flights/OffersCarousel';
 
 
 export default function trains() {
@@ -163,38 +164,11 @@ export default function trains() {
         </button>
         <div className='vh'></div>
 
+
         {                                        /* Offers Carousel Part */                                        }
 
 
-        <div className='offer-container'>
-          <div className='offers-tittle'>
-            <h2>
-              <font color="393939">Offers</font>
-            </h2>
-            <ul className='offer-list cp'>
-              <li onClick={() => { setVisibleOffer("RAILS"); clickedOfferNav("RAILS"); handleSubmit("RAILS") }}><a className={isClicked["RAILS"] ? "colorOfferNav" : ""} >Train</a></li>
-              <li onClick={() => { setVisibleOffer("ALL"); clickedOfferNav("ALL"); handleSubmit("ALL") }}><a className={isClicked["ALL"] ? "colorOfferNav" : ""} >All Offers</a></li>
-              <li onClick={() => { setVisibleOffer("FLIGHTS"); clickedOfferNav("FLIGHTS"); handleSubmit("FLIGHTS") }}><a className={isClicked["FLIGHTS"] ? "colorOfferNav" : ""} >Flights</a></li>
-              <li onClick={() => { setVisibleOffer("HOTELS"); clickedOfferNav("HOTELS"); handleSubmit("HOTELS") }}><a className={isClicked["HOTELS"] ? "colorOfferNav" : ""} >Hotels</a></li>
-            </ul>
-          </div>
-
-          <div className='offers-card'>
-            {offerData ? (offerData.map((item, index) =>
-            (<div key={index} className='cards-container'>
-              <div className='card-img'>
-                <img src={item.newHeroUrl} alt="image" />
-                <p>T&C's Apply</p>
-              </div>
-              <div className='card-box'>
-                <h5>INTL FLIGHTS</h5>
-                <h4>Get up to 50% OFF* on<br />International Flights!</h4>
-                <p>Grab & make all your dream trips come true.</p>
-              </div>
-            </div>
-            ))) : "...Loading"}
-          </div>
-        </div>
+        <OffersCarousel/>
       </div>
     </div>
   )

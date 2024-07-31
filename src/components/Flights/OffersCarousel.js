@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import "./OffersCarousel.css"
+import { Box, Button, Modal, Typography } from '@mui/material'
 
 export default function OffersCarousel() {
   const [offerData, setOfferData] = useState([])
   const [visibleOffer, setVisibleOffer] = useState("")
   const [isClicked, setIsClicked] = useState({ "ALL": true })
+  const [open, setOpen] = useState(false);
+
 
 
 
@@ -33,6 +36,30 @@ export default function OffersCarousel() {
   useEffect(() => {
     handleSubmit("ALL");
   }, [])
+
+
+  const handleOpen = (id) => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 300,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    
+  };
+
+  console.log("ttttt", handleOpen)
+
   return (
     <>
       <div className='offer-container'>
@@ -49,10 +76,11 @@ export default function OffersCarousel() {
         </div>
 
         <div className='offers-card'>
-          {offerData ? (offerData.map((item, index) =>
-          (<div className='cards-container'>
+      {offerData ? (
+        offerData.map((item, index) => (
+          <div className='cards-container' key={index} onClick={()=> handleOpen(item._id)}>
             <div className='card-img'>
-              <img src={item.newHeroUrl} alt="image" />
+              <img src={item.newHeroUrl} alt='image' />
               <p>T&C's Apply</p>
             </div>
             <div className='card-box'>
@@ -61,12 +89,26 @@ export default function OffersCarousel() {
               <p>Grab & make all your dream trips come true.</p>
             </div>
           </div>
-          ))) : "...Loading"}
-        </div>
-
+        ))
+      ) : (
+        '...Loading'
+      )}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={modalStyle}>
+          <Typography id='modal-modal-title' variant='h6' component='h2' color={"red"}>
+            Offer's already expired!
+          </Typography>
+          {/* <Button onClick={handleClose}>Close</Button> */}
+        </Box>
+      </Modal>
+    </div>
       </div>
     </>
-
   )
 }
 
